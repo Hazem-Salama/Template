@@ -1,0 +1,49 @@
+/* Admin-specific global styles */
+/* Hide main website navbar and footer on admin pages */
+
+/* Target common navbar selectors but EXCLUDE admin elements */
+nav:not(.admin-nav):not(.admin-header),
+.navbar:not(.admin-nav):not(.admin-header),
+header:not(.admin-header) {
+  display: none !important;
+}
+
+/* Target common footer selectors but EXCLUDE admin elements */
+footer:not(.admin-footer),
+.footer:not(.admin-footer) {
+  display: none !important;
+}
+
+/* Ensure admin header is always visible */
+.admin-header {
+  display: block !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+}
+
+/* Ensure admin pages have full control */
+.admin-layout {
+  position: relative;
+  z-index: 9999;
+  min-height: 100vh;
+}
+
+/* Override any inherited body styles */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Ensure admin content is properly positioned */
+.admin-layout > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Make sure logout button is always clickable */
+.admin-header button {
+  pointer-events: all !important;
+  z-index: 10000 !important;
+}

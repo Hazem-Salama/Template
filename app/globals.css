@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-red: #E53E3E;
+  --brand-black: #1A1A1A;
+  --brand-white: #FFFFFF;
+  --brand-gray: #F7F7F7;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  color: var(--brand-black);
+  background: var(--brand-white);
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Ensure sections take full width */
+section {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d53030;
+}
+
+/* Loading animation */
+.loading-dots {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.loading-dots div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--brand-red);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.loading-dots div:nth-child(1) {
+  left: 8px;
+  animation: loading1 0.6s infinite;
+}
+
+.loading-dots div:nth-child(2) {
+  left: 8px;
+  animation: loading2 0.6s infinite;
+}
+
+.loading-dots div:nth-child(3) {
+  left: 32px;
+  animation: loading2 0.6s infinite;
+}
+
+.loading-dots div:nth-child(4) {
+  left: 56px;
+  animation: loading3 0.6s infinite;
+}
+
+@keyframes loading1 {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+@keyframes loading3 {
+  0% { transform: scale(1); }
+  100% { transform: scale(0); }
+}
+
+@keyframes loading2 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(24px, 0); }
+}
+
+/* RTL Support - More Specific Rules */
+[dir="rtl"] {
+  text-align: right;
+}
+
+/* Only apply flex-direction: row-reverse to specific elements, not all flex */
+[dir="rtl"] .nav-flex {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .breadcrumb-flex {
+  flex-direction: row-reverse;
+}
+
+/* Prevent global flex override - keep English layout structure */
+.process-step-container {
+  flex-direction: row !important;
+}
+
+.process-step-container.reverse {
+  flex-direction: row-reverse !important;
+}
+
+[dir="rtl"] .process-step-container {
+  flex-direction: row !important;
+}
+
+[dir="rtl"] .process-step-container.reverse {
+  flex-direction: row-reverse !important;
+}
+
+/* Navbar specific fixes */
+.navbar-items {
+  flex-direction: row !important;
+}
+
+[dir="rtl"] .navbar-items {
+  flex-direction: row !important;
+}
+
+/* Margin and Padding RTL Support */
+[dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+[dir="rtl"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
+[dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+[dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+[dir="rtl"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
+[dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+
+[dir="rtl"] .pl-2 { padding-left: 0; padding-right: 0.5rem; }
+[dir="rtl"] .pl-3 { padding-left: 0; padding-right: 0.75rem; }
+[dir="rtl"] .pl-4 { padding-left: 0; padding-right: 1rem; }
+[dir="rtl"] .pr-2 { padding-right: 0; padding-left: 0.5rem; }
+[dir="rtl"] .pr-3 { padding-right: 0; padding-left: 0.75rem; }
+[dir="rtl"] .pr-4 { padding-right: 0; padding-left: 1rem; }
+
+/* Text alignment */
+[dir="rtl"] .text-left { text-align: right; }
+[dir="rtl"] .text-right { text-align: left; }
+
+/* Border radius */
+[dir="rtl"] .rounded-l-lg { border-radius: 0 0.5rem 0.5rem 0; }
+[dir="rtl"] .rounded-r-lg { border-radius: 0.5rem 0 0 0.5rem; }
+
+/* Remove the global flex override that was causing issues */
+/* [dir="rtl"] .flex { flex-direction: row-reverse; } - REMOVED */
+
+/* Only apply specific RTL overrides where needed */
+[dir="rtl"] .grid {
+  direction: rtl;
+}
+
+/* Arabic font optimization */
+[dir="rtl"] {
+  font-family: 'Cairo', 'Tajawal', 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif;
+  line-height: 1.7;
+}
+
+/* Better spacing for Arabic text */
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
+  line-height: 1.4;
+}
+
+[dir="rtl"] p {
+  line-height: 1.8;
+}
+
+/* List styles */
+[dir="rtl"] ul, [dir="rtl"] ol {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+/* Input field adjustments */
+[dir="rtl"] input, [dir="rtl"] textarea, [dir="rtl"] select {
+  text-align: right;
+}
+
+[dir="rtl"] input::placeholder, [dir="rtl"] textarea::placeholder {
+  text-align: right;
+}

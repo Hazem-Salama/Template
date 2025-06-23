@@ -1,0 +1,1341 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "bookCall": "Book Call"
+  },
+  "hero": {
+    "title": "Unlimited Creative Solutions",
+    "subtitle": "Transform your brand with innovative design, development, and marketing solutions that drive real results.",
+    "startProject": "Start Your Project",
+    "viewWork": "View Our Work",
+    "bookCall": "Book Free Strategy Call"
+  },
+  "services": {
+    "title": "Our",
+    "titleHighlight": "Expertise",
+    "subtitle": "We combine strategic thinking with creative execution to deliver solutions that drive real business growth.",
+    "branding": {
+      "title": "Branding",
+      "description": "Create a powerful brand identity that resonates with your audience and builds lasting trust."
+    },
+    "uiux": {
+      "title": "UI/UX Design",
+      "description": "Design intuitive and engaging user experiences that convert visitors into customers."
+    },
+    "webdev": {
+      "title": "Web Development",
+      "description": "Build fast, secure, and scalable websites that perform excellently across all devices."
+    },
+    "marketing": {
+      "title": "Digital Marketing",
+      "description": "Data-driven marketing strategies that increase visibility and drive measurable growth."
+    }
+  },
+  "about": {
+    "title": "About Unlimited",
+    "subtitle": "We're a team of passionate creators, strategists, and innovators dedicated to transforming ambitious brands through unlimited creative solutions.",
+    "mission": "Our Mission",
+    "missionText": "To help businesses grow by creating powerful digital experiences through innovative, creative, tailored solutions.",
+    "vision": "Our Vision", 
+    "visionText": "To become a leading force in digital innovation, empowering brands worldwide through exceptional creative solutions and marketing that inspire growth, trust, and lasting impact.",
+    "values": "Our Values",
+    "valuesText": "We value innovation, creativity, integrity, client success, continuous learning, and a collaborative spirit that drives meaningful digital impact."
+  },
+  "portfolio": {
+    "title": "Our Portfolio",
+    "subtitle": "Explore our collection of successful projects that have transformed brands, elevated user experiences, and driven measurable business results.",
+    "featuredProjects": "Featured Projects",
+    "projectsDescription": "Each project represents our commitment to excellence, innovation, and delivering measurable results that exceed our clients' expectations.",
+    "categories": {
+      "all": "All",
+      "uiux": "UI/UX Design", 
+      "web": "Web Design",
+      "mobile": "Mobile App",
+      "marketing": "Marketing",
+      "ecommerce": "E-commerce",
+      "branding": "Branding"
+    },
+    "viewDetails": "View Details",
+    "client": "Client",
+    "projectOverview": "Project Overview",
+    "technologiesUsed": "Technologies Used",
+    "resultsAchieved": "Results Achieved",
+    "visitLiveSite": "Visit Live Site"
+  },
+  "branding": {
+    "title": "Branding That Inspires",
+    "subtitle": "Create a powerful brand identity that resonates with your audience, builds trust, and sets you apart from the competition.",
+    "startBrand": "Start Your Brand",
+    "viewWork": "View Our Work",
+    "completeSolutions": "Complete Branding Solutions",
+    "solutionsDescription": "From logo design to complete brand systems, we create cohesive identities that build recognition, trust, and business value.",
+    "process": "Our Branding Process",
+    "processDescription": "A proven 5-step process that ensures your brand is strategically sound, visually compelling, and ready for success in the marketplace.",
+    "successStories": "Branding Success Stories",
+    "storiesDescription": "See how our branding solutions have transformed businesses across industries, driving recognition, trust, and measurable growth."
+  },
+  "bookCall": {
+    "title": "Book Your Free Strategy Call",
+    "subtitle": "Get expert insights on your project with a complimentary consultation. No sales pitch - just valuable advice to help you succeed.",
+    "free": "100% Free • No Commitment Required",
+    "chooseType": "Choose Your Call Type:",
+    "personalInfo": "Personal Information",
+    "contactInfo": "Contact Information", 
+    "projectInfo": "Project Information",
+    "scheduleCall": "Schedule Your Call",
+    "projectDetails": "Tell Us About Your Project",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "company": "Company Name",
+    "bookMyCall": "Book My Free Strategy Call",
+    "callTypes": {
+      "strategy-call": {
+        "title": "Strategy Call",
+        "duration": "45 minutes",
+        "description": "Deep dive into your business goals and create a roadmap for success.",
+        "features": [
+          "Business Analysis",
+          "Growth Strategy", 
+          "Market Research",
+          "Action Plan"
+        ]
+      },
+      "discovery-call": {
+        "title": "Discovery Call",
+        "duration": "30 minutes", 
+        "description": "Understand your project requirements and explore possibilities.",
+        "features": [
+          "Project Scope",
+          "Technical Review",
+          "Timeline Planning", 
+          "Budget Discussion"
+        ]
+      },
+      "consultation": {
+        "title": "Consultation",
+        "duration": "60 minutes",
+        "description": "Expert guidance on specific challenges and opportunities.", 
+        "features": [
+          "Expert Advice",
+          "Problem Solving",
+          "Best Practices",
+          "Implementation Guide"
+        ]
+      }
+    },
+    "stats": {
+      "successfulProjects": "Successful Projects",
+      "clientSatisfaction": "Client Satisfaction", 
+      "responseTime": "Response Time",
+      "yearsExperience": "Years Experience"
+    },
+    "preferCallDirectly": "Prefer to call directly?",
+    "availability": "Available 9 AM - 6 PM (GMT+2)",
+    "benefits": {
+      "title": "What You'll Get",
+      "personalizedStrategy": {
+        "title": "Personalized Strategy",
+        "description": "Get a custom strategy tailored specifically to your business goals and challenges."
+      },
+      "budgetOptimization": {
+        "title": "Budget Optimization", 
+        "description": "Learn how to maximize your ROI and allocate resources for maximum impact."
+      },
+      "timelinePlanning": {
+        "title": "Timeline Planning",
+        "description": "Create realistic timelines and milestones to achieve your objectives efficiently."
+      },
+      "marketInsights": {
+        "title": "Market Insights",
+        "description": "Gain valuable insights into your market, competitors, and growth opportunities."
+      }
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "steps": {
+        "book": {
+          "title": "Book Your Call",
+          "description": "Choose your preferred time and tell us about your project goals."
+        },
+        "preparation": {
+          "title": "We Prepare", 
+          "description": "Our team reviews your information and prepares tailored insights."
+        },
+        "call": {
+          "title": "Strategic Discussion",
+          "description": "We discuss your goals, challenges, and create an action plan together."
+        },
+        "followUp": {
+          "title": "Follow-Up",
+          "description": "Receive a summary of recommendations and next steps via email."
+        }
+      }
+    },
+    "trustIndicator": {
+      "title": "100% Risk-Free",
+      "description": "No commitment required. This is a completely free consultation to help you make informed decisions about your business growth."
+    },
+    "form": {
+      "header": "Book Your {title}",
+      "guarantee": "Guaranteed {duration} consultation",
+      "sections": {
+        "personalInfo": "Personal Information",
+        "contactInfo": "Contact Information",
+        "projectInfo": "Project Information", 
+        "scheduling": "Schedule Your Call",
+        "projectDetails": "Tell Us About Your Project"
+      },
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name", 
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "company": "Company (Optional)",
+        "projectType": "Project Type",
+        "budget": "Budget Range",
+        "timeline": "Timeline",
+        "urgency": "Priority Level",
+        "preferredDate": "Preferred Date",
+        "preferredTime": "Preferred Time",
+        "timeZone": "Time Zone",
+        "projectDetails": "Project Details",
+        "hearAbout": "How did you hear about us?"
+      },
+      "placeholders": {
+        "firstName": "Enter your first name",
+        "lastName": "Enter your last name",
+        "email": "your@email.com",
+        "phone": "+1 (555) 123-4567",
+        "company": "Your company name",
+        "projectType": "Select project type",
+        "budget": "Select budget range", 
+        "timeline": "Select timeline",
+        "preferredTime": "Select time",
+        "hearAbout": "Select an option",
+        "projectDetails": "Tell us about your project goals, challenges, or questions..."
+      },
+      "projectTypes": {
+        "branding": "Branding & Identity",
+        "webDev": "Web Development",
+        "mobileDev": "Mobile Development", 
+        "digitalMarketing": "Digital Marketing",
+        "uiux": "UI/UX Design",
+        "ecommerce": "E-commerce Solutions",
+        "consulting": "Business Consulting",
+        "multiple": "Multiple Services",
+        "notSure": "Not Sure Yet"
+      },
+      "budgetRanges": {
+        "under10k": "Under $10,000",
+        "10to15k": "$10,000 - $15,000",
+        "15to25k": "$15,000 - $25,000",
+        "25to35k": "$25,000 - $35,000", 
+        "35to50k": "$35,000 - $50,000",
+        "over50k": "Over $50,000",
+        "discuss": "Let's Discuss"
+      },
+      "timelines": {
+        "asap": "ASAP",
+        "oneMonth": "Within 1 Month",
+        "oneToThree": "1-3 Months",
+        "threeToSix": "3-6 Months",
+        "sixPlus": "6+ Months",
+        "exploring": "Just Exploring"
+      },
+      "timeZones": {
+        "est": "EST (Eastern)",
+        "cst": "CST (Central)",
+        "mst": "MST (Mountain)",
+        "pst": "PST (Pacific)",
+        "gmt": "GMT (London)",
+        "cet": "CET (Europe)",
+        "other": "Other"
+      },
+      "hearAbout": {
+        "google": "Google Search",
+        "social": "Social Media",
+        "referral": "Referral",
+        "linkedin": "LinkedIn",
+        "previousClient": "Previous Client",
+        "event": "Event/Conference",
+        "content": "Blog/Content",
+        "advertisement": "Advertisement",
+        "other": "Other"
+      },
+      "urgency": {
+        "urgent": "Urgent",
+        "high": "High Priority",
+        "normal": "Normal",
+        "low": "Low Priority"
+      },
+      "newsletter": {
+        "title": "Stay Updated",
+        "description": "Receive valuable insights, tips, and updates about digital marketing and business growth."
+      },
+      "submit": {
+        "booking": "Booking Your {title}...",
+        "book": "Book My {title}"
+      },
+      "trust": {
+        "freeCall": "100% Free Call",
+        "noPressure": "No Pressure",
+        "expertInsights": "Expert Insights"
+      },
+      "footer": {
+        "questions": "Questions? Call us directly at",
+        "calendarInvite": "You'll receive a calendar invite within 24 hours.",
+        "agreement": "By submitting this form, you agree to our",
+        "privacyPolicy": "Privacy Policy",
+        "and": "and",
+        "termsOfService": "Terms of Service",
+        "helpNote": "The more details you provide, the better we can help you."
+      },
+      "expectations": {
+        "title": "What to expect from your {title}:",
+        "strategyCall": [
+          "Business goal analysis and roadmap creation",
+          "Market opportunities and competitive insights", 
+          "Growth strategy recommendations",
+          "Actionable next steps for success"
+        ],
+        "discoveryCall": [
+          "Project scope and requirements review",
+          "Technical feasibility assessment",
+          "Timeline and budget planning",
+          "Solution recommendations"
+        ],
+        "consultation": [
+          "Expert guidance on your specific challenges",
+          "Industry best practices and insights",
+          "Problem-solving strategies",
+          "Implementation roadmap"
+        ]
+      },
+      "validation": {
+        "firstNameRequired": "First name is required",
+        "lastNameRequired": "Last name is required",
+        "emailRequired": "Email is required",
+        "phoneRequired": "Phone number is required",
+        "dateRequired": "Please select a date",
+        "timeRequired": "Please select a time",
+        "messageRequired": "Please tell us about your project",
+        "emailInvalid": "Please enter a valid email address",
+        "phoneInvalid": "Please enter a valid phone number",
+        "dateInvalid": "Please select a future date"
+      }
+    },
+    "success": {
+      "title": "Call Booked Successfully!",
+      "message": "Your {title} has been scheduled successfully. We'll send you a calendar invite shortly.",
+      "callDetails": "Call Details",
+      "type": "Type",
+      "duration": "Duration", 
+      "date": "Date",
+      "time": "Time",
+      "email": "Email",
+      "reference": "Reference",
+      "bookAnother": "Book Another Call",
+      "returnHome": "Return Home",
+      "viewServices": "View Services",
+      "rescheduleNote": "Need to reschedule? Contact us:"
+    },
+    "error": {
+      "title": "Booking Failed",
+      "message": "We encountered an issue while booking your call.",
+      "whatHappened": "What happened?",
+      "unableToBook": "Unable to book your call. ",
+      "checkConnection": "Please check your internet connection.",
+      "checkInfo": "Please check your information and try again.",
+      "serverIssues": "We're experiencing technical issues.",
+      "tryAgainOrContact": "Please try again or contact us directly.",
+      "tryAgain": "Try Again",
+      "callInstead": "Call Instead",
+      "emailUs": "Email Us"
+    }
+  },
+  "team": {
+    "title": "Meet Our",
+    "titleHighlight": "Team",
+    "subtitle": "Our diverse team of experts brings together years of experience in design, development, marketing, and strategy to deliver exceptional results.",
+    "whatDrives": "What Drives Us",
+    "drivesDescription": "These core values guide everything we do and shape how we work with our clients and each other.",
+    "joinTeam": "Want to Join Our Team?",
+    "joinDescription": "We're always looking for talented individuals who share our passion for creativity, innovation, and delivering exceptional results for our clients.",
+    "viewPositions": "View Open Positions",
+    "getInTouch": "Get In Touch",
+    "members": {
+      "soror": {
+        "position": "Creative Director",
+        "description": "With 8+ years in design, Soror leads our creative vision and ensures every project reflects innovative thinking.",
+        "skills": ["Brand Strategy", "Visual Design", "Team Leadership"]
+      },
+      "hazem": {
+        "position": "Lead Developer",
+        "description": "Full-stack developer with expertise in modern web technologies and a passion for clean, efficient code.",
+        "skills": ["React/Next.js", "Node.js", "System Architecture", "TypeScript", "React Native", "API Development", "Backend Development"]
+      },
+      "amir": {
+        "position": "Marketing Strategist",
+        "description": "Data-driven marketer who specializes in creating campaigns that drive real business growth and engagement.",
+        "skills": ["Digital Marketing", "Analytics", "Campaign Strategy"]
+      },
+      "abdullah": {
+        "position": "Content Strategist",
+        "description": "Creates compelling content strategies that tell your brand story and engage your target audience effectively.",
+        "skills": ["Content Strategy", "Copywriting", "SEO"]
+      }
+    },
+    "values": {
+      "innovation": {
+        "title": "Innovation First",
+        "description": "We constantly explore new technologies and creative approaches to stay ahead of the curve."
+      },
+      "partnership": {
+        "title": "Client Partnership",
+        "description": "We view our clients as partners and work collaboratively to achieve shared success."
+      },
+      "learning": {
+        "title": "Continuous Learning",
+        "description": "Our team is always learning and growing to bring you the latest expertise."
+      },
+      "quality": {
+        "title": "Quality Excellence",
+        "description": "We never compromise on quality and always deliver work that exceeds expectations."
+      }
+    }
+  },
+  "stats": {
+    "title": "Our",
+    "titleHighlight": "Impact",
+    "description": "These numbers tell the story of our commitment to excellence and the trust our clients place in us to deliver exceptional results.",
+    "projectsCompleted": "Projects Completed",
+    "projectsCompletedDesc": "Successfully delivered projects across various industries",
+    "happyClients": "Happy Clients",
+    "happyClientsDesc": "Satisfied clients who trust us with their brand",
+    "clientRetention": "Client Satisfaction",
+    "clientRetentionDesc": "Client satisfaction rate across all projects",
+    "yearsExperience": "5 Years",
+    "yearsExperienceDesc": "Years of expertise in digital marketing and design",
+    "supportAvailable": "24/7 Support",
+    "supportAvailableDesc": "Round-the-clock support for our clients",
+    "teamMembers": "Team Members",
+    "teamMembersDesc": "Talented professionals dedicated to your success",
+    "ctaTitle": "Ready to be part of our success story?",
+    "ctaDescription": "Join the growing list of satisfied clients who have transformed their brands with our unlimited creative solutions.",
+    "ctaButton": "Start Your Project Today"
+  },
+  "howWeWork": {
+    "title": "How We",
+    "titleHighlight": "Work",
+    "description": "Our proven process adapts to any project size or type. Whether you need one service or a complete solution, we follow the same rigorous approach to ensure success.",
+    "stepLabel": "Step",
+    "approaches": {
+      "single": {
+        "title": "Single Service Focus",
+        "description": "Need just one thing done right? We excel at specialized projects.",
+        "examples": ["Marketing campaigns", "Website development", "Brand design", "SEO optimization"]
+      },
+      "integrated": {
+        "title": "Integrated Solutions",
+        "description": "Want multiple services working together? We create seamless experiences.",
+        "examples": ["Brand + website", "Design + development", "Marketing + analytics", "Full digital transformation"]
+      },
+      "partnership": {
+        "title": "Ongoing Partnership",
+        "description": "Looking for a long-term creative partner? We grow with your business.",
+        "examples": ["Monthly marketing", "Continuous optimization", "Regular updates", "Strategic consulting"]
+      }
+    },
+    "steps": {
+      "understand": {
+        "title": "Understand",
+        "description": "We dive deep into your business, goals, challenges, and vision to create a clear understanding of what success looks like for your project.",
+        "details": [
+          "Business goals and objectives analysis",
+          "Current situation assessment",
+          "Target audience identification",
+          "Success metrics definition"
+        ]
+      },
+      "strategize": {
+        "title": "Strategize",
+        "description": "Based on our understanding, we develop a customized strategy and roadmap tailored specifically to your needs and desired outcomes.",
+        "details": [
+          "Custom strategy development",
+          "Project roadmap creation",
+          "Resource planning and allocation",
+          "Timeline and milestone setting"
+        ]
+      },
+      "create": {
+        "title": "Create",
+        "description": "Our expert team executes the strategy, creating and building exactly what you need using best practices and cutting-edge techniques.",
+        "details": [
+          "Expert execution and creation",
+          "Quality assurance and testing",
+          "Regular progress updates",
+          "Collaborative feedback loops"
+        ]
+      },
+      "launch": {
+        "title": "Launch",
+        "description": "We ensure a smooth rollout of your project, whether it is a marketing campaign, website, brand identity, or complete digital transformation.",
+        "details": [
+          "Careful deployment and launch",
+          "Performance monitoring",
+          "Issue resolution and support",
+          "Success measurement and reporting"
+        ]
+      },
+      "optimize": {
+        "title": "Optimize",
+        "description": "We continuously monitor, analyze, and improve performance to ensure you get maximum value and ongoing success from your investment.",
+        "details": [
+          "Performance analysis and insights",
+          "Continuous improvement recommendations",
+          "Ongoing optimization and refinement",
+          "Long-term success planning"
+        ]
+      }
+    },
+    "whyWorks": {
+      "title": "Why Our Process Works for Every Project",
+      "flexible": {
+        "title": "Flexible",
+        "description": "Adapts to any project type or size"
+      },
+      "structured": {
+        "title": "Structured",
+        "description": "Clear steps ensure nothing is missed"
+      },
+      "collaborative": {
+        "title": "Collaborative",
+        "description": "You are involved every step of the way"
+      },
+      "resultsDriven": {
+        "title": "Results-Driven",
+        "description": "Focused on achieving your specific goals"
+      }
+    }
+  },
+  "mission": {
+    "title": "Our",
+    "titleHighlight": "Mission & Values",
+    "description": "We exist to help ambitious brands unlock their unlimited potential through innovative, creative, and tailored solutions that drive growth, spark engagement, and create lasting impact.",
+    "statement": {
+      "title": "Our Mission",
+      "content": "At Unlimited Creative Solutions, our mission is to help businesses grow by crafting powerful digital experiences that blend innovation, creativity, and tailored solutions. We are dedicated to understanding each client's unique goals and challenges, delivering results-driven strategies across design, development, and digital marketing. By combining modern technology with a human-centric approach, we aim to build lasting partnerships and create meaningful impact in every project we undertake."
+    },
+    "values": {
+      "creativity": {
+        "title": "Creativity First",
+        "description": "We believe in pushing creative boundaries to deliver innovative solutions that stand out in the market."
+      },
+      "dataDriven": {
+        "title": "Data-Driven",
+        "description": "Every decision we make is backed by solid data and research to ensure maximum impact and ROI."
+      },
+      "resultsFocused": {
+        "title": "Results Focused",
+        "description": "We measure success by the tangible results we deliver for our clients and their business growth."
+      },
+      "collaborative": {
+        "title": "Collaborative",
+        "description": "We work closely with our clients as partners, ensuring transparent communication throughout the process."
+      },
+      "agile": {
+        "title": "Agile & Fast",
+        "description": "We adapt quickly to market changes and deliver projects efficiently without compromising quality."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "We strive for excellence in every project, from the smallest detail to the overall strategy."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Client",
+    "titleHighlight": "Success",
+    "subtitle": "Don't just take our word for it. Here's what our clients say about working with us.",
+    "clients": {
+      "ahmed": {
+        "name": "Ahmed Elshamy",
+        "company": "Elshamy Group",
+        "text": "Unlimited worked with us on developing our brand identity and website. The results exceeded our expectations significantly. Their professionalism and creativity truly sets them apart."
+      },
+      "sarah": {
+        "name": "Dr. Sarah Alamaan", 
+        "company": "Alamaan Center",
+        "text": "Our marketing campaign with Unlimited achieved amazing results. Engagement rates increased by 300% and we achieved our goals in record time. A professional and creative team."
+      },
+      "mohamed": {
+        "name": "Mohamed Elidrissi",
+        "company": "Tech Innovation Co.",
+        "text": "Developing our mobile app with Unlimited was an excellent experience. The design is outstanding and performance is excellent. I highly recommend them for any tech project."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Our",
+    "titleHighlight": "Pricing Approach",
+    "subtitle": "Transparent, flexible pricing models designed to fit your budget and business needs. We believe in honest pricing with no hidden fees or surprises.",
+    "models": {
+      "projectBased": {
+        "title": "Project-Based",
+        "description": "Fixed-price projects with clear deliverables and timelines.",
+        "benefits": [
+          "Transparent, upfront pricing",
+          "No surprises or hidden costs",
+          "Clear scope and deliverables",
+          "Perfect for one-time projects"
+        ],
+        "bestFor": "Branding, website development, campaigns",
+        "startingPrice": "Starting at 5,000 EGP"
+      },
+      "monthlyRetainer": {
+        "title": "Monthly Retainer",
+        "description": "Ongoing partnership with dedicated team support.",
+        "benefits": [
+          "Priority access to our team",
+          "Consistent monthly support",
+          "Flexible scope adjustments",
+          "Better rates for ongoing work"
+        ],
+        "bestFor": "Marketing, maintenance, consulting",
+        "startingPrice": "Starting at 10,000 EGP"
+      },
+      "performanceBased": {
+        "title": "Performance-Based",
+        "description": "Results-driven pricing tied to your business outcomes.",
+        "benefits": [
+          "Pay based on results achieved",
+          "Aligned incentives for success",
+          "Lower upfront investment",
+          "Shared risk and reward"
+        ],
+        "bestFor": "Marketing campaigns, growth projects",
+        "startingPrice": "Custom pricing"
+      }
+    },
+    "benefitsLabel": "Benefits:",
+    "bestForLabel": "Best for:",
+    "startingAtLabel": "Starting at:",
+    "influencesTitle": "What Influences Our Pricing?",
+    "influencesSubtitle": "We consider multiple factors to provide you with fair, accurate pricing that reflects the true value of our work.",
+    "factors": {
+      "projectScope": {
+        "title": "Project Scope",
+        "description": "Complexity and size of deliverables"
+      },
+      "timeline": {
+        "title": "Timeline",
+        "description": "Urgency and delivery requirements"
+      },
+      "teamSize": {
+        "title": "Team Size",
+        "description": "Number of specialists required"
+      },
+      "customization": {
+        "title": "Customization",
+        "description": "Level of custom work needed"
+      },
+      "ongoingSupport": {
+        "title": "Ongoing Support",
+        "description": "Maintenance and optimization needs"
+      },
+      "industry": {
+        "title": "Industry",
+        "description": "Specific industry requirements"
+      }
+    },
+    "promise": {
+      "title": "Our Pricing Promise",
+      "transparent": {
+        "title": "100% Transparent",
+        "description": "No hidden fees or surprise charges. What we quote is what you pay."
+      },
+      "fair": {
+        "title": "Fair & Competitive",
+        "description": "Premium quality at competitive rates. You get exceptional value for your investment."
+      },
+      "detailed": {
+        "title": "Detailed Proposals",
+        "description": "Every proposal includes detailed breakdowns so you know exactly what you're getting."
+      },
+      "ctaButton": "Get Your Custom Quote"
+    }
+  },
+  "serviceProcess": {
+    "title": "Our",
+    "titleHighlight": "Process",
+    "subtitle": "Every successful project follows a proven process. Here's how we ensure your project is delivered on time, on budget, and exceeds expectations.",
+    "steps": {
+      "discovery": {
+        "title": "Discovery Call",
+        "description": "We start with a detailed consultation to understand your goals, challenges, and vision.",
+        "duration": "30-60 minutes",
+        "outcome": "Clear project scope and requirements"
+      },
+      "proposal": {
+        "title": "Proposal & Planning",
+        "description": "We create a detailed proposal with timeline, deliverables, and transparent pricing.",
+        "duration": "2-3 days",
+        "outcome": "Detailed project roadmap and agreement"
+      },
+      "development": {
+        "title": "Design & Development",
+        "description": "Our expert team brings your vision to life with regular check-ins and updates.",
+        "duration": "Project dependent",
+        "outcome": "Regular progress updates and milestones"
+      },
+      "review": {
+        "title": "Review & Refinement",
+        "description": "We incorporate your feedback and make refinements to ensure everything is perfect.",
+        "duration": "1-2 weeks",
+        "outcome": "Polished final deliverables"
+      },
+      "launch": {
+        "title": "Launch & Support",
+        "description": "We handle the launch and provide ongoing support to ensure continued success.",
+        "duration": "Ongoing",
+        "outcome": "Successful launch and optimization"
+      }
+    },
+    "durationLabel": "Duration:",
+    "outcomeLabel": "Outcome:",
+    "whyWorks": {
+      "title": "Why Our Process Works",
+      "communication": {
+        "title": "Clear Communication",
+        "description": "Regular updates and transparent communication throughout the entire project."
+      },
+      "delivery": {
+        "title": "On-Time Delivery",
+        "description": "Structured timeline with clear milestones ensures projects finish on schedule."
+      },
+      "quality": {
+        "title": "Quality Assurance",
+        "description": "Multiple review stages guarantee the highest quality deliverables."
+      }
+    }
+  },
+  "servicesGrid": {
+    "title": "Complete",
+    "titleHighlight": "Creative Solutions",
+    "subtitle": "Choose from our comprehensive range of services or combine multiple solutions for a complete digital transformation.",
+    "services": {
+      "branding": {
+        "title": "Branding & Identity",
+        "description": "Complete brand identity systems that capture your essence and resonate with your target audience.",
+        "features": [
+          "Logo Design & Brand Mark",
+          "Brand Guidelines & Standards",
+          "Color Palette & Typography",
+          "Brand Voice & Messaging",
+          "Business Card & Stationery",
+          "Brand Applications"
+        ],
+        "deliverables": "Logo files, brand guide, stationery suite",
+        "timeline": "2-4 weeks",
+        "startingPrice": "Starting at 1,200 EGP"
+      },
+      "digitalMarketing": {
+        "title": "Digital Marketing",
+        "description": "Strategic campaigns that drive growth through SEO, paid advertising, and content marketing.",
+        "features": [
+          "SEO Strategy & Implementation",
+          "Google Ads & Social Media Ads",
+          "Content Marketing",
+          "Social Media Management",
+          "Email Marketing Campaigns",
+          "Analytics & Reporting"
+        ],
+        "deliverables": "Campaign setup, monthly reports, optimization",
+        "timeline": "Monthly ongoing",
+        "startingPrice": "Starting at 600 EGP"
+        
+      },
+      "uiux": {
+        "title": "UI/UX Design",
+        "description": "User-centered design solutions that create intuitive, beautiful experiences that convert visitors into customers.",
+        "features": [
+          "User Research & Analysis",
+          "Wireframing & Prototyping",
+          "Interface Design",
+          "User Experience Optimization",
+          "Design Systems Creation",
+          "Usability Testing"
+        ],
+        "deliverables": "Design files, prototypes, style guide",
+        "timeline": "3-6 weeks",
+        "startingPrice": "Starting at 2,000 EGP"
+      },
+      "consulting": {
+        "title": "Strategy Consulting",
+        "description": "Expert guidance to help you make informed decisions about your brand, digital presence, and marketing.",
+        "features": [
+          "Business Strategy Development",
+          "Digital Transformation Planning",
+          "Brand Positioning Strategy",
+          "Market Research & Analysis",
+          "Competitive Analysis",
+          "Growth Strategy Planning"
+        ],
+        "deliverables": "Strategy document, action plan, recommendations",
+        "timeline": "1-3 weeks",
+        "startingPrice": "Starting at 4,500 EGP"
+      },
+      "development": {
+        "title": "Development",
+        "description": "Fast, responsive websites and mobile apps built with cutting-edge technology and optimized for performance.",
+        "features": [
+          "Responsive Web Development/Mobile App",
+          "E/M-commerce Solutions",
+          "Dashboard Management Systems",
+          "Performance Optimization",
+          "SEO Implementation",
+          "API Creation/Integration",
+          "Database Design"
+        ],
+        "deliverables": "Live website/app, admin access, documentation",
+        "timeline": "4-8 weeks",
+        "startingPrice": "Starting at 10,000 EGP"
+      }
+    },
+    "includesLabel": "What's Included:",
+    "deliverablesLabel": "Deliverables:",
+    "timelineLabel": "Timeline:",
+    "investmentLabel": "Investment:",
+    "customSolution": {
+      "title": "Need Something Custom?",
+      "description": "Every business is unique. We create custom service packages tailored to your specific needs and budget. Let's discuss your project requirements.",
+      "ctaButton": "Discuss Custom Solution"
+    }
+  },
+  "servicesHero": {
+    "title": "Our Services",
+    "subtitle": "From brand identity to digital marketing, we offer comprehensive creative solutions that transform your vision into measurable business success.",
+    "ctaQuote": "Get Custom Quote",
+    "ctaExplore": "Explore Services",
+    "highlights": {
+      "branding": "Branding Delivered",
+      "websites": "Websites Delivered",
+      "apps": "Apps Delivered",
+      "campaigns": "Campaigns Delivered"
+    }
+  },
+  "servicesCTA": {
+    "title": "Ready to",
+    "titleHighlight": "Get Started?",
+    "subtitle": "Choose the best way to connect with us. Whether you want to chat about your project, get a custom quote, or just have questions - we're here to help.",
+    "options": {
+      "strategyCall": {
+        "title": "Book Free Strategy Call",
+        "description": "Get personalized recommendations for your project",
+        "action": "Schedule 30-min call"
+      },
+      "chat": {
+        "title": "Chat with Our Team",
+        "description": "Quick questions? Get instant answers from our experts",
+        "action": "Start conversation"
+      },
+      "quote": {
+        "title": "Get Custom Quote",
+        "description": "Detailed proposal tailored to your specific needs",
+        "action": "Request quote"
+      }
+    },
+    "expectations": {
+      "title": "What You Can Expect",
+      "quickResponse": {
+        "title": "Quick Response",
+        "description": "Response within 24 hours guaranteed"
+      },
+      "customSolutions": {
+        "title": "Custom Solutions",
+        "description": "Tailored specifically to your needs"
+      },
+      "noPressure": {
+        "title": "No Pressure",
+        "description": "Honest advice, no pushy sales tactics"
+      },
+      "confidential": {
+        "title": "Confidential",
+        "description": "Your information stays private"
+      }
+    },
+    "nextSteps": {
+      "title": "What Happens Next?",
+      "subtitle": "Here's our simple 4-step process to get your project started and ensure we deliver exactly what you need.",
+      "steps": {
+        "getInTouch": {
+          "title": "Get in Touch",
+          "description": "Choose your preferred way to connect with us"
+        },
+        "discoveryCall": {
+          "title": "Discovery Call",
+          "description": "We learn about your goals and challenges"
+        },
+        "customProposal": {
+          "title": "Custom Proposal",
+          "description": "Receive a detailed proposal with timeline and pricing"
+        },
+        "projectKickoff": {
+          "title": "Project Kickoff",
+          "description": "Start bringing your vision to life"
+        }
+      },
+      "ctaButton": "Start Your Project Today",
+      "disclaimer": "Free consultation • No obligation • Quick response guaranteed"
+    },
+    "trustedBy": "Trusted by Industry Leaders"
+  },
+  "portfolioHero": {
+    "title": "Our",
+    "titleHighlight": "Portfolio",
+    "subtitle": "Explore our collection of successful projects that have transformed brands, elevated user experiences, and driven measurable business results.",
+    "categories": {
+      "all": "All Projects",
+      "branding": "Branding",
+      "webDesign": "Web Design",
+      "mobileApps": "Mobile Apps",
+      "marketing": "Marketing"
+    },
+    "stats": {
+      "projectsCompleted": "Projects Completed",
+      "happyClients": "Happy Clients",
+      "industriesServed": "Industries Served",
+      "clientSatisfaction": "Client Satisfaction"
+    },
+    "exploreProjects": "Explore Projects",
+    "startProject": "Start Your Project"
+  },
+  "portfolioGrid": {
+    "projectsTitle": "Projects",
+    "imageNotFound": "Image not found",
+    "more": "more",
+    "projects": {
+      "finflow": {
+        "title": "FinFlow Interface Design",
+        "description": "Complete brand identity system for a cutting-edge tech startup, including logo design, brand guidelines, and marketing materials.",
+        "tags": ["Interface Design", "User Experience", "Prototyping"],
+        "results": [
+          "Improved user task completion rate by 40%",
+          "Reduced bounce rate by 35% after redesign",
+          "Achieved 2x increase in user engagement with interactive prototypes"
+        ]
+      },
+      "unlimited": {
+        "title": "Unlimited Creative Solutions",
+        "description": "Modern website with advanced features, custom integrations, and optimized user experience for maximum conversions.",
+        "tags": ["Web Design", "UX/UI Design", "Custom Development"],
+        "results": [
+          "250% increase in online sales",
+          "40% improvement in conversion rate",
+          "60% reduction in cart abandonment"
+        ]
+      },
+      "fixtra": {
+        "title": "Fixtra Mobile App",
+        "description": "Native mobile application with intuitive design, seamless user experience, and powerful backend integration.",
+        "tags": ["Mobile Development", "UI/UX Design", "API Integration"],
+        "results": [
+          "Completed end-to-end UI/UX design and prototyping",
+          "Built scalable architecture with full API integration",
+          "Successfully passed internal testing and QA phases"
+        ]
+      },
+      "nextgen": {
+        "title": "NextGen Digital Campaign",
+        "description": "Multi-channel digital marketing campaign that drove unprecedented engagement and measurable business growth.",
+        "tags": ["Digital Marketing", "Social Media", "PPC Advertising"],
+        "results": [
+          "400% increase in leads",
+          "180% boost in brand awareness",
+          "220% ROI improvement"
+        ]
+      },
+      "retailmax": {
+        "title": "RetailMax Online Store",
+        "description": "Complete e-commerce solution with custom features, inventory management, and seamless checkout experience.",
+        "tags": ["E-commerce", "Custom Development", "Payment Integration"],
+        "results": [
+          "300% increase in online revenue",
+          "50% faster checkout process",
+          "35% increase in average order value"
+        ]
+      },
+      "creativecorp": {
+        "title": "CreativeCorp Rebrand",
+        "description": "Complete brand transformation including new visual identity, messaging strategy, and brand implementation across all touchpoints.",
+        "tags": ["Rebranding", "Visual Identity", "Brand Strategy"],
+        "results": [
+          "250% increase in brand perception",
+          "180% boost in customer inquiries",
+          "200% growth in social following"
+        ]
+      }
+    }
+  },
+  "portfolioCTA": {
+    "title": "Ready to Create Your",
+    "titleHighlight": "Success Story?",
+    "subtitle": "Join the growing list of successful brands who have transformed their business with our creative solutions. Let's make your project the next success story.",
+    "processTitle": "How We'll Work Together",
+    "processSubtitle": "Our proven 4-step process ensures your project is delivered on time, on budget, and exceeds your expectations.",
+    "commitmentTitle": "Our Commitment to You",
+    "ctaTitle": "Let's Create Something Amazing Together",
+    "ctaSubtitle": "Ready to transform your brand and achieve the results you see in our portfolio? Book a free strategy call and let's discuss your project.",
+    "startProject": "Start Your Project",
+    "bookCall": "Book Strategy Call",
+    "disclaimer": "Free consultation • No obligation • Quick response guaranteed",
+    "trustedBy": "Trusted by Industry Leaders",
+    "steps": {
+      "discuss": {
+        "title": "Discuss Your Vision",
+        "description": "Tell us about your project goals and challenges"
+      },
+      "planning": {
+        "title": "Strategic Planning",
+        "description": "We create a custom strategy tailored to your needs"
+      },
+      "create": {
+        "title": "Bring It to Life",
+        "description": "Our team executes with precision and creativity"
+      },
+      "measure": {
+        "title": "Measure Success",
+        "description": "Track results and optimize for continued growth"
+      }
+    },
+    "guarantees": {
+      "customWork": {
+        "title": "100% Custom Work",
+        "description": "Every project is tailored specifically to your brand and goals"
+      },
+      "onTime": {
+        "title": "On-Time Delivery",
+        "description": "We respect deadlines and deliver projects when promised"
+      },
+      "revisions": {
+        "title": "Unlimited Revisions",
+        "description": "We refine until you're completely satisfied with the result"
+      },
+      "results": {
+        "title": "Results Guaranteed",
+        "description": "Our work is designed to deliver measurable business outcomes"
+      }
+    }
+  },
+  "contactHero": {
+    "title": "Let's Bring Your Vision to",
+    "titleHighlight": "Life",
+    "subtitle": "Ready to transform your brand? Get in touch with our creative team and discover how we can help you achieve your business goals.",
+    "methodsTitle": "What can we help you with?",
+    "methods": {
+      "generalInquiry": {
+        "title": "General Inquiry",
+        "description": "Ask questions about our services or get more information",
+        "action": "Send Message"
+      },
+      "serviceInquiry": {
+        "title": "Service Inquiry",
+        "description": "Learn more about specific services and what we offer",
+        "action": "Learn More"
+      },
+      "projectQuote": {
+        "title": "Project Quote",
+        "description": "Get a detailed quote for your specific project needs",
+        "action": "Request Quote"
+      },
+      "support": {
+        "title": "Support Request",
+        "description": "Need help with an existing project or service",
+        "action": "Get Support"
+      },
+      "partnership": {
+        "title": "Partnership",
+        "description": "Explore collaboration opportunities with our team",
+        "action": "Discuss Partnership"
+      }
+    },
+    "promises": {
+      "quickResponse": {
+        "title": "24-Hour Response",
+        "description": "We respond to all inquiries within 24 hours"
+      },
+      "customSolutions": {
+        "title": "Custom Solutions",
+        "description": "Every proposal is tailored to your specific needs"
+      },
+      "professional": {
+        "title": "Professional Service",
+        "description": "Expert advice and dedicated project management"
+      },
+      "confidential": {
+        "title": "Confidential",
+        "description": "Your project details stay completely private"
+      }
+    },
+    "otherWays": "Other ways to reach us:",
+    "address": "Cairo, Egypt",
+    "availability": "Available Monday - Friday, 9 AM - 6 PM EST",
+    "bookCallLink": "Prefer to book a call? Click here"
+  },
+  "contactForm": {
+    "guarantee": "24-Hour Response • Free Consultation • No Commitment",
+    "sections": {
+      "personalInfo": "Personal Information",
+      "contactInfo": "Contact Information",
+      "projectInfo": "Project Information",
+      "serviceInfo": "Service Information",
+      "message": "Your Message"
+    },
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "company": "Company Name",
+      "projectType": "Project Type",
+      "serviceType": "Service Type",
+      "budget": "Budget Range",
+      "timeline": "Timeline",
+      "priority": "Priority Level",
+      "messageLabel": "Tell us about your {{type}}",
+      "hearAbout": "How did you hear about us?"
+    },
+    "placeholders": {
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name",
+      "email": "your.email@company.com",
+      "phone": "+20 106 023 3872",
+      "company": "Your company or organization",
+      "projectType": "What type of project?",
+      "serviceType": "What service interests you?",
+      "budget": "Select budget range",
+      "timeline": "When do you need this?",
+      "hearAbout": "How did you find us?",
+      "message": {
+        "support": "Please describe the issue you're experiencing and any relevant details. Include error messages, steps you've tried, and when the issue started...",
+        "partnership": "Tell us about your partnership idea and how we can collaborate. What type of partnership are you interested in and what value can we create together...",
+        "project-quote": "Please describe your project requirements, goals, and any specific features you need. Include target audience, timeline, and any technical requirements...",
+        "service-inquiry": "Tell us which services you're interested in and what you'd like to know. Include your goals, timeline, and any specific questions about our offerings...",
+        "default": "Please describe what you'd like to know about our services or how we can help you. The more details you provide, the better we can assist you..."
+      }
+    },
+    "projectTypes": {
+      "branding": "Branding & Identity",
+      "webDev": "Web Development",
+      "mobileDev": "Mobile App Development",
+      "digitalMarketing": "Digital Marketing",
+      "uiux": "UI/UX Design",
+      "ecommerce": "E-commerce Solution",
+      "consulting": "Strategy Consulting",
+      "multiple": "Multiple Services",
+      "notSure": "Not Sure Yet"
+    },
+    "budgetRanges": {
+      "under10k": "Under 10,000 EGP",
+      "10to15k": "10,000 - 15,000 EGP",
+      "15to25k": "15,000 - 25,000 EGP",
+      "25to35k": "25,000 - 35,000 EGP",
+      "35to50k": "35,000 - 50,000 EGP",
+      "over50k": "50,000+ EGP",
+      "discuss": "Let's discuss"
+    },
+    "timelines": {
+      "asap": "ASAP",
+      "oneMonth": "Within 1 month",
+      "oneToThree": "1-3 months",
+      "threeToSix": "3-6 months",
+      "sixPlus": "6+ months",
+      "exploring": "Just exploring"
+    },
+    "hearAbout": {
+      "google": "Google Search",
+      "social": "Social Media",
+      "referral": "Referral",
+      "linkedin": "LinkedIn",
+      "previousClient": "Previous Client",
+      "event": "Industry Event",
+      "content": "Content/Blog",
+      "advertisement": "Advertisement",
+      "other": "Other"
+    },
+    "priorities": {
+      "urgent": "Urgent (ASAP)",
+      "high": "High Priority",
+      "normal": "Normal Priority",
+      "low": "Low Priority"
+    },
+    "methods": {
+      "generalInquiry": {
+        "title": "General Inquiry",
+        "subtitle": "Ask questions about our services"
+      },
+      "serviceInquiry": {
+        "title": "Service Inquiry",
+        "subtitle": "Learn more about specific services"
+      },
+      "projectQuote": {
+        "title": "Project Quote",
+        "subtitle": "Get a detailed quote for your project"
+      },
+      "support": {
+        "title": "Support Request",
+        "subtitle": "Get help with existing projects"
+      },
+      "partnership": {
+        "title": "Partnership Inquiry",
+        "subtitle": "Explore collaboration opportunities"
+      },
+      "default": {
+        "title": "Contact Us",
+        "subtitle": "Get in touch with our team"
+      }
+    },
+    "messageTypes": {
+      "support": "support request",
+      "partnership": "partnership idea",
+      "service": "service inquiry",
+      "project": "project"
+    },
+    "messageHelp": "The more details you provide, the better we can assist you with your {{method}}.",
+    "newsletter": {
+      "title": "Get creative insights and tips",
+      "description": "Subscribe to our newsletter for industry insights, creative tips, and exclusive offers. You can unsubscribe at any time."
+    },
+    "buttons": {
+      "sending": "Sending Your Message...",
+      "send": "Send Message"
+    },
+    "trust": {
+      "response": "24-Hour Response",
+      "consultation": "Free Consultation",
+      "advice": "Expert Advice"
+    },
+    "footer": {
+      "questions": "Questions? Call us directly at",
+      "availability": "We respond to all messages within 24 hours • Available Monday-Friday, 9 AM - 6 PM EST",
+      "agreement": "By sending this message, you agree to our",
+      "privacyPolicy": "Privacy Policy",
+      "and": "and",
+      "termsOfService": "Terms of Service"
+    },
+    "expectations": {
+      "title": "What to expect from your {{method}}:",
+      "generalInquiry": [
+        "Detailed answers to your questions",
+        "Service recommendations based on your needs",
+        "Next steps and action plan",
+        "Free consultation offer if applicable"
+      ],
+      "serviceInquiry": [
+        "Comprehensive service overview and details",
+        "Process explanation and methodology",
+        "Pricing information and package options",
+        "Timeline and deliverables breakdown"
+      ],
+      "projectQuote": [
+        "Detailed project assessment and analysis",
+        "Custom pricing proposal with breakdown",
+        "Timeline and milestone planning",
+        "Team and resource allocation plan"
+      ],
+      "support": [
+        "Issue diagnosis and troubleshooting",
+        "Step-by-step resolution guidance",
+        "Priority support assignment",
+        "Follow-up and monitoring service"
+      ],
+      "partnership": [
+        "Partnership opportunity assessment",
+        "Mutual benefit analysis and planning",
+        "Collaboration framework discussion",
+        "Next steps and formal agreements"
+      ]
+    },
+    "validation": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "emailRequired": "Email is required",
+      "messageRequired": "Message is required",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneInvalid": "Please enter a valid phone number"
+    },
+    "errors": {
+      "invalidResponse": "Invalid response from server. Please try again.",
+      "serverError": "Server error occurred",
+      "submissionFailed": "Message submission failed",
+      "couldNotSave": "Message could not be saved. Please try again.",
+      "unknown": "Unknown error occurred",
+      "failedToSend": "Failed to send message. Please try again.",
+      "connectionError": "Connection error. Please check your internet connection and try again.",
+      "serverResponseError": "Server response error. Please try again or contact us directly."
+    },
+    "success": {
+      "title": "Message Sent Successfully!",
+      "message": "Thank you for contacting us! We've received your {{method}} and will get back to you within 24 hours.",
+      "submissionDetails": "Submission Details:",
+      "referenceId": "Reference ID",
+      "type": "Type",
+      "status": "Status",
+      "email": "Email",
+      "submitted": "Submitted",
+      "emailStatus": "Email Status",
+      "sent": "Sent",
+      "whatsNext": "What's Next:",
+      "steps": {
+        "emailSent": "Confirmation email sent to your inbox",
+        "messageSaved": "We have your message saved",
+        "teamReview": "Our team reviews your {{method}}",
+        "response": "We'll respond within 24 hours via email",
+        "followUp": "Follow-up discussion about your project needs"
+      },
+      "sendAnother": "Send Another Message",
+      "returnHome": "Return Home",
+      "bookCall": "Book a Call",
+      "needHelp": "Need immediate assistance? Contact us directly:",
+      "referenceIdLabel": "Reference ID"
+    },
+    "error": {
+      "title": "Message Failed to Send",
+      "message": "We're sorry, but we couldn't send your message at this time. Please try again or contact us directly.",
+      "errorDetails": "Error Details:",
+      "tryAgain": "Try Again",
+      "callUs": "Call Us",
+      "emailUs": "Email Us"
+    }
+  },
+  "cta": {
+    "readyToCreate": "Ready to Transform Your Brand?",
+    "joinGrowing": "Book a free 30-minute strategy call and discover how we can help you achieve your business goals with unlimited creative solutions.",
+    "startProject": "Book Free Strategy Call",
+    "bookCall": "Schedule via Calendar",
+    "trustedBy": "Trusted by Industry Leaders"
+  },
+  "common": {
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "contactUs": "Contact Us",
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "bookCall": "Book Call",
+    "scheduleCall": "Schedule Call",
+    "viewWork": "View Our Work",
+    "startProject": "Start Your Project",
+    "yearsExperience": "Years Experience",
+    "projectsCompleted": "Projects Completed",
+    "clientSatisfaction": "Client Satisfaction"
+  }
+}
