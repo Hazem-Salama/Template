@@ -1,19 +1,11 @@
-// components/AboutHero.tsx
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-// Import i18n configuration
-import '@/lib/i18n'
-
 export default function AboutHero() {
-  const { t, i18n } = useTranslation('common')
-  const isRTL = i18n.language === 'ar'
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-red-900 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900 pt-20">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div 
@@ -35,7 +27,7 @@ export default function AboutHero() {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute top-1/3 right-1/4 w-72 h-72 bg-red-500/5 rounded-full blur-3xl"
+        className="absolute top-1/3 right-1/4 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -50,21 +42,10 @@ export default function AboutHero() {
             variants={fadeInUp}
             className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight"
           >
-            {isRTL ? (
-              <>
-                عن{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-                  انليميتد
-                </span>
-              </>
-            ) : (
-              <>
-                About{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-                  Unlimited
-                </span>
-              </>
-            )}
+            About{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600">
+              Our Agency
+            </span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -72,7 +53,7 @@ export default function AboutHero() {
             variants={fadeInUp}
             className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
           >
-            {t('about.subtitle')}
+            We're a passionate team of creatives and strategists dedicated to helping businesses grow through innovative digital solutions.
           </motion.p>
 
           {/* Key Points */}
@@ -82,18 +63,24 @@ export default function AboutHero() {
           >
             <div className="text-center">
               <div className="text-4xl mb-4">🎯</div>
-              <h3 className="text-xl font-bold text-white mb-2">{t('about.mission')}</h3>
-              <p className="text-gray-400">{t('about.missionText')}</p>
+              <h3 className="text-xl font-bold text-white mb-2">Our Mission</h3>
+              <p className="text-gray-400">
+                To empower businesses with cutting-edge digital solutions that drive growth and success.
+              </p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-4">💡</div>
-              <h3 className="text-xl font-bold text-white mb-2">{t('about.vision')}</h3>
-              <p className="text-gray-400">{t('about.visionText')}</p>
+              <h3 className="text-xl font-bold text-white mb-2">Our Vision</h3>
+              <p className="text-gray-400">
+                To be the leading agency that transforms ideas into impactful digital experiences.
+              </p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-4">🤝</div>
-              <h3 className="text-xl font-bold text-white mb-2">{t('about.values')}</h3>
-              <p className="text-gray-400">{t('about.valuesText')}</p>
+              <h3 className="text-xl font-bold text-white mb-2">Our Values</h3>
+              <p className="text-gray-400">
+                Creativity, integrity, excellence, and client success are at the heart of everything we do.
+              </p>
             </div>
           </motion.div>
         </motion.div>

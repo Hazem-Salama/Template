@@ -2,7 +2,7 @@
 import mongoose from 'mongoose'
 
 const MONGODB_URI = process.env.MONGODB_URI!
-const DATABASE_NAME = process.env.DATABASE_NAME || 'Unlimited'
+const DATABASE_NAME = process.env.DATABASE_NAME || 'agency_template'
 
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env.local')

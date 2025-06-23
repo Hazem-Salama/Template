@@ -1,39 +1,35 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Button from '../Button'
-import { useTranslation } from 'react-i18next'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
+// Template service highlights - customize with your actual numbers
+const serviceHighlights = [
+  { 
+    icon: '🎨', 
+    title: 'Brands Created', 
+    count: '50+' 
+  },
+  { 
+    icon: '💻', 
+    title: 'Websites Built', 
+    count: '200+' 
+  },
+  { 
+    icon: '📱', 
+    title: 'Apps Developed', 
+    count: '30+' 
+  },
+  { 
+    icon: '📊', 
+    title: 'Campaigns Launched', 
+    count: '100+' 
+  }
+]
+
 export default function ServicesHero() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-
-  const serviceHighlights = [
-    { 
-      icon: '🎨', 
-      title: t('servicesHero.highlights.branding'), 
-      count: '50+' 
-    },
-    { 
-      icon: '💻', 
-      title: t('servicesHero.highlights.websites'), 
-      count: '200+' 
-    },
-    { 
-      icon: '📱', 
-      title: t('servicesHero.highlights.apps'), 
-      count: '30+' 
-    },
-    { 
-      icon: '📊', 
-      title: t('servicesHero.highlights.campaigns'), 
-      count: '100+' 
-    }
-  ]
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-red-900 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900 pt-20">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div 
@@ -55,7 +51,7 @@ export default function ServicesHero() {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute top-1/4 right-1/3 w-64 h-64 bg-red-500/10 rounded-full blur-3xl"
+        className="absolute top-1/4 right-1/3 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
       />
 
       <motion.div
@@ -77,29 +73,24 @@ export default function ServicesHero() {
           initial="hidden"
           animate="visible"
           className="max-w-5xl mx-auto"
-          dir={isRTL ? 'rtl' : 'ltr'}
         >
           {/* Main Heading */}
           <motion.h1
             variants={fadeInUp}
-            className={`text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight"
           >
-            {t('servicesHero.title')}{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-              {/* No need to translate "Services" as it's handled in the main title */}
+            Our{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600">
+              Services
             </span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
             variants={fadeInUp}
-            className={`text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
           >
-            {t('servicesHero.subtitle')}
+            Comprehensive digital solutions designed to elevate your brand, engage your audience, and drive measurable business growth.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -107,25 +98,25 @@ export default function ServicesHero() {
             variants={fadeInUp}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
           >
-            <Button 
-              variant="primary" 
-              size="large"
-              className={isRTL ? 'font-arabic' : ''}
-              onClick={() => window.location.href = '/book-call'}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-lg"
+              onClick={() => window.location.href = '/contact'}
             >
-              {t('servicesHero.ctaQuote')}
-            </Button>
-            <Button 
-              variant="outline" 
-              size="large"
-              className={isRTL ? 'font-arabic' : ''}
+              Get Free Quote
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-black transition-colors"
               onClick={() => {
                 const servicesSection = document.getElementById('services-grid')
                 servicesSection?.scrollIntoView({ behavior: 'smooth' })
               }}
             >
-              {t('servicesHero.ctaExplore')}
-            </Button>
+              Explore Services
+            </motion.button>
           </motion.div>
 
           {/* Service Highlights */}
@@ -134,14 +125,12 @@ export default function ServicesHero() {
             className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-gray-700/50"
           >
             {serviceHighlights.map((highlight, index) => (
-              <div key={index} className="text-center" dir={isRTL ? 'rtl' : 'ltr'}>
+              <div key={index} className="text-center">
                 <div className="text-3xl mb-2">{highlight.icon}</div>
-                <div className="text-2xl md:text-3xl font-bold text-red-500 mb-1">
+                <div className="text-2xl md:text-3xl font-bold text-blue-500 mb-1">
                   {highlight.count}
                 </div>
-                <div className={`text-gray-400 text-sm uppercase tracking-wide ${
-                  isRTL ? 'font-arabic' : ''
-                }`}>
+                <div className="text-gray-400 text-sm uppercase tracking-wide">
                   {highlight.title}
                 </div>
               </div>

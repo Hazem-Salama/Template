@@ -1,24 +1,21 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import Button from './Button'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 export default function CallToAction() {
-  const { i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-
+  // Template placeholder logos - replace with actual client logos
   const trustedLogos = [
-    { logo: '/ElShamy.svg', name: 'Elshamy Group' },
-    { logo: '/Alamaan.svg', name: 'Alamaan Center' },
-    { logo: '/ElShamy.svg', name: 'Elshamy Group' }, // Duplicate for now
-    { logo: '/Alamaan.svg', name: 'Alamaan Center' } // Duplicate for now
+    { logo: '/placeholder-logo-1.svg', name: 'Company One' },
+    { logo: '/placeholder-logo-2.svg', name: 'Company Two' },
+    { logo: '/placeholder-logo-3.svg', name: 'Company Three' },
+    { logo: '/placeholder-logo-4.svg', name: 'Company Four' }
   ]
 
   return (
-    <section className="py-24 bg-gradient-to-r from-black via-gray-900 to-red-900 relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -36,69 +33,46 @@ export default function CallToAction() {
         >
           <motion.h2
             variants={fadeInUp}
-            className={`text-4xl md:text-6xl font-bold text-white mb-6 cta-title ${
-              isRTL ? 'font-arabic' : ''
-            }`}
-            dir={isRTL ? 'rtl' : 'ltr'}
+            className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
-            {isRTL ? (
-              <>
-                مستعد لتحويل{' '}
-                <span className="block text-red-500">علامتك التجارية؟</span>
-              </>
-            ) : (
-              <>
-                Ready to Transform{' '}
-                <span className="block text-red-500">Your Brand?</span>
-              </>
-            )}
+            Ready to Transform{' '}
+            <span className="block text-blue-400">Your Business?</span>
           </motion.h2>
           
           <motion.p
             variants={fadeInUp}
-            className={`text-xl text-gray-300 mb-12 max-w-2xl mx-auto cta-description ${
-              isRTL ? 'font-arabic' : ''
-            }`}
-            dir={isRTL ? 'rtl' : 'ltr'}
+            className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto"
           >
-            {isRTL ? (
-              'احجز مكالمة استراتيجية مجانية لمدة 30 دقيقة واكتشف كيف يمكننا مساعدتك في تحقيق أهداف عملك بحلول إبداعية بلا حدود.'
-            ) : (
-              'Book a free 30-minute strategy call and discover how we can help you achieve your business goals with unlimited creative solutions.'
-            )}
+            Book a free 30-minute strategy consultation and discover how we can help you achieve your business goals with innovative solutions.
           </motion.p>
           
           <motion.div
             variants={fadeInUp}
-            className={`flex flex-col sm:flex-row gap-6 justify-center items-center ${
-              isRTL ? 'sm:flex-row-reverse' : ''
-            }`}
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
             <Button 
               variant="primary" 
               size="large"
               onClick={() => window.location.href = '/book-call'}
             >
-              {isRTL ? 'احجز مكالمة استراتيجية مجانية' : 'Book Free Strategy Call'}
+              Book Free Consultation
             </Button>
             <Button 
               variant="outline" 
               size="large"
-              onClick={() => window.open('https://calendly.com/unlimited-agency', '_blank')}
+              onClick={() => window.open('https://calendly.com/your-agency', '_blank')}
             >
-              {isRTL ? 'جدولة عبر التقويم' : 'Schedule via Calendar'}
+              Schedule via Calendar
             </Button>
           </motion.div>
 
-          {/* Trust Indicators with Logos */}
+          {/* Trust Indicators with Placeholder Logos */}
           <motion.div
             variants={fadeInUp}
             className="mt-16 pt-12 border-t border-gray-700"
           >
-            <p className={`text-gray-400 mb-8 text-sm uppercase tracking-wide ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {isRTL ? 'موثوق به من قبل رواد الصناعة' : 'Trusted by Industry Leaders'}
+            <p className="text-gray-400 mb-8 text-sm uppercase tracking-wide">
+              Trusted by Industry Leaders
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
               {trustedLogos.map((company, index) => (
@@ -112,15 +86,21 @@ export default function CallToAction() {
                     duration: 0.3,
                     ease: "easeOut"
                   }}
-                  className="flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer h-32"
+                  className="flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer h-20"
                 >
+                  {/* Placeholder logo - replace with actual client logos */}
+                  <div className="w-32 h-16 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
+                    <span className="text-white/60 text-sm font-medium">{company.name}</span>
+                  </div>
+                  {/* Alternative: Use actual logo images
                   <Image
                     src={company.logo}
                     alt={`${company.name} logo`}
-                    width={240}
-                    height={120}
+                    width={160}
+                    height={80}
                     className="object-contain max-w-full max-h-full filter grayscale hover:grayscale-0 transition-all duration-300"
                   />
+                  */}
                 </motion.div>
               ))}
             </div>

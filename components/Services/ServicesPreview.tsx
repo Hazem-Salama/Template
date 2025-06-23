@@ -1,26 +1,18 @@
-// components/ServicesPreview.tsx
+// components/Services/ServicesPreview.tsx
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
 import ServiceCard from './ServiceCard'
 import { staggerContainer, fadeInUp } from '@/lib/animations'
 
-// Service data with fallback text to prevent Arabic showing in English
-const getServices = (t: any, isRTL: boolean) => [
+// Template services data - customize for your agency
+const services = [
   {
-    title: isRTL ? 'الهوية التجارية' : 'Branding',
-    description: isRTL 
-      ? 'أنشئ هوية تجارية قوية تتواصل مع جمهورك وتبني الثقة الدائمة.'
-      : 'Create a powerful brand identity that resonates with your audience and builds lasting trust.',
+    title: 'Brand Strategy',
+    description: 'Create a powerful brand identity that resonates with your audience and builds lasting trust.',
     icon: "🎨",
     href: "/Branding",
-    features: isRTL ? [
-      "تصميم الشعار",
-      "الهوية البصرية",
-      "دليل العلامة التجارية",
-      "التطبيقات الرقمية"
-    ] : [
+    features: [
       "Logo Design",
       "Visual Identity", 
       "Brand Guidelines",
@@ -28,18 +20,11 @@ const getServices = (t: any, isRTL: boolean) => [
     ]
   },
   {
-    title: isRTL ? 'تصميم واجهة المستخدم' : 'UI/UX Design',
-    description: isRTL
-      ? 'صمم تجارب مستخدم بديهية وجذابة تحول الزوار إلى عملاء.'
-      : 'Design intuitive and engaging user experiences that convert visitors into customers.',
+    title: 'UI/UX Design',
+    description: 'Design intuitive and engaging user experiences that convert visitors into customers.',
     icon: "💻",
     href: "/UIUX",
-    features: isRTL ? [
-      "بحث المستخدم",
-      "تصميم واجهة المستخدم",
-      "النماذج الأولية",
-      "اختبار الاستخدام"
-    ] : [
+    features: [
       "User Research",
       "UI Design",
       "Prototyping",
@@ -47,37 +32,23 @@ const getServices = (t: any, isRTL: boolean) => [
     ]
   },
   {
-    title: isRTL ? 'تطوير المواقع' : 'Web Development',
-    description: isRTL
-      ? 'ابن مواقع سريعة وآمنة وقابلة للتطوير تعمل بامتياز على جميع الأجهزة.'
-      : 'Build fast, secure, and scalable websites that perform excellently across all devices.',
+    title: 'Web Development',
+    description: 'Build fast, secure, and scalable websites that perform excellently across all devices.',
     icon: "🌐",
     href: "/WebDev",
-    features: isRTL ? [
-      "مواقع مخصصة",
-      "تطبيقات ويب",
-      "التجارة الإلكترونية",
-      "تحسين الأداء"
-    ] : [
+    features: [
       "Custom Websites",
       "Web Applications",
-      "E-commerce",
+      "E-commerce Solutions",
       "Performance Optimization"
     ]
   },
   {
-    title: isRTL ? 'التسويق الرقمي' : 'Digital Marketing',
-    description: isRTL
-      ? 'استراتيجيات تسويقية مدفوعة بالبيانات تزيد الرؤية وتحقق نمواً قابلاً للقياس.'
-      : 'Data-driven marketing strategies that increase visibility and drive measurable growth.',
+    title: 'Digital Marketing',
+    description: 'Data-driven marketing strategies that increase visibility and drive measurable growth.',
     icon: "📈",
     href: "/DM",
-    features: isRTL ? [
-      "وسائل التواصل الاجتماعي",
-      "إعلانات جوجل",
-      "تحسين محركات البحث",
-      "تحليل البيانات"
-    ] : [
+    features: [
       "Social Media Marketing",
       "Google Ads",
       "SEO Optimization", 
@@ -87,10 +58,6 @@ const getServices = (t: any, isRTL: boolean) => [
 ]
 
 export default function ServicesPreview() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-  const services = getServices(t, isRTL)
-
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,26 +70,15 @@ export default function ServicesPreview() {
         >
           <motion.h2
             variants={fadeInUp}
-            className="text-4xl md:text-5xl font-bold text-black mb-6"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            {isRTL ? (
-              <>
-                <span className="text-red-500">خبرتنا</span>
-              </>
-            ) : (
-              <>
-                Our <span className="text-red-500">Expertise</span>
-              </>
-            )}
+            Our <span className="text-blue-500">Expertise</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            {isRTL 
-              ? 'نحن نجمع بين التفكير الاستراتيجي والتنفيذ الإبداعي لتقديم حلول تحقق نمواً حقيقياً في الأعمال.'
-              : 'We combine strategic thinking with creative execution to deliver solutions that drive real business growth.'
-            }
+            We combine strategic thinking with creative execution to deliver solutions that drive real business growth and measurable results.
           </motion.p>
         </motion.div>
 
@@ -138,6 +94,32 @@ export default function ServicesPreview() {
               <ServiceCard {...service} />
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Additional Services CTA */}
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 md:p-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Need Something Custom?
+            </h3>
+            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+              We specialize in creating tailored solutions that perfectly fit your unique business needs and goals.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = '/Contact'}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-medium transition-colors shadow-lg"
+            >
+              Discuss Your Project
+            </motion.button>
+          </div>
         </motion.div>
       </div>
     </section>

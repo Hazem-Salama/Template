@@ -1,62 +1,59 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Button from '../Button'
-import { useTranslation } from 'react-i18next'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
+// Template process steps - customize for your workflow
+const nextSteps = [
+  {
+    step: '01',
+    title: 'Discovery Call',
+    description: 'We discuss your goals, requirements, and vision for the project'
+  },
+  {
+    step: '02',
+    title: 'Strategy & Planning',
+    description: 'Develop a comprehensive plan and timeline for your project'
+  },
+  {
+    step: '03',
+    title: 'Design & Create',
+    description: 'Bring your vision to life with expert design and development'
+  },
+  {
+    step: '04',
+    title: 'Launch & Optimize',
+    description: 'Deploy your project and continuously optimize for best results'
+  }
+]
+
+// Template guarantees - customize for your service offerings
+const guarantees = [
+  {
+    icon: '💯',
+    title: 'Custom Solutions',
+    description: 'Tailored specifically to your business needs and goals'
+  },
+  {
+    icon: '⏱️',
+    title: 'On-Time Delivery',
+    description: 'Projects delivered on schedule with clear milestones'
+  },
+  {
+    icon: '🔄',
+    title: 'Unlimited Revisions',
+    description: 'We work until you\'re completely satisfied with the results'
+  },
+  {
+    icon: '🎯',
+    title: 'Results-Driven',
+    description: 'Focus on measurable outcomes that grow your business'
+  }
+]
+
 export default function PortfolioCTA() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-
-  const nextSteps = [
-    {
-      step: '01',
-      title: t('portfolioCTA.steps.discuss.title'),
-      description: t('portfolioCTA.steps.discuss.description')
-    },
-    {
-      step: '02',
-      title: t('portfolioCTA.steps.planning.title'),
-      description: t('portfolioCTA.steps.planning.description')
-    },
-    {
-      step: '03',
-      title: t('portfolioCTA.steps.create.title'),
-      description: t('portfolioCTA.steps.create.description')
-    },
-    {
-      step: '04',
-      title: t('portfolioCTA.steps.measure.title'),
-      description: t('portfolioCTA.steps.measure.description')
-    }
-  ]
-
-  const guarantees = [
-    {
-      icon: '💯',
-      title: t('portfolioCTA.guarantees.customWork.title'),
-      description: t('portfolioCTA.guarantees.customWork.description')
-    },
-    {
-      icon: '⏱️',
-      title: t('portfolioCTA.guarantees.onTime.title'),
-      description: t('portfolioCTA.guarantees.onTime.description')
-    },
-    {
-      icon: '🔄',
-      title: t('portfolioCTA.guarantees.revisions.title'),
-      description: t('portfolioCTA.guarantees.revisions.description')
-    },
-    {
-      icon: '🎯',
-      title: t('portfolioCTA.guarantees.results.title'),
-      description: t('portfolioCTA.guarantees.results.description')
-    }
-  ]
-
   return (
-    <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-red-900 relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-blue-900 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -75,7 +72,7 @@ export default function PortfolioCTA() {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute top-1/4 right-1/4 w-80 h-80 bg-red-500/10 rounded-full blur-3xl"
+        className="absolute top-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,24 +82,19 @@ export default function PortfolioCTA() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
-          dir={isRTL ? 'rtl' : 'ltr'}
         >
           <motion.h2
             variants={fadeInUp}
-            className={`text-4xl md:text-6xl font-bold text-white mb-6 ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
-            {t('portfolioCTA.title')}{' '}
-            <span className="text-red-500">{t('portfolioCTA.titleHighlight')}</span>
+            Ready to Start{' '}
+            <span className="text-blue-500">Your Project?</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className={`text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            {t('portfolioCTA.subtitle')}
+            Let's transform your ideas into exceptional digital experiences that drive real business results.
           </motion.p>
         </motion.div>
 
@@ -114,16 +106,12 @@ export default function PortfolioCTA() {
           viewport={{ once: true, margin: "-100px" }}
           className="mb-20"
         >
-          <div className="text-center mb-12" dir={isRTL ? 'rtl' : 'ltr'}>
-            <h3 className={`text-3xl font-bold text-white mb-4 ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('portfolioCTA.processTitle')}
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              How We Work Together
             </h3>
-            <p className={`text-gray-300 max-w-2xl mx-auto ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('portfolioCTA.processSubtitle')}
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Our proven process ensures successful project delivery from concept to launch.
             </p>
           </div>
 
@@ -133,25 +121,22 @@ export default function PortfolioCTA() {
                 key={index}
                 variants={fadeInUp}
                 className="text-center relative"
-                dir={isRTL ? 'rtl' : 'ltr'}
               >
                 {/* Connection Line */}
                 {index < nextSteps.length - 1 && (
-                  <div className={`hidden lg:block absolute top-6 w-full h-0.5 bg-red-500/30 transform translate-x-4 ${
-                    isRTL ? 'right-full' : 'left-full'
-                  }`}></div>
+                  <div className="hidden lg:block absolute top-6 left-full w-full h-0.5 bg-blue-500/30 transform translate-x-4"></div>
                 )}
                 
                 <div className="relative z-10">
-                  <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">
+                  <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">
                     {step.step}
                   </div>
-                  <h4 className={`text-lg font-bold text-white mb-3 ${
-                    isRTL ? 'font-arabic' : ''
-                  }`}>{step.title}</h4>
-                  <p className={`text-gray-300 text-sm leading-relaxed ${
-                    isRTL ? 'font-arabic' : ''
-                  }`}>{step.description}</p>
+                  <h4 className="text-lg font-bold text-white mb-3">
+                    {step.title}
+                  </h4>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    {step.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -166,11 +151,9 @@ export default function PortfolioCTA() {
           viewport={{ once: true, margin: "-100px" }}
           className="mb-16"
         >
-          <div className="text-center mb-12" dir={isRTL ? 'rtl' : 'ltr'}>
-            <h3 className={`text-3xl font-bold text-white mb-4 ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('portfolioCTA.commitmentTitle')}
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Our Commitment to You
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -179,15 +162,14 @@ export default function PortfolioCTA() {
                 key={index}
                 variants={fadeInUp}
                 className="text-center p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
-                dir={isRTL ? 'rtl' : 'ltr'}
               >
                 <div className="text-4xl mb-4">{guarantee.icon}</div>
-                <h4 className={`text-lg font-bold text-white mb-3 ${
-                  isRTL ? 'font-arabic' : ''
-                }`}>{guarantee.title}</h4>
-                <p className={`text-gray-300 text-sm leading-relaxed ${
-                  isRTL ? 'font-arabic' : ''
-                }`}>{guarantee.description}</p>
+                <h4 className="text-lg font-bold text-white mb-3">
+                  {guarantee.title}
+                </h4>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {guarantee.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -201,41 +183,35 @@ export default function PortfolioCTA() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center"
         >
-          <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10" dir={isRTL ? 'rtl' : 'ltr'}>
-            <h3 className={`text-3xl font-bold text-white mb-6 ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('portfolioCTA.ctaTitle')}
+          <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10">
+            <h3 className="text-3xl font-bold text-white mb-6">
+              Let's Create Something Amazing Together
             </h3>
-            <p className={`text-gray-300 mb-8 max-w-2xl mx-auto ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('portfolioCTA.ctaSubtitle')}
+            <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+              Ready to take your business to the next level? Get in touch and let's discuss how we can help you achieve your goals.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-              <Button
-                variant="primary"
-                size="large"
-                className={isRTL ? 'font-arabic' : ''}
-                onClick={() => window.location.href = '/book-call'}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-lg"
+                onClick={() => window.location.href = '/contact'}
               >
-                {t('portfolioCTA.startProject')}
-              </Button>
-              <Button
-                variant="outline"
-                size="large"
-                className={isRTL ? 'font-arabic' : ''}
-                onClick={() => window.open('', '_blank')}
+                Start Your Project
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-black transition-colors"
+                onClick={() => window.location.href = '/contact'}
               >
-                {t('portfolioCTA.bookCall')}
-              </Button>
+                Schedule a Call
+              </motion.button>
             </div>
 
-            <p className={`text-gray-400 text-sm ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('portfolioCTA.disclaimer')}
+            <p className="text-gray-400 text-sm">
+              Free consultation • No obligation • Quick response within 24 hours
             </p>
           </div>
         </motion.div>
@@ -248,10 +224,8 @@ export default function PortfolioCTA() {
           viewport={{ once: true, margin: "-100px" }}
           className="mt-16 text-center"
         >
-          <p className={`text-gray-400 mb-8 text-sm uppercase tracking-wide ${
-            isRTL ? 'font-arabic' : ''
-          }`}>
-            {t('portfolioCTA.trustedBy')}
+          <p className="text-gray-400 mb-8 text-sm uppercase tracking-wide">
+            Trusted by Leading Companies
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60">
             {['TechStart', 'GrowthCo', 'InnovateLab', 'NextGen'].map((company, index) => (

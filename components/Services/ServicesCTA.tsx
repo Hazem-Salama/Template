@@ -2,96 +2,93 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import Button from '../Button'
-import { useTranslation } from 'react-i18next'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
+// Template CTA options - customize for your agency
+const ctaOptions = [
+  {
+    icon: '📞',
+    title: 'Strategy Call',
+    description: 'Book a free 30-minute consultation to discuss your project and get expert advice.',
+    action: 'Book Free Call',
+    href: '/contact',
+    variant: 'primary' as const
+  },
+  {
+    icon: '💬',
+    title: 'Quick Chat',
+    description: 'Send us a message and we\'ll get back to you within 24 hours with next steps.',
+    action: 'Send Message',
+    href: '/contact',
+    variant: 'secondary' as const
+  },
+  {
+    icon: '📊',
+    title: 'Get Quote',
+    description: 'Receive a detailed proposal with timeline, deliverables, and transparent pricing.',
+    action: 'Request Quote',
+    href: '/contact',
+    variant: 'outline' as const
+  }
+]
+
+const guarantees = [
+  {
+    icon: '⚡',
+    title: 'Quick Response',
+    description: 'We respond to all inquiries within 24 hours'
+  },
+  {
+    icon: '🎯',
+    title: 'Custom Solutions',
+    description: 'Tailored strategies for your unique needs'
+  },
+  {
+    icon: '💯',
+    title: 'No Pressure',
+    description: 'Honest advice with no pushy sales tactics'
+  },
+  {
+    icon: '🔒',
+    title: 'Confidential',
+    description: 'Your ideas and information stay secure'
+  }
+]
+
+const nextSteps = [
+  {
+    step: '01',
+    title: 'Get In Touch',
+    description: 'Reach out through your preferred method - call, email, or contact form.'
+  },
+  {
+    step: '02',
+    title: 'Discovery Call',
+    description: 'We discuss your goals, challenges, and vision for the project.'
+  },
+  {
+    step: '03',
+    title: 'Custom Proposal',
+    description: 'Receive a detailed proposal with timeline and transparent pricing.'
+  },
+  {
+    step: '04',
+    title: 'Project Kickoff',
+    description: 'Once approved, we begin bringing your vision to life.'
+  }
+]
+
+// Template client logos - replace with your actual clients
+const trustedLogos = [
+  { logo: '/logo-placeholder-1.svg', name: 'Client One' },
+  { logo: '/logo-placeholder-2.svg', name: 'Client Two' },
+  { logo: '/logo-placeholder-3.svg', name: 'Client Three' },
+  { logo: '/logo-placeholder-4.svg', name: 'Client Four' }
+]
+
 export default function ServicesCTA() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-
-  const ctaOptions = [
-    {
-      icon: '📞',
-      title: t('servicesCTA.options.strategyCall.title'),
-      description: t('servicesCTA.options.strategyCall.description'),
-      action: t('servicesCTA.options.strategyCall.action'),
-      href: '/book-call',
-      variant: 'primary' as const
-    },
-    {
-      icon: '💬',
-      title: t('servicesCTA.options.chat.title'),
-      description: t('servicesCTA.options.chat.description'),
-      action: t('servicesCTA.options.chat.action'),
-      href: '/Contact',
-      variant: 'secondary' as const
-    },
-    {
-      icon: '📊',
-      title: t('servicesCTA.options.quote.title'),
-      description: t('servicesCTA.options.quote.description'),
-      action: t('servicesCTA.options.quote.action'),
-      href: '/book-call',
-      variant: 'outline' as const
-    }
-  ]
-
-  const guarantees = [
-    {
-      icon: '⚡',
-      title: t('servicesCTA.expectations.quickResponse.title'),
-      description: t('servicesCTA.expectations.quickResponse.description')
-    },
-    {
-      icon: '🎯',
-      title: t('servicesCTA.expectations.customSolutions.title'),
-      description: t('servicesCTA.expectations.customSolutions.description')
-    },
-    {
-      icon: '💯',
-      title: t('servicesCTA.expectations.noPressure.title'),
-      description: t('servicesCTA.expectations.noPressure.description')
-    },
-    {
-      icon: '🔒',
-      title: t('servicesCTA.expectations.confidential.title'),
-      description: t('servicesCTA.expectations.confidential.description')
-    }
-  ]
-
-  const nextSteps = [
-    {
-      step: '01',
-      title: t('servicesCTA.nextSteps.steps.getInTouch.title'),
-      description: t('servicesCTA.nextSteps.steps.getInTouch.description')
-    },
-    {
-      step: '02',
-      title: t('servicesCTA.nextSteps.steps.discoveryCall.title'),
-      description: t('servicesCTA.nextSteps.steps.discoveryCall.description')
-    },
-    {
-      step: '03',
-      title: t('servicesCTA.nextSteps.steps.customProposal.title'),
-      description: t('servicesCTA.nextSteps.steps.customProposal.description')
-    },
-    {
-      step: '04',
-      title: t('servicesCTA.nextSteps.steps.projectKickoff.title'),
-      description: t('servicesCTA.nextSteps.steps.projectKickoff.description')
-    }
-  ]
-
-  const trustedLogos = [
-    { logo: '/ElShamy.svg', name: 'Elshamy Group' },
-    { logo: '/Alamaan.svg', name: 'Alamaan Center' },
-    { logo: '/ElShamy.svg', name: 'Elshamy Group' },
-    { logo: '/Alamaan.svg', name: 'Alamaan Center' }
-  ]
-
   return (
-    <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-red-900 relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-blue-900 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -110,7 +107,7 @@ export default function ServicesCTA() {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute top-1/4 right-1/4 w-80 h-80 bg-red-500/10 rounded-full blur-3xl"
+        className="absolute top-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
       />
 
       <motion.div
@@ -133,23 +130,18 @@ export default function ServicesCTA() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
-          dir={isRTL ? 'rtl' : 'ltr'}
         >
           <motion.h2
             variants={fadeInUp}
-            className={`text-4xl md:text-6xl font-bold text-white mb-6 ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
-            {t('servicesCTA.title')} <span className="text-red-500">{t('servicesCTA.titleHighlight')}</span>
+            Ready to <span className="text-blue-500">Get Started?</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className={`text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            {t('servicesCTA.subtitle')}
+            Let's discuss your project and explore how we can help bring your vision to life with our expert team.
           </motion.p>
         </motion.div>
 
@@ -166,29 +158,30 @@ export default function ServicesCTA() {
               key={index}
               variants={fadeInUp}
               className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center hover:bg-white/15 transition-all duration-300 group"
-              dir={isRTL ? 'rtl' : 'ltr'}
             >
               <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">
                 {option.icon}
               </div>
-              <h3 className={`text-2xl font-bold text-white mb-4 ${
-                isRTL ? 'font-arabic' : ''
-              }`}>
+              <h3 className="text-2xl font-bold text-white mb-4">
                 {option.title}
               </h3>
-              <p className={`text-gray-300 mb-8 leading-relaxed ${
-                isRTL ? 'font-arabic' : ''
-              }`}>
+              <p className="text-gray-300 mb-8 leading-relaxed">
                 {option.description}
               </p>
-              <Button
-                variant={option.variant}
-                size="large"
-                className={`w-full ${isRTL ? 'font-arabic' : ''}`}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`w-full py-3 px-6 rounded-lg font-medium transition-colors ${
+                  option.variant === 'primary' 
+                    ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                    : option.variant === 'secondary'
+                    ? 'bg-white text-black hover:bg-gray-100'
+                    : 'border-2 border-white text-white hover:bg-white hover:text-black'
+                }`}
                 onClick={() => window.location.href = option.href}
               >
                 {option.action}
-              </Button>
+              </motion.button>
             </motion.div>
           ))}
         </motion.div>
@@ -201,11 +194,9 @@ export default function ServicesCTA() {
           viewport={{ once: true, margin: "-100px" }}
           className="mb-16"
         >
-          <div className="text-center mb-12" dir={isRTL ? 'rtl' : 'ltr'}>
-            <h3 className={`text-3xl font-bold text-white mb-4 ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('servicesCTA.expectations.title')}
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              What to Expect
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -214,15 +205,14 @@ export default function ServicesCTA() {
                 key={index}
                 variants={fadeInUp}
                 className="text-center"
-                dir={isRTL ? 'rtl' : 'ltr'}
               >
                 <div className="text-4xl mb-3">{guarantee.icon}</div>
-                <h4 className={`text-lg font-bold text-white mb-2 ${
-                  isRTL ? 'font-arabic' : ''
-                }`}>{guarantee.title}</h4>
-                <p className={`text-gray-300 text-sm ${
-                  isRTL ? 'font-arabic' : ''
-                }`}>{guarantee.description}</p>
+                <h4 className="text-lg font-bold text-white mb-2">
+                  {guarantee.title}
+                </h4>
+                <p className="text-gray-300 text-sm">
+                  {guarantee.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -236,16 +226,12 @@ export default function ServicesCTA() {
           viewport={{ once: true, margin: "-100px" }}
           className="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 mb-16"
         >
-          <div className="text-center mb-12" dir={isRTL ? 'rtl' : 'ltr'}>
-            <h3 className={`text-3xl font-bold text-white mb-4 ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('servicesCTA.nextSteps.title')}
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              How It Works
             </h3>
-            <p className={`text-gray-300 max-w-2xl mx-auto ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('servicesCTA.nextSteps.subtitle')}
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Our simple 4-step process to get your project started and delivered successfully.
             </p>
           </div>
 
@@ -255,25 +241,22 @@ export default function ServicesCTA() {
                 key={index}
                 variants={fadeInUp}
                 className="text-center relative"
-                dir={isRTL ? 'rtl' : 'ltr'}
               >
                 {/* Connection Line */}
                 {index < nextSteps.length - 1 && (
-                  <div className={`hidden lg:block absolute top-6 w-full h-0.5 bg-red-500/30 transform translate-x-4 ${
-                    isRTL ? 'right-full' : 'left-full'
-                  }`}></div>
+                  <div className="hidden lg:block absolute top-6 left-full w-full h-0.5 bg-blue-500/30 transform translate-x-4"></div>
                 )}
                 
                 <div className="relative z-10">
-                  <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">
+                  <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">
                     {step.step}
                   </div>
-                  <h4 className={`text-lg font-bold text-white mb-3 ${
-                    isRTL ? 'font-arabic' : ''
-                  }`}>{step.title}</h4>
-                  <p className={`text-gray-300 text-sm leading-relaxed ${
-                    isRTL ? 'font-arabic' : ''
-                  }`}>{step.description}</p>
+                  <h4 className="text-lg font-bold text-white mb-3">
+                    {step.title}
+                  </h4>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    {step.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -282,20 +265,17 @@ export default function ServicesCTA() {
           <motion.div
             variants={fadeInUp}
             className="text-center mt-12"
-            dir={isRTL ? 'rtl' : 'ltr'}
           >
-            <Button
-              variant="primary"
-              size="large"
-              className={isRTL ? 'font-arabic' : ''}
-              onClick={() => window.location.href = '/book-call'}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-lg"
+              onClick={() => window.location.href = '/contact'}
             >
-              {t('servicesCTA.nextSteps.ctaButton')}
-            </Button>
-            <p className={`text-gray-400 text-sm mt-4 ${
-              isRTL ? 'font-arabic' : ''
-            }`}>
-              {t('servicesCTA.nextSteps.disclaimer')}
+              Start Your Project Today
+            </motion.button>
+            <p className="text-gray-400 text-sm mt-4">
+              Free consultation • No obligation • Quick response
             </p>
           </motion.div>
         </motion.div>
@@ -308,10 +288,8 @@ export default function ServicesCTA() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center"
         >
-          <p className={`text-gray-400 mb-8 text-sm uppercase tracking-wide ${
-            isRTL ? 'font-arabic' : ''
-          }`}>
-            {t('servicesCTA.trustedBy')}
+          <p className="text-gray-400 mb-8 text-sm uppercase tracking-wide">
+            Trusted by Great Companies
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
             {trustedLogos.map((company, index) => (
@@ -327,6 +305,10 @@ export default function ServicesCTA() {
                 }}
                 className="flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer h-32"
               >
+                <div className="w-32 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+                  <span className="text-white/60 text-sm">Logo</span>
+                </div>
+                {/* Replace with actual logos:
                 <Image
                   src={company.logo}
                   alt={`${company.name} logo`}
@@ -334,6 +316,7 @@ export default function ServicesCTA() {
                   height={120}
                   className="object-contain max-w-full max-h-full filter grayscale hover:grayscale-0 transition-all duration-300"
                 />
+                */}
               </motion.div>
             ))}
           </div>

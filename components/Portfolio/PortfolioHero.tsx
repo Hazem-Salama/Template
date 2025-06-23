@@ -1,31 +1,28 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Button from '../Button'
-import { useTranslation } from 'react-i18next'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
+// Template categories - customize for your portfolio
+const categories = [
+  { name: 'All Projects', count: '50+', active: true },
+  { name: 'Branding', count: '15+', active: false },
+  { name: 'Web Design', count: '20+', active: false },
+  { name: 'Mobile Apps', count: '8+', active: false },
+  { name: 'Marketing', count: '12+', active: false }
+]
+
+// Template stats - customize with your actual numbers
+const stats = [
+  { number: '500+', label: 'Projects Completed' },
+  { number: '150+', label: 'Happy Clients' },
+  { number: '25+', label: 'Industries Served' },
+  { number: '98%', label: 'Client Satisfaction' }
+]
+
 export default function PortfolioHero() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-
-  const categories = [
-    { name: t('portfolioHero.categories.all'), count: '50+', active: true },
-    { name: t('portfolioHero.categories.branding'), count: '15+', active: false },
-    { name: t('portfolioHero.categories.webDesign'), count: '20+', active: false },
-    { name: t('portfolioHero.categories.mobileApps'), count: '8+', active: false },
-    { name: t('portfolioHero.categories.marketing'), count: '12+', active: false }
-  ]
-
-  const stats = [
-    { number: '500+', label: t('portfolioHero.stats.projectsCompleted') },
-    { number: '150+', label: t('portfolioHero.stats.happyClients') },
-    { number: '25+', label: t('portfolioHero.stats.industriesServed') },
-    { number: '98%', label: t('portfolioHero.stats.clientSatisfaction') }
-  ]
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-red-900 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900 pt-20">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div 
@@ -47,7 +44,7 @@ export default function PortfolioHero() {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute top-1/4 right-1/3 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"
+        className="absolute top-1/4 right-1/3 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
       />
 
       <motion.div
@@ -69,29 +66,25 @@ export default function PortfolioHero() {
           initial="hidden"
           animate="visible"
           className="max-w-5xl mx-auto"
-          dir={isRTL ? 'rtl' : 'ltr'}
         >
           {/* Main Heading */}
           <motion.h1
             variants={fadeInUp}
-            className={`text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight"
           >
-            {t('portfolioHero.title')}{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-              {t('portfolioHero.titleHighlight')}
+            Our{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600">
+              Portfolio
             </span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
             variants={fadeInUp}
-            className={`text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
           >
-            {t('portfolioHero.subtitle')}
+            Explore our collection of successful projects that showcase our expertise in creating 
+            exceptional digital experiences that drive results.
           </motion.p>
 
           {/* Category Pills */}
@@ -106,10 +99,9 @@ export default function PortfolioHero() {
                 whileTap={{ scale: 0.95 }}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                   category.active
-                    ? 'bg-red-500 text-white shadow-lg'
+                    ? 'bg-blue-500 text-white shadow-lg'
                     : 'bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white backdrop-blur-sm'
-                } ${isRTL ? 'font-arabic' : ''}`}
-                dir={isRTL ? 'rtl' : 'ltr'}
+                }`}
               >
                 {category.name} ({category.count})
               </motion.button>
@@ -121,25 +113,25 @@ export default function PortfolioHero() {
             variants={fadeInUp}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
           >
-            <Button 
-              variant="primary" 
-              size="large"
-              className={isRTL ? 'font-arabic' : ''}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-lg"
               onClick={() => {
                 const portfolioGrid = document.getElementById('portfolio-grid')
                 portfolioGrid?.scrollIntoView({ behavior: 'smooth' })
               }}
             >
-              {t('portfolioHero.exploreProjects')}
-            </Button>
-            <Button 
-              variant="outline" 
-              size="large"
-              className={isRTL ? 'font-arabic' : ''}
-              onClick={() => window.location.href = '/book-call'}
+              Explore Projects
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-black transition-colors"
+              onClick={() => window.location.href = '/contact'}
             >
-              {t('portfolioHero.startProject')}
-            </Button>
+              Start Your Project
+            </motion.button>
           </motion.div>
 
           {/* Stats */}
@@ -148,13 +140,11 @@ export default function PortfolioHero() {
             className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-gray-700/50"
           >
             {stats.map((stat, index) => (
-              <div key={index} className="text-center" dir={isRTL ? 'rtl' : 'ltr'}>
-                <div className="text-3xl md:text-4xl font-bold text-red-500 mb-2">
+              <div key={index} className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-blue-500 mb-2">
                   {stat.number}
                 </div>
-                <div className={`text-gray-400 text-sm uppercase tracking-wide ${
-                  isRTL ? 'font-arabic' : ''
-                }`}>
+                <div className="text-gray-400 text-sm uppercase tracking-wide">
                   {stat.label}
                 </div>
               </div>

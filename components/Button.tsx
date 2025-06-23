@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
 import { ButtonHTMLAttributes, ReactNode } from 'react'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,15 +18,12 @@ export default function Button({
   className = '',
   ...props 
 }: ButtonProps) {
-  const { i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-  
   const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2'
   
   const variants = {
-    primary: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-500 shadow-lg hover:shadow-xl',
-    secondary: 'bg-black text-white hover:bg-gray-800 focus:ring-gray-500 shadow-lg hover:shadow-xl',
-    outline: 'border-2 border-white text-white hover:bg-white hover:text-black focus:ring-white'
+    primary: 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500 shadow-lg hover:shadow-xl',
+    secondary: 'bg-gray-800 text-white hover:bg-gray-900 focus:ring-gray-500 shadow-lg hover:shadow-xl',
+    outline: 'border-2 border-white text-white hover:bg-white hover:text-gray-900 focus:ring-white'
   }
   
   const sizes = {
@@ -43,17 +39,12 @@ export default function Button({
       className="inline-block"
     >
       <button
-        className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className} ${
-          isRTL ? 'font-arabic' : ''
-        }`}
+        className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
         disabled={isLoading}
-        dir={isRTL ? 'rtl' : 'ltr'}
         {...props}
       >
         {isLoading && (
-          <div className={`w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin ${
-            isRTL ? 'ml-2' : 'mr-2'
-          }`} />
+          <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin mr-2" />
         )}
         {children}
       </button>

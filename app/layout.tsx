@@ -2,21 +2,22 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import I18nProvider from '@/components/I18nProvider'
 import ConditionalLayout from '@/components/ConditionalLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
+// Template Metadata - Easy to customize for your agency
 export const metadata: Metadata = {
   title: {
-    default: 'Unlimited Creative Agency',
-    template: '%s | Unlimited Creative Agency'
+    default: 'Creative Agency Template',
+    template: '%s | Creative Agency Template'
   },
-  description: 'Premium digital marketing and design agency specializing in branding, UI/UX design, web development, and digital marketing.',
-  keywords: ['creative agency', 'branding', 'web design', 'digital marketing', 'UI/UX design'],
-  authors: [{ name: 'Unlimited Creative Agency' }],
-  creator: 'Unlimited Creative Agency',
-  metadataBase: new URL('https://unlimited-agency.com'),
+  description: 'Modern creative agency template with admin dashboard. Built with Next.js 15, TypeScript, and Tailwind CSS.',
+  keywords: ['creative agency template', 'nextjs template', 'agency website', 'admin dashboard', 'typescript'],
+  authors: [{ name: 'Your Agency Name' }],
+  creator: 'Your Agency Name',
+  // TODO: Replace with your domain
+  metadataBase: new URL('https://your-domain.com'),
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -29,21 +30,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://unlimited-agency.com',
-    siteName: 'Unlimited Creative Agency',
+    // TODO: Replace with your domain
+    url: 'https://your-domain.com',
+    siteName: 'Creative Agency Template',
     images: [
       {
+        // TODO: Add your og-image
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Unlimited Creative Agency',
+        alt: 'Creative Agency Template',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@unlimited_agency',
-    creator: '@unlimited_agency',
+    // TODO: Replace with your social handles
+    site: '@your_agency',
+    creator: '@your_agency',
   },
   robots: {
     index: true,
@@ -66,11 +70,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} antialiased`}>
-        <I18nProvider>
-          <ConditionalLayout>
-            {children}
-          </ConditionalLayout>
-        </I18nProvider>
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   )

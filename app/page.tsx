@@ -1,25 +1,26 @@
 // app/page.tsx
 import { Metadata } from 'next'
 import Hero from '@/components/Hero'
-import ServicesPreview from '@/components/Services/ServicesPreview' // Make sure path is correct
+import ServicesPreview from '@/components/Services/ServicesPreview'
 import Testimonials from '@/components/Testimonials'
 import CallToAction from '@/components/CallToAction'
 import AnimatedSection from '@/components/AnimatedSection'
 
 export const metadata: Metadata = {
-  title: 'Unlimited Creative Agency - Premium Digital Marketing & Design',
-  description: 'Transform your brand with unlimited creative solutions. Expert branding, UI/UX design, web development, and digital marketing services.',
-  keywords: 'creative agency, branding, web design, digital marketing, UI/UX design',
+  title: 'Creative Agency Template - Modern Digital Solutions',
+  description: 'Transform your business with our comprehensive creative agency template. Features include modern design, admin dashboard, and complete booking system.',
+  keywords: ['creative agency', 'template', 'nextjs', 'admin dashboard', 'modern design'],
   openGraph: {
-    title: 'Unlimited Creative Agency - Premium Digital Marketing & Design',
-    description: 'Transform your brand with unlimited creative solutions.',
+    title: 'Creative Agency Template - Modern Digital Solutions',
+    description: 'Transform your business with our comprehensive creative agency template.',
     type: 'website',
+    // TODO: Replace with your og-image
     images: ['/images/og-image.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Unlimited Creative Agency',
-    description: 'Transform your brand with unlimited creative solutions.',
+    title: 'Creative Agency Template',
+    description: 'Transform your business with our comprehensive creative agency template.',
   }
 }
 
@@ -29,7 +30,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <Hero />
       
-      {/* Services Preview - NO PROPS NEEDED */}
+      {/* Services Preview */}
       <AnimatedSection>
         <ServicesPreview />
       </AnimatedSection>

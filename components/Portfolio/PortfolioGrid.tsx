@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { useTranslation } from 'react-i18next'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 import PortfolioFilter from './PortfolioFilter'
 
@@ -20,86 +19,118 @@ interface Project {
   link?: string
 }
 
+// Template categories - customize for your services
+const categories = [
+  'All Projects',
+  'Branding',
+  'Web Design',
+  'Mobile Apps',
+  'Marketing',
+  'E-commerce'
+]
+
+// Template projects - replace with your actual projects
+const projects: Project[] = [
+  {
+    id: 1,
+    title: 'Modern Finance App',
+    category: 'Mobile Apps',
+    description: 'A sleek and intuitive mobile banking application with advanced security features and user-friendly interface design.',
+    image: '/project-1.jpg', // Replace with actual image paths
+    tags: ['React Native', 'UI/UX Design', 'Mobile Development'],
+    client: 'FinTech Solutions Inc.',
+    year: '2024',
+    results: [
+      '40% increase in user engagement',
+      '25% faster transaction processing',
+      '95% user satisfaction rating'
+    ],
+    link: 'https://example.com'
+  },
+  {
+    id: 2,
+    title: 'Creative Agency Website',
+    category: 'Web Design',
+    description: 'A stunning portfolio website showcasing creative work with smooth animations and responsive design.',
+    image: '/project-2.jpg',
+    tags: ['Next.js', 'Framer Motion', 'Responsive Design'],
+    client: 'Creative Studio',
+    year: '2024',
+    results: [
+      '60% increase in leads',
+      '50% better page load speed',
+      '30% higher conversion rate'
+    ],
+    link: 'https://example.com'
+  },
+  {
+    id: 3,
+    title: 'Service Marketplace App',
+    category: 'Mobile Apps',
+    description: 'A comprehensive marketplace connecting service providers with customers through an intuitive mobile platform.',
+    image: '/project-3.jpg',
+    tags: ['Flutter', 'Backend API', 'Payment Integration'],
+    client: 'ServiceHub',
+    year: '2024',
+    results: [
+      '200% growth in bookings',
+      '45% improvement in user retention',
+      '99.9% platform uptime'
+    ]
+  },
+  {
+    id: 4,
+    title: 'E-commerce Brand Identity',
+    category: 'Branding',
+    description: 'Complete brand identity design for a sustainable fashion e-commerce platform.',
+    image: '/project-4.jpg',
+    tags: ['Brand Design', 'Logo Design', 'Visual Identity'],
+    client: 'EcoFashion Co.',
+    year: '2023',
+    results: [
+      '80% brand recognition increase',
+      '35% sales growth after rebrand',
+      '90% positive customer feedback'
+    ]
+  },
+  {
+    id: 5,
+    title: 'Digital Marketing Campaign',
+    category: 'Marketing',
+    description: 'Multi-channel digital marketing campaign that drove significant growth for a B2B SaaS company.',
+    image: '/project-5.jpg',
+    tags: ['Social Media', 'PPC Advertising', 'Content Strategy'],
+    client: 'TechSaaS Ltd.',
+    year: '2023',
+    results: [
+      '150% increase in qualified leads',
+      '45% reduction in cost per acquisition',
+      '300% growth in social engagement'
+    ]
+  },
+  {
+    id: 6,
+    title: 'Online Store Platform',
+    category: 'E-commerce',
+    description: 'Custom e-commerce platform with advanced inventory management and seamless checkout experience.',
+    image: '/project-6.jpg',
+    tags: ['Shopify', 'Custom Development', 'Payment Systems'],
+    client: 'RetailPro',
+    year: '2023',
+    results: [
+      '120% increase in online sales',
+      '40% improvement in checkout completion',
+      '25% reduction in cart abandonment'
+    ]
+  }
+]
+
 export default function PortfolioGrid() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-
-  const categories = [
-    t('portfolio.categories.all'),
-    t('portfolio.categories.branding'),
-    t('portfolio.categories.web'),
-    t('portfolio.categories.mobile'),
-    t('portfolio.categories.marketing'),
-    t('portfolio.categories.ecommerce')
-  ]
-
-  const [activeCategory, setActiveCategory] = useState(t('portfolio.categories.all'))
+  const [activeCategory, setActiveCategory] = useState('All Projects')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [imageErrors, setImageErrors] = useState<{[key: number]: boolean}>({})
 
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: t('portfolioGrid.projects.finflow.title'),
-      category: t('portfolio.categories.uiux'),
-      description: t('portfolioGrid.projects.finflow.description'),
-      image: '/Cover FinFlow.jpg',
-      tags: [
-        t('portfolioGrid.projects.finflow.tags.0'),
-        t('portfolioGrid.projects.finflow.tags.1'),
-        t('portfolioGrid.projects.finflow.tags.2')
-      ],
-      client: 'TechStart Inc.',
-      year: '2024',
-      results: [
-        t('portfolioGrid.projects.finflow.results.0'),
-        t('portfolioGrid.projects.finflow.results.1'),
-        t('portfolioGrid.projects.finflow.results.2')
-      ],
-      link: ''
-    },
-    {
-      id: 2,
-      title: t('portfolioGrid.projects.unlimited.title'),
-      category: t('portfolio.categories.web'),
-      description: t('portfolioGrid.projects.unlimited.description'),
-      image: '/Unlimited.jpg',
-      tags: [
-        t('portfolioGrid.projects.unlimited.tags.0'),
-        t('portfolioGrid.projects.unlimited.tags.1'),
-        t('portfolioGrid.projects.unlimited.tags.2')
-      ],
-      client: 'Unlimited Creative Solutions',
-      year: '2024',
-      results: [
-        t('portfolioGrid.projects.unlimited.results.0'),
-        t('portfolioGrid.projects.unlimited.results.1'),
-        t('portfolioGrid.projects.unlimited.results.2')
-      ],
-      link: ''
-    },
-    {
-      id: 3,
-      title: t('portfolioGrid.projects.fixtra.title'),
-      category: t('portfolio.categories.mobile'),
-      description: t('portfolioGrid.projects.fixtra.description'),
-      image: '/Fixtra.jpg',
-      tags: [
-        t('portfolioGrid.projects.fixtra.tags.0'),
-        t('portfolioGrid.projects.fixtra.tags.1'),
-        t('portfolioGrid.projects.fixtra.tags.2')
-      ],
-      client: 'Fixtra',
-      year: '2024',
-      results: [
-        t('portfolioGrid.projects.fixtra.results.0'),
-        t('portfolioGrid.projects.fixtra.results.1'),
-        t('portfolioGrid.projects.fixtra.results.2')
-      ]
-    }
-  ]
-
-  const filteredProjects = activeCategory === t('portfolio.categories.all')
+  const filteredProjects = activeCategory === 'All Projects'
     ? projects 
     : projects.filter(project => project.category === activeCategory)
 
@@ -119,23 +150,18 @@ export default function PortfolioGrid() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
-          dir={isRTL ? 'rtl' : 'ltr'}
         >
           <motion.h2
             variants={fadeInUp}
-            className={`text-4xl md:text-5xl font-bold text-black mb-6 ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            {t('portfolio.featuredProjects')} <span className="text-red-500">{t('portfolioGrid.projectsTitle')}</span>
+            Featured <span className="text-blue-500">Projects</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className={`text-xl text-gray-600 max-w-3xl mx-auto mb-12 ${
-              isRTL ? 'font-arabic' : ''
-            }`}
+            className="text-xl text-gray-600 max-w-3xl mx-auto mb-12"
           >
-            {t('portfolio.projectsDescription')}
+            Discover how we've helped businesses achieve their goals through innovative design and strategic thinking.
           </motion.p>
 
           {/* Filter */}
@@ -163,7 +189,6 @@ export default function PortfolioGrid() {
                 whileHover={{ y: -8 }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer"
                 onClick={() => setSelectedProject(project)}
-                dir={isRTL ? 'rtl' : 'ltr'}
               >
                 {/* Project Image */}
                 <div className="relative overflow-hidden">
@@ -175,15 +200,13 @@ export default function PortfolioGrid() {
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         onError={() => handleImageError(project.id)}
-                        priority={index < 3} // Prioritize first 3 images
+                        priority={index < 3}
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
                         <div className="text-center">
                           <div className="text-4xl text-gray-400 mb-2">🎨</div>
-                          <p className={`text-sm text-gray-500 ${isRTL ? 'font-arabic' : ''}`}>
-                            {t('portfolioGrid.imageNotFound')}
-                          </p>
+                          <p className="text-sm text-gray-500">Project Image</p>
                         </div>
                       </div>
                     )}
@@ -192,9 +215,7 @@ export default function PortfolioGrid() {
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
                     
                     {/* View Icon */}
-                    <div className={`absolute top-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                      isRTL ? 'left-4' : 'right-4'
-                    }`}>
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="bg-white/90 backdrop-blur-sm rounded-full p-2">
                         <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -206,64 +227,46 @@ export default function PortfolioGrid() {
 
                 {/* Project Info */}
                 <div className="p-6">
-                  <div className={`flex items-center justify-between mb-3 ${
-                    isRTL ? 'flex-row-reverse' : ''
-                  }`}>
-                    <span className={`px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full ${
-                      isRTL ? 'font-arabic' : ''
-                    }`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
                       {project.category}
                     </span>
-                    <span className={`text-gray-500 text-sm ${isRTL ? 'font-arabic' : ''}`}>
-                      {project.year}
-                    </span>
+                    <span className="text-gray-500 text-sm">{project.year}</span>
                   </div>
                   
-                  <h3 className={`text-xl font-bold text-black mb-3 group-hover:text-red-500 transition-colors duration-300 ${
-                    isRTL ? 'font-arabic text-right' : ''
-                  }`}>
+                  <h3 className="text-xl font-bold text-black mb-3 group-hover:text-blue-500 transition-colors duration-300">
                     {project.title}
                   </h3>
                   
-                  <p className={`text-gray-600 mb-4 leading-relaxed line-clamp-3 ${
-                    isRTL ? 'font-arabic text-right' : ''
-                  }`}>
+                  <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
                   
-                  <div className={`flex flex-wrap gap-2 mb-4 ${
-                    isRTL ? 'justify-end' : ''
-                  }`}>
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.slice(0, 2).map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className={`px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md ${
-                          isRTL ? 'font-arabic' : ''
-                        }`}
+                        className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md"
                       >
                         {tag}
                       </span>
                     ))}
                     {project.tags.length > 2 && (
-                      <span className={`px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md ${
-                        isRTL ? 'font-arabic' : ''
-                      }`}>
-                        +{project.tags.length - 2} {t('portfolioGrid.more')}
+                      <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">
+                        +{project.tags.length - 2} more
                       </span>
                     )}
                   </div>
 
-                  <div className={`flex items-center justify-between ${
-                    isRTL ? 'flex-row-reverse' : ''
-                  }`}>
-                    <span className={`text-gray-500 text-sm ${isRTL ? 'font-arabic' : ''}`}>
-                      {t('portfolio.client')}: {project.client}
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-500 text-sm">
+                      Client: {project.client}
                     </span>
                     <motion.div
-                      whileHover={{ x: isRTL ? -4 : 4 }}
-                      className={`text-red-500 text-sm font-medium ${isRTL ? 'font-arabic' : ''}`}
+                      whileHover={{ x: 4 }}
+                      className="text-blue-500 text-sm font-medium"
                     >
-                      {t('portfolio.viewDetails')} {isRTL ? '←' : '→'}
+                      View Details →
                     </motion.div>
                   </div>
                 </div>
@@ -272,7 +275,7 @@ export default function PortfolioGrid() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Project Modal - Enhanced for video support */}
+        {/* Project Modal */}
         <AnimatePresence>
           {selectedProject && (
             <motion.div
@@ -288,20 +291,15 @@ export default function PortfolioGrid() {
                 exit={{ scale: 0.9, opacity: 0 }}
                 className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
-                dir={isRTL ? 'rtl' : 'ltr'}
               >
                 {/* Modal Header */}
                 <div className="p-8 border-b border-gray-200">
-                  <div className={`flex items-center justify-between ${
-                    isRTL ? 'flex-row-reverse' : ''
-                  }`}>
-                    <div className={isRTL ? 'text-right' : ''}>
-                      <h2 className={`text-3xl font-bold text-black mb-2 ${
-                        isRTL ? 'font-arabic' : ''
-                      }`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-3xl font-bold text-black mb-2">
                         {selectedProject.title}
                       </h2>
-                      <p className={`text-gray-600 ${isRTL ? 'font-arabic' : ''}`}>
+                      <p className="text-gray-600">
                         {selectedProject.client} • {selectedProject.year}
                       </p>
                     </div>
@@ -332,9 +330,7 @@ export default function PortfolioGrid() {
                       <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
                         <div className="text-center">
                           <div className="text-6xl text-gray-400 mb-2">🎨</div>
-                          <p className={`text-gray-500 ${isRTL ? 'font-arabic' : ''}`}>
-                            {t('portfolioGrid.imageNotFound')}
-                          </p>
+                          <p className="text-gray-500">Project Image</p>
                         </div>
                       </div>
                     )}
@@ -342,32 +338,22 @@ export default function PortfolioGrid() {
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Project Details */}
-                    <div className={isRTL ? 'text-right' : ''}>
-                      <h3 className={`text-xl font-bold text-black mb-4 ${
-                        isRTL ? 'font-arabic' : ''
-                      }`}>
-                        {t('portfolio.projectOverview')}
+                    <div>
+                      <h3 className="text-xl font-bold text-black mb-4">
+                        Project Overview
                       </h3>
-                      <p className={`text-gray-600 mb-6 leading-relaxed ${
-                        isRTL ? 'font-arabic' : ''
-                      }`}>
+                      <p className="text-gray-600 mb-6 leading-relaxed">
                         {selectedProject.description}
                       </p>
                       
-                      <h4 className={`font-bold text-black mb-3 ${
-                        isRTL ? 'font-arabic' : ''
-                      }`}>
-                        {t('portfolio.technologiesUsed')}:
+                      <h4 className="font-bold text-black mb-3">
+                        Technologies Used:
                       </h4>
-                      <div className={`flex flex-wrap gap-2 mb-6 ${
-                        isRTL ? 'justify-end' : ''
-                      }`}>
+                      <div className="flex flex-wrap gap-2 mb-6">
                         {selectedProject.tags.map((tag, index) => (
                           <span
                             key={index}
-                            className={`px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full ${
-                              isRTL ? 'font-arabic' : ''
-                            }`}
+                            className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full"
                           >
                             {tag}
                           </span>
@@ -381,12 +367,10 @@ export default function PortfolioGrid() {
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className={`inline-flex items-center bg-red-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-600 transition-colors ${
-                            isRTL ? 'font-arabic flex-row-reverse' : ''
-                          }`}
+                          className="inline-flex items-center bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors"
                         >
-                          {t('portfolio.visitLiveSite')}
-                          <svg className={`w-4 h-4 ${isRTL ? 'mr-2' : 'ml-2'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          Visit Live Site
+                          <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
                         </motion.a>
@@ -394,23 +378,15 @@ export default function PortfolioGrid() {
                     </div>
 
                     {/* Results */}
-                    <div className={isRTL ? 'text-right' : ''}>
-                      <h3 className={`text-xl font-bold text-black mb-4 ${
-                        isRTL ? 'font-arabic' : ''
-                      }`}>
-                        {t('portfolio.resultsAchieved')}
+                    <div>
+                      <h3 className="text-xl font-bold text-black mb-4">
+                        Results Achieved
                       </h3>
                       <div className="space-y-4">
                         {selectedProject.results.map((result, index) => (
-                          <div key={index} className={`flex items-start ${
-                            isRTL ? 'flex-row-reverse' : ''
-                          }`}>
-                            <div className={`w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0 ${
-                              isRTL ? 'ml-3' : 'mr-3'
-                            }`}></div>
-                            <p className={`text-gray-600 ${isRTL ? 'font-arabic' : ''}`}>
-                              {result}
-                            </p>
+                          <div key={index} className="flex items-start">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0 mr-3"></div>
+                            <p className="text-gray-600">{result}</p>
                           </div>
                         ))}
                       </div>

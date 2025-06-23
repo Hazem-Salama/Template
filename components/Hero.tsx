@@ -1,16 +1,12 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
 import Button from './Button'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 export default function Hero() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-red-900 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 pt-20">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -29,7 +25,7 @@ export default function Hero() {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
       />
       
       <motion.div
@@ -55,44 +51,27 @@ export default function Hero() {
           {/* Main Heading */}
           <motion.h1
             variants={fadeInUp}
-            className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight hero-title"
+            className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight"
           >
-            {isRTL ? (
-              <>
-                <span className="block">حلول</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-                  إبداعية
-                </span>
-                <span className="block">بلا حدود</span>
-              </>
-            ) : (
-              <>
-                <span className="block">Unlimited</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-                  Creative
-                </span>
-                <span className="block">Solutions</span>
-              </>
-            )}
+            <span className="block">Creative</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
+              Solutions
+            </span>
+            <span className="block">For Growth</span>
           </motion.h1>
 
           {/* Tagline */}
           <motion.p
             variants={fadeInUp}
-            className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed hero-subtitle"
+            className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            {isRTL 
-              ? 'حوّل علامتك التجارية بحلول مبتكرة في التصميم والتطوير والتسويق تحقق نتائج حقيقية.'
-              : 'Transform your brand with innovative design, development, and marketing solutions that drive real results.'
-            }
+            Transform your business with innovative design, development, and marketing solutions that drive real results and accelerate growth.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
             variants={fadeInUp}
-            className={`flex flex-col sm:flex-row gap-6 justify-center items-center ${
-              isRTL ? 'sm:flex-row-reverse' : ''
-            }`}
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
             <Button 
               variant="primary" 
@@ -101,7 +80,7 @@ export default function Hero() {
                 window.location.href = '/book-call'
               }}
             >
-              {isRTL ? 'احجز مكالمة استراتيجية مجانية' : 'Book Free Strategy Call'}
+              Start Your Project
             </Button>
             <Button 
               variant="outline" 
@@ -110,7 +89,7 @@ export default function Hero() {
                 window.location.href = '/Portfolio'
               }}
             >
-              {isRTL ? 'شاهد أعمالنا' : 'View Our Work'}
+              View Our Work
             </Button>
           </motion.div>
 
@@ -120,27 +99,27 @@ export default function Hero() {
             className="grid grid-cols-3 gap-8 mt-20 pt-12 border-t border-gray-700/50"
           >
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-red-500 mb-2 arabic-numerals">
-                500+
+              <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
+                150+
               </div>
-              <div className="text-gray-400 text-sm uppercase tracking-wide stat-label">
-                {isRTL ? 'مشاريع مكتملة' : 'Projects Completed'}
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-red-500 mb-2 arabic-numerals">
-                98%
-              </div>
-              <div className="text-gray-400 text-sm uppercase tracking-wide stat-label">
-                {isRTL ? 'رضا العملاء' : 'Client Satisfaction'}
+              <div className="text-gray-400 text-sm uppercase tracking-wide">
+                Projects Completed
               </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-red-500 mb-2 arabic-numerals">
-                5
+              <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
+                99%
               </div>
-              <div className="text-gray-400 text-sm uppercase tracking-wide stat-label">
-                {isRTL ? 'سنوات خبرة' : 'Years Experience'}
+              <div className="text-gray-400 text-sm uppercase tracking-wide">
+                Client Satisfaction
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
+                24/7
+              </div>
+              <div className="text-gray-400 text-sm uppercase tracking-wide">
+                Support Available
               </div>
             </div>
           </motion.div>

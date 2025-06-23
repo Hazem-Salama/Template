@@ -1,5 +1,6 @@
 // lib/email-service.ts
 import nodemailer from 'nodemailer'
+import { templateConfig } from './template-config'
 
 interface BookingEmailData {
   firstName: string
@@ -56,16 +57,17 @@ class EmailService {
       })
     }
 
-    throw new Error('Email configuration missing')
+    throw new Error('Email configuration missing. Please check your environment variables.')
   }
 
   async sendBookingConfirmation(bookingData: BookingEmailData): Promise<boolean> {
     try {
       const emailContent = this.generateConfirmationEmail(bookingData)
+      const { company } = templateConfig
 
       const mailOptions: nodemailer.SendMailOptions = {
         from: {
-          name: process.env.EMAIL_FROM_NAME || 'Unlimited Creative Agency',
+          name: process.env.EMAIL_FROM_NAME || company.name,
           address: process.env.EMAIL_FROM_EMAIL || process.env.EMAIL_USER!
         },
         to: bookingData.email,
@@ -77,11 +79,14 @@ class EmailService {
       await this.transporter.sendMail(mailOptions)
       return true
     } catch (error: unknown) {
+      console.error('Error sending booking confirmation:', error)
       return false
     }
   }
 
   private generateConfirmationEmail(data: BookingEmailData): EmailContent {
+    const { company, branding, business } = templateConfig
+    
     const formatDate = (dateString: string): string => {
       try {
         return new Date(dateString).toLocaleDateString('en-US', { 
@@ -105,27 +110,27 @@ class EmailService {
         <style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #1A1A1A; max-width: 600px; margin: 0 auto; }
             .content { padding: 30px; background: #ffffff; }
-            .booking-details { background: #f9f9f9; padding: 25px; border-radius: 12px; margin: 25px 0; border-left: 4px solid #E53E3E; }
+            .booking-details { background: #f9f9f9; padding: 25px; border-radius: 12px; margin: 25px 0; border-left: 4px solid ${branding.primaryColor}; }
             .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e5e5e5; }
             .detail-label { font-weight: 600; color: #1A1A1A; }
             .detail-value { color: #1A1A1A; font-weight: 500; }
-            .next-steps { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin: 25px 0; border: 1px solid #0ea5e9; }
+            .next-steps { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin: 25px 0; border: 1px solid ${branding.accentColor}; }
             .footer { text-align: center; padding: 25px; color: #666; font-size: 14px; background: #f7f7f7; }
-            .button { display: inline-block; background: #E53E3E; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; margin: 8px; font-weight: 600; font-size: 14px; }
-            .button:hover { background: #d53030; }
+            .button { display: inline-block; background: ${branding.primaryColor}; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; margin: 8px; font-weight: 600; font-size: 14px; }
+            .button:hover { opacity: 0.9; }
             .reference { background: #fff3cd; border: 2px solid #ffeaa7; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center; }
             .reference strong { color: #1A1A1A; font-size: 16px; }
-            .project-details { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #E53E3E; }
+            .project-details { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid ${branding.primaryColor}; }
         </style>
     </head>
     <body>
-        <!-- Simple dark background that Gmail mobile can't override -->
-        <div style="background-color: #E53E3E; padding: 40px 30px; text-align: center;">
+        <!-- Header -->
+        <div style="background-color: ${branding.primaryColor}; padding: 40px 30px; text-align: center;">
             <h1 style="color: white; font-family: Arial, sans-serif; font-size: 32px; font-weight: bold; margin: 0 0 15px 0; line-height: 1.2;">
                 🎉 Booking Confirmed!
             </h1>
             <p style="color: white; font-family: Arial, sans-serif; font-size: 18px; margin: 0; line-height: 1.4;">
-                Your ${data.callInfo.title} with Unlimited Creative Agency
+                Your ${data.callInfo.title} with ${company.name}
             </p>
         </div>
         
@@ -175,13 +180,13 @@ class EmailService {
                     <li style="margin-bottom: 8px;"><strong>Calendar Invite:</strong> You'll receive a calendar invitation within the next 30 minutes</li>
                     <li style="margin-bottom: 8px;"><strong>Pre-Call Prep:</strong> We'll send you a brief questionnaire to maximize our time together</li>
                     <li style="margin-bottom: 8px;"><strong>The Call:</strong> Join us for your ${data.callInfo.duration} ${data.callInfo.title.toLowerCase()}</li>
-                    <li><strong>Follow-up:</strong> Receive a detailed summary and recommendations within 24 hours</li>
+                    <li><strong>Follow-up:</strong> Receive a detailed summary and recommendations within ${business.responseTime}</li>
                 </ol>
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
                 <a href="https://calendar.google.com" class="button">📅 Add to Calendar</a>
-                <a href="tel:+201060233872" class="button">📞 Call Us</a>
+                <a href="tel:${company.phone}" class="button">📞 Call Us</a>
             </div>
             
             <div class="project-details">
@@ -192,25 +197,25 @@ class EmailService {
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 25px 0;">
                 <p style="margin: 0 0 15px 0; font-weight: 600; color: #1A1A1A;">Need to reschedule or have questions?</p>
                 <ul style="margin: 0; padding-left: 20px; color: #555;">
-                    <li style="margin-bottom: 5px;">📞 Call us: <a href="tel:+201060233872" style="color: #E53E3E; text-decoration: none; font-weight: 600;">+20 106 023 3872</a></li>
-                    <li style="margin-bottom: 5px;">📧 Email us: <a href="mailto:Unlimitedadvv@gmail.com" style="color: #E53E3E; text-decoration: none; font-weight: 600;">Unlimitedadvv@gmail.com</a></li>
+                    <li style="margin-bottom: 5px;">📞 Call us: <a href="tel:${company.phone}" style="color: ${branding.primaryColor}; text-decoration: none; font-weight: 600;">${company.phone}</a></li>
+                    <li style="margin-bottom: 5px;">📧 Email us: <a href="mailto:${company.email}" style="color: ${branding.primaryColor}; text-decoration: none; font-weight: 600;">${company.email}</a></li>
                     <li>💬 Reply to this email with your reference ID: <strong style="color: #1A1A1A;">${data.referenceId}</strong></li>
                 </ul>
             </div>
         </div>
         
         <div class="footer">
-            <p style="margin: 0 0 10px 0;"><strong style="color: #1A1A1A; font-size: 16px;">Unlimited Creative Agency</strong></p>
-            <p style="margin: 0 0 10px 0; color: #E53E3E; font-weight: 600;">Transforming ideas into extraordinary digital experiences</p>
-            <p style="margin: 0 0 10px 0;">📞 +20 106 023 3872 | 📧 Unlimitedadvv@gmail.com</p>
-            <p style="margin: 0; font-size: 12px;">Available Monday-Friday, 9 AM - 6 PM EST</p>
+            <p style="margin: 0 0 10px 0;"><strong style="color: #1A1A1A; font-size: 16px;">${company.name}</strong></p>
+            <p style="margin: 0 0 10px 0; color: ${branding.primaryColor}; font-weight: 600;">${company.tagline}</p>
+            <p style="margin: 0 0 10px 0;">📞 ${company.phone} | 📧 ${company.email}</p>
+            <p style="margin: 0; font-size: 12px;">Available ${business.workingHours} ${business.timezone}</p>
         </div>
     </body>
     </html>
     `
 
     const text = `
-🎉 BOOKING CONFIRMED - Unlimited Creative Agency
+🎉 BOOKING CONFIRMED - ${company.name}
 
 Dear ${data.firstName} ${data.lastName},
 
@@ -230,17 +235,17 @@ ${data.company ? `- Company: ${data.company}` : ''}
 1. Calendar invite within 30 minutes
 2. Pre-call questionnaire 
 3. Your ${data.callInfo.duration} consultation
-4. Follow-up summary within 24 hours
+4. Follow-up summary within ${business.responseTime}
 
 📝 YOUR PROJECT: "${data.message}"
 
 NEED HELP?
-📞 +20 106 023 3872
-📧 Unlimitedadvv@gmail.com
+📞 ${company.phone}
+📧 ${company.email}
 Reference: ${data.referenceId}
 
-Unlimited Creative Agency
-Available Monday-Friday, 9 AM - 6 PM EST
+${company.name}
+Available ${business.workingHours} ${business.timezone}
     `
 
     return { html, text }
@@ -251,6 +256,7 @@ Available Monday-Friday, 9 AM - 6 PM EST
       await this.transporter.verify()
       return true
     } catch (error: unknown) {
+      console.error('Email connection test failed:', error)
       return false
     }
   }

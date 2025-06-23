@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
 import { fadeInUp } from '@/lib/animations'
 
 interface PortfolioFilterProps {
@@ -15,9 +14,6 @@ export default function PortfolioFilter({
   activeCategory, 
   onCategoryChange 
 }: PortfolioFilterProps) {
-  const { i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-
   return (
     <motion.div
       variants={fadeInUp}
@@ -25,7 +21,6 @@ export default function PortfolioFilter({
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       className="flex flex-wrap justify-center gap-4 mb-12"
-      dir={isRTL ? 'rtl' : 'ltr'}
     >
       {categories.map((category, index) => (
         <motion.button
@@ -35,9 +30,9 @@ export default function PortfolioFilter({
           onClick={() => onCategoryChange(category)}
           className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
             activeCategory === category
-              ? 'bg-red-500 text-white shadow-lg'
-              : 'bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600'
-          } ${isRTL ? 'font-arabic' : ''}`}
+              ? 'bg-blue-500 text-white shadow-lg'
+              : 'bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+          }`}
         >
           {category}
         </motion.button>

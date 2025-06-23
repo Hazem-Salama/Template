@@ -1,5 +1,6 @@
 // lib/contact-email-utils.ts
 import nodemailer from 'nodemailer'
+import { templateConfig } from './template-config'
 
 // Email configuration
 function createEmailTransporter(): nodemailer.Transporter {
@@ -27,18 +28,17 @@ function createEmailTransporter(): nodemailer.Transporter {
     })
   }
 
-  throw new Error('Email configuration missing')
+  throw new Error('Email configuration missing. Please check your environment variables.')
 }
 
 // Method label helper
 function getMethodLabel(method: string): string {
-  const labels = {
-    'general-inquiry': 'General Inquiry',
-    'project-quote': 'Project Quote Request',
-    'support': 'Support Request',
-    'partnership': 'Partnership Inquiry'
-  }
-  return labels[method as keyof typeof labels] || 'Contact Form Submission'
+  const methodMap = templateConfig.contactMethods.reduce((acc, item) => {
+    acc[item.value] = item.label
+    return acc
+  }, {} as Record<string, string>)
+  
+  return methodMap[method] || 'Contact Form Submission'
 }
 
 // Company notification email
@@ -46,6 +46,8 @@ export async function sendCompanyNotification(savedMessage: any): Promise<boolea
   try {
     const transporter = createEmailTransporter()
     const methodLabel = getMethodLabel(savedMessage.method)
+    const { company, branding, business } = templateConfig
+    
     const priorityColor = savedMessage.formData.priority === 'urgent' ? '#dc2626' : 
                          savedMessage.formData.priority === 'high' ? '#f59e0b' : '#10b981'
 
@@ -59,36 +61,29 @@ export async function sendCompanyNotification(savedMessage: any): Promise<boolea
         <style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #1A1A1A; max-width: 600px; margin: 0 auto; }
             .content { padding: 30px; background: #ffffff; }
-            .contact-details { background: #f9f9f9; padding: 25px; border-radius: 12px; margin: 25px 0; border-left: 4px solid #E53E3E; }
+            .contact-details { background: #f9f9f9; padding: 25px; border-radius: 12px; margin: 25px 0; border-left: 4px solid ${branding.primaryColor}; }
             .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e5e5e5; }
             .detail-label { font-weight: 600; color: #1A1A1A; min-width: 120px; }
             .detail-value { color: #1A1A1A; font-weight: 500; flex: 1; margin-left: 10px; }
-            .message-content { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #E53E3E; }
+            .message-content { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid ${branding.primaryColor}; }
             .priority { background: ${priorityColor}; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
             .actions { text-align: center; margin: 30px 0; }
-            .button { display: inline-block; background: #E53E3E; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; margin: 8px; font-weight: 600; font-size: 14px; }
-            .button:hover { background: #d53030; }
+            .button { display: inline-block; background: ${branding.primaryColor}; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; margin: 8px; font-weight: 600; font-size: 14px; }
+            .button:hover { opacity: 0.9; }
             .footer { text-align: center; padding: 25px; color: #666; font-size: 14px; background: #f7f7f7; }
             .reference { background: #fff3cd; border: 2px solid #ffeaa7; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center; }
             .reference strong { color: #1A1A1A; font-size: 16px; }
         </style>
     </head>
     <body>
-        <!-- Simple dark background that Gmail mobile can't override -->
-        <div style="background-color: #E53E3E; padding: 40px 30px; text-align: center;">
+        <!-- Header -->
+        <div style="background-color: ${branding.primaryColor}; padding: 40px 30px; text-align: center;">
             <h1 style="color: white; font-family: Arial, sans-serif; font-size: 32px; font-weight: bold; margin: 0 0 15px 0; line-height: 1.2;">
                 🔔 New ${methodLabel}
             </h1>
             <p style="color: white; font-family: Arial, sans-serif; font-size: 18px; margin: 0; line-height: 1.4;">
-                Unlimited Creative Agency Website Contact Form
+                ${company.name} Website Contact Form
             </p>
-        </div>
-        
-        <div class="footer">
-            <p style="margin: 0 0 10px 0;"><strong style="color: #1A1A1A; font-size: 16px;">Unlimited Creative Agency</strong></p>
-            <p style="margin: 0 0 10px 0; color: #E53E3E; font-weight: 600;">Transforming ideas into extraordinary digital experiences</p>
-            <p style="margin: 0 0 10px 0;">📞 +20 106 023 3872 | 📧 Unlimitedadvv@gmail.com</p>
-            <p style="margin: 0; font-size: 12px;">Available Monday-Friday, 9 AM - 6 PM EST</p>
         </div>
         
         <div class="content">
@@ -173,12 +168,19 @@ export async function sendCompanyNotification(savedMessage: any): Promise<boolea
                 <p style="margin: 0; color: #666; font-size: 14px;">Newsletter Subscription: ${savedMessage.formData.newsletter ? '✅ Yes' : '❌ No'}</p>
             </div>
         </div>
+        
+        <div class="footer">
+            <p style="margin: 0 0 10px 0;"><strong style="color: #1A1A1A; font-size: 16px;">${company.name}</strong></p>
+            <p style="margin: 0 0 10px 0; color: ${branding.primaryColor}; font-weight: 600;">${company.tagline}</p>
+            <p style="margin: 0 0 10px 0;">📞 ${company.phone} | 📧 ${company.email}</p>
+            <p style="margin: 0; font-size: 12px;">Available ${business.workingHours} ${business.timezone}</p>
+        </div>
     </body>
     </html>
     `
 
     const text = `
-🔔 NEW ${methodLabel.toUpperCase()} - UNLIMITED CREATIVE AGENCY
+🔔 NEW ${methodLabel.toUpperCase()} - ${company.name.toUpperCase()}
 
 👤 CONTACT INFORMATION:
 Name: ${savedMessage.formData.firstName} ${savedMessage.formData.lastName}
@@ -206,10 +208,10 @@ Reply directly to this email to respond to the customer.
 
     const mailOptions = {
       from: {
-        name: 'Unlimited Website Contact Form',
+        name: `${company.name} Contact Form`,
         address: process.env.EMAIL_USER!
       },
-      to: 'Unlimitedadvv@gmail.com',
+      to: company.email,
       subject: `🔔 New ${methodLabel} - ${savedMessage.formData.firstName} ${savedMessage.formData.lastName}`,
       html,
       text,
@@ -220,6 +222,7 @@ Reply directly to this email to respond to the customer.
     return true
     
   } catch (error) {
+    console.error('Error sending company notification:', error)
     return false
   }
 }
@@ -229,6 +232,7 @@ export async function sendUserConfirmation(savedMessage: any): Promise<boolean> 
   try {
     const transporter = createEmailTransporter()
     const methodLabel = getMethodLabel(savedMessage.method)
+    const { company, branding, business } = templateConfig
 
     const html = `
     <!DOCTYPE html>
@@ -240,21 +244,21 @@ export async function sendUserConfirmation(savedMessage: any): Promise<boolean> 
         <style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #1A1A1A; max-width: 600px; margin: 0 auto; }
             .content { padding: 30px; background: #ffffff; }
-            .confirmation-details { background: #f9f9f9; padding: 25px; border-radius: 12px; margin: 25px 0; border-left: 4px solid #E53E3E; }
-            .next-steps { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin: 25px 0; border: 1px solid #0ea5e9; }
+            .confirmation-details { background: #f9f9f9; padding: 25px; border-radius: 12px; margin: 25px 0; border-left: 4px solid ${branding.primaryColor}; }
+            .next-steps { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin: 25px 0; border: 1px solid ${branding.accentColor}; }
             .footer { text-align: center; padding: 25px; color: #666; font-size: 14px; background: #f7f7f7; }
             .reference { background: #fff3cd; border: 2px solid #ffeaa7; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center; }
             .reference strong { color: #1A1A1A; font-size: 16px; }
         </style>
     </head>
     <body>
-        <!-- Simple dark background that Gmail mobile can't override -->
-        <div style="background-color: #E53E3E; padding: 40px 30px; text-align: center;">
+        <!-- Header -->
+        <div style="background-color: ${branding.primaryColor}; padding: 40px 30px; text-align: center;">
             <h1 style="color: white; font-family: Arial, sans-serif; font-size: 32px; font-weight: bold; margin: 0 0 15px 0; line-height: 1.2;">
                 ✅ Message Received!
             </h1>
             <p style="color: white; font-family: Arial, sans-serif; font-size: 18px; margin: 0; line-height: 1.4;">
-                Thank you for contacting Unlimited Creative Agency
+                Thank you for contacting ${company.name}
             </p>
         </div>
         
@@ -275,7 +279,7 @@ export async function sendUserConfirmation(savedMessage: any): Promise<boolean> 
                 ${savedMessage.formData.company ? `<p style="margin: 0 0 10px 0;"><strong>Company:</strong> ${savedMessage.formData.company}</p>` : ''}
                 ${savedMessage.formData.projectType ? `<p style="margin: 0 0 10px 0;"><strong>Project Type:</strong> ${savedMessage.formData.projectType}</p>` : ''}
                 <p style="margin: 15px 0 0 0;"><strong>Your Message:</strong></p>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #E53E3E; font-style: italic; margin-top: 10px;">
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid ${branding.primaryColor}; font-style: italic; margin-top: 10px;">
                     "${savedMessage.formData.message}"
                 </div>
             </div>
@@ -284,7 +288,7 @@ export async function sendUserConfirmation(savedMessage: any): Promise<boolean> 
                 <h3 style="margin: 0 0 15px 0; color: #0c4a6e; font-size: 18px;">🚀 What Happens Next?</h3>
                 <ol style="margin: 0; padding-left: 20px; color: #0c4a6e;">
                     <li style="margin-bottom: 8px;"><strong>Review:</strong> Our team is reviewing your ${methodLabel.toLowerCase()}</li>
-                    <li style="margin-bottom: 8px;"><strong>Response:</strong> We'll get back to you within 24 hours</li>
+                    <li style="margin-bottom: 8px;"><strong>Response:</strong> We'll get back to you within ${business.responseTime}</li>
                     <li style="margin-bottom: 8px;"><strong>Discussion:</strong> We'll discuss your project needs and goals</li>
                     <li><strong>Proposal:</strong> If applicable, we'll prepare a custom proposal</li>
                 </ol>
@@ -293,25 +297,25 @@ export async function sendUserConfirmation(savedMessage: any): Promise<boolean> 
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 25px 0;">
                 <p style="margin: 0 0 15px 0; font-weight: 600; color: #1A1A1A;">Need immediate assistance?</p>
                 <ul style="margin: 0; padding-left: 20px; color: #555;">
-                    <li style="margin-bottom: 5px;">📞 Call us: <a href="tel:+201060233872" style="color: #E53E3E; text-decoration: none; font-weight: 600;">+20 106 023 3872</a></li>
-                    <li style="margin-bottom: 5px;">📧 Email us: <a href="mailto:Unlimitedadvv@gmail.com" style="color: #E53E3E; text-decoration: none; font-weight: 600;">Unlimitedadvv@gmail.com</a></li>
+                    <li style="margin-bottom: 5px;">📞 Call us: <a href="tel:${company.phone}" style="color: ${branding.primaryColor}; text-decoration: none; font-weight: 600;">${company.phone}</a></li>
+                    <li style="margin-bottom: 5px;">📧 Email us: <a href="mailto:${company.email}" style="color: ${branding.primaryColor}; text-decoration: none; font-weight: 600;">${company.email}</a></li>
                     <li>💬 Reply to this email with your reference ID: <strong style="color: #1A1A1A;">${savedMessage.referenceId}</strong></li>
                 </ul>
             </div>
         </div>
         
         <div class="footer">
-            <p style="margin: 0 0 10px 0;"><strong style="color: #1A1A1A; font-size: 16px;">Unlimited Creative Agency</strong></p>
-            <p style="margin: 0 0 10px 0; color: #E53E3E; font-weight: 600;">Transforming ideas into extraordinary digital experiences</p>
-            <p style="margin: 0 0 10px 0;">📞 +20 106 023 3872 | 📧 Unlimitedadvv@gmail.com</p>
-            <p style="margin: 0; font-size: 12px;">Available Monday-Friday, 9 AM - 6 PM EST</p>
+            <p style="margin: 0 0 10px 0;"><strong style="color: #1A1A1A; font-size: 16px;">${company.name}</strong></p>
+            <p style="margin: 0 0 10px 0; color: ${branding.primaryColor}; font-weight: 600;">${company.tagline}</p>
+            <p style="margin: 0 0 10px 0;">📞 ${company.phone} | 📧 ${company.email}</p>
+            <p style="margin: 0; font-size: 12px;">Available ${business.workingHours} ${business.timezone}</p>
         </div>
     </body>
     </html>
     `
 
     const text = `
-✅ MESSAGE RECEIVED - Unlimited Creative Agency
+✅ MESSAGE RECEIVED - ${company.name}
 
 Dear ${savedMessage.formData.firstName} ${savedMessage.formData.lastName},
 
@@ -329,22 +333,22 @@ Your Message: "${savedMessage.formData.message}"
 
 🚀 WHAT'S NEXT:
 1. Our team is reviewing your ${methodLabel.toLowerCase()}
-2. We'll get back to you within 24 hours
+2. We'll get back to you within ${business.responseTime}
 3. We'll discuss your project needs and goals
 4. If applicable, we'll prepare a custom proposal
 
 NEED HELP?
-📞 +20 106 023 3872
-📧 Unlimitedadvv@gmail.com
+📞 ${company.phone}
+📧 ${company.email}
 Reference: ${savedMessage.referenceId}
 
-Unlimited Creative Agency
-Available Monday-Friday, 9 AM - 6 PM EST
+${company.name}
+Available ${business.workingHours} ${business.timezone}
     `
 
     const mailOptions = {
       from: {
-        name: process.env.EMAIL_FROM_NAME || 'Unlimited Creative Agency',
+        name: process.env.EMAIL_FROM_NAME || company.name,
         address: process.env.EMAIL_FROM_EMAIL || process.env.EMAIL_USER!
       },
       to: savedMessage.formData.email,
@@ -357,6 +361,7 @@ Available Monday-Friday, 9 AM - 6 PM EST
     return true
     
   } catch (error) {
+    console.error('Error sending user confirmation:', error)
     return false
   }
 }

@@ -2,13 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Template Color Variables - Easy to customize */
 :root {
-  --brand-red: #E53E3E;
-  --brand-black: #1A1A1A;
-  --brand-white: #FFFFFF;
-  --brand-gray: #F7F7F7;
+  --primary-color: #3B82F6;       /* Changed from red to blue */
+  --primary-dark: #2563EB;
+  --secondary-color: #1F2937;     /* Dark gray */
+  --accent-color: #F59E0B;        /* Amber accent */
+  --text-dark: #1F2937;
+  --text-light: #FFFFFF;
+  --background-light: #FFFFFF;
+  --background-dark: #111827;
+  --gray-light: #F9FAFB;
+  --border-color: #E5E7EB;
 }
 
+/* Template Brand Colors - Customize these for your brand */
+.brand-primary { color: var(--primary-color); }
+.brand-secondary { color: var(--secondary-color); }
+.brand-accent { color: var(--accent-color); }
+
+.bg-brand-primary { background-color: var(--primary-color); }
+.bg-brand-secondary { background-color: var(--secondary-color); }
+.bg-brand-accent { background-color: var(--accent-color); }
+
+.border-brand-primary { border-color: var(--primary-color); }
+.text-brand-primary { color: var(--primary-color); }
+
+/* Base Styles */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -21,8 +41,8 @@ html {
 }
 
 body {
-  color: var(--brand-black);
-  background: var(--brand-white);
+  color: var(--text-dark);
+  background: var(--background-light);
   font-feature-settings: 'rlig' 1, 'calt' 1;
   margin: 0;
   padding: 0;
@@ -42,7 +62,7 @@ section {
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar with template colors */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -52,15 +72,15 @@ section {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-red);
+  background: var(--primary-color);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d53030;
+  background: var(--primary-dark);
 }
 
-/* Loading animation */
+/* Loading animation with template colors */
 .loading-dots {
   display: inline-block;
   position: relative;
@@ -74,7 +94,7 @@ section {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: var(--brand-red);
+  background: var(--primary-color);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 
@@ -113,103 +133,64 @@ section {
   100% { transform: translate(24px, 0); }
 }
 
-/* RTL Support - More Specific Rules */
-[dir="rtl"] {
-  text-align: right;
+/* Template-specific utility classes */
+.gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
 }
 
-/* Only apply flex-direction: row-reverse to specific elements, not all flex */
-[dir="rtl"] .nav-flex {
-  flex-direction: row-reverse;
+.gradient-dark {
+  background: linear-gradient(135deg, var(--background-dark), var(--secondary-color));
 }
 
-[dir="rtl"] .breadcrumb-flex {
-  flex-direction: row-reverse;
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Prevent global flex override - keep English layout structure */
-.process-step-container {
-  flex-direction: row !important;
+.shadow-brand {
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
 }
 
-.process-step-container.reverse {
-  flex-direction: row-reverse !important;
+.hover-lift {
+  transition: transform 0.3s ease;
 }
 
-[dir="rtl"] .process-step-container {
-  flex-direction: row !important;
+.hover-lift:hover {
+  transform: translateY(-5px);
 }
 
-[dir="rtl"] .process-step-container.reverse {
-  flex-direction: row-reverse !important;
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Navbar specific fixes */
-.navbar-items {
-  flex-direction: row !important;
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
 }
 
-[dir="rtl"] .navbar-items {
-  flex-direction: row !important;
+/* Responsive utilities */
+.container-custom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-/* Margin and Padding RTL Support */
-[dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
-[dir="rtl"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
-[dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
-[dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
-[dir="rtl"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
-[dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
-
-[dir="rtl"] .pl-2 { padding-left: 0; padding-right: 0.5rem; }
-[dir="rtl"] .pl-3 { padding-left: 0; padding-right: 0.75rem; }
-[dir="rtl"] .pl-4 { padding-left: 0; padding-right: 1rem; }
-[dir="rtl"] .pr-2 { padding-right: 0; padding-left: 0.5rem; }
-[dir="rtl"] .pr-3 { padding-right: 0; padding-left: 0.75rem; }
-[dir="rtl"] .pr-4 { padding-right: 0; padding-left: 1rem; }
-
-/* Text alignment */
-[dir="rtl"] .text-left { text-align: right; }
-[dir="rtl"] .text-right { text-align: left; }
-
-/* Border radius */
-[dir="rtl"] .rounded-l-lg { border-radius: 0 0.5rem 0.5rem 0; }
-[dir="rtl"] .rounded-r-lg { border-radius: 0.5rem 0 0 0.5rem; }
-
-/* Remove the global flex override that was causing issues */
-/* [dir="rtl"] .flex { flex-direction: row-reverse; } - REMOVED */
-
-/* Only apply specific RTL overrides where needed */
-[dir="rtl"] .grid {
-  direction: rtl;
+@media (min-width: 768px) {
+  .container-custom {
+    padding: 0 2rem;
+  }
 }
 
-/* Arabic font optimization */
-[dir="rtl"] {
-  font-family: 'Cairo', 'Tajawal', 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif;
-  line-height: 1.7;
-}
-
-/* Better spacing for Arabic text */
-[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
-  line-height: 1.4;
-}
-
-[dir="rtl"] p {
-  line-height: 1.8;
-}
-
-/* List styles */
-[dir="rtl"] ul, [dir="rtl"] ol {
-  padding-right: 1.5rem;
-  padding-left: 0;
-}
-
-/* Input field adjustments */
-[dir="rtl"] input, [dir="rtl"] textarea, [dir="rtl"] select {
-  text-align: right;
-}
-
-[dir="rtl"] input::placeholder, [dir="rtl"] textarea::placeholder {
-  text-align: right;
+@media (min-width: 1024px) {
+  .container-custom {
+    padding: 0 3rem;
+  }
 }
