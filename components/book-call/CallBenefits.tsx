@@ -106,7 +106,7 @@ export default function CallBenefits() {
                 variants={fadeInUp}
                 className={`flex items-start space-x-4 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}
               >
-                <div className="flex-shrink-0 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                   {step.step}
                 </div>
                 <div className={isRTL ? 'text-right' : ''}>

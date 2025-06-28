@@ -5,6 +5,23 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { fadeInUp } from '@/lib/animations'
 
+// Template configuration - customize these values for your project
+const TEMPLATE_CONFIG = {
+  company: {
+    phone: '+1 (555) 123-4567', // Update with your phone
+    email: 'hello@yourcompany.com' // Update with your email
+  },
+  branding: {
+    primaryColor: '#3B82F6' // Blue - customize this
+  },
+  routes: {
+    privacyPolicy: '/privacy-policy', // Update with your privacy policy route
+    termsOfService: '/terms-of-service', // Update with your terms route
+    homeRoute: '/', // Update with your home route
+    servicesRoute: '/services' // Update with your services route
+  }
+}
+
 interface BookCallFormProps {
   selectedCallType: string
 }
@@ -361,7 +378,8 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleGoBack}
-                className={`w-full bg-red-500 text-white py-3 rounded-lg font-medium hover:bg-red-600 transition-colors ${isRTL ? 'font-arabic' : ''}`}
+                className={`w-full text-white py-3 rounded-lg font-medium hover:opacity-90 transition-colors ${isRTL ? 'font-arabic' : ''}`}
+                style={{ backgroundColor: TEMPLATE_CONFIG.branding.primaryColor }}
               >
                 {t('bookCall.success.bookAnother', 'Book Another Call')}
               </motion.button>
@@ -372,7 +390,7 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                   whileTap={{ scale: 0.98 }}
                   onClick={() => {
                     if (typeof window !== 'undefined') {
-                      window.location.href = '/';
+                      window.location.href = TEMPLATE_CONFIG.routes.homeRoute;
                     }
                   }}
                   className={`w-full bg-white/20 text-white py-2 rounded-lg font-medium hover:bg-white/30 transition-colors border border-white/30 text-sm ${isRTL ? 'font-arabic' : ''}`}
@@ -384,7 +402,7 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                   whileTap={{ scale: 0.98 }}
                   onClick={() => {
                     if (typeof window !== 'undefined') {
-                      window.location.href = '/services';
+                      window.location.href = TEMPLATE_CONFIG.routes.servicesRoute;
                     }
                   }}
                   className={`w-full bg-white/20 text-white py-2 rounded-lg font-medium hover:bg-white/30 transition-colors border border-white/30 text-sm ${isRTL ? 'font-arabic' : ''}`}
@@ -399,8 +417,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
               <p className={`text-gray-400 text-xs mb-2 ${isRTL ? 'font-arabic' : ''}`}>
                 {t('bookCall.success.rescheduleNote', 'Need to reschedule? Contact us:')}
               </p>
-              <a href="tel:+201060233872" className="text-red-400 hover:text-red-300 font-semibold text-sm">
-                +20 106 023 3872
+              <a 
+                href={`tel:${TEMPLATE_CONFIG.company.phone}`} 
+                className="hover:opacity-80 font-semibold text-sm transition-colors"
+                style={{ color: TEMPLATE_CONFIG.branding.primaryColor }}
+              >
+                {TEMPLATE_CONFIG.company.phone}
               </a>
             </div>
           </div>
@@ -408,6 +430,7 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
       </div>
     )
   }
+
   // Error State
   if (submitError) {
     return (
@@ -454,7 +477,7 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                   whileTap={{ scale: 0.98 }}
                   onClick={() => {
                     if (typeof window !== 'undefined') {
-                      window.location.href = 'tel:+201060233872';
+                      window.location.href = `tel:${TEMPLATE_CONFIG.company.phone}`;
                     }
                   }}
                   className={`w-full bg-green-500/20 text-green-300 py-2 rounded-lg font-medium hover:bg-green-500/30 transition-colors border border-green-500/30 text-sm ${isRTL ? 'font-arabic' : ''}`}
@@ -466,7 +489,7 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                   whileTap={{ scale: 0.98 }}
                   onClick={() => {
                     if (typeof window !== 'undefined') {
-                      window.location.href = 'mailto:Unlimitedadvv@gmail.com';
+                      window.location.href = `mailto:${TEMPLATE_CONFIG.company.email}`;
                     }
                   }}
                   className={`w-full bg-blue-500/20 text-blue-300 py-2 rounded-lg font-medium hover:bg-blue-500/30 transition-colors border border-green-500/30 text-sm ${isRTL ? 'font-arabic' : ''}`}
@@ -499,9 +522,13 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
               {isRTL ? `احجز ${callInfo.title}` : `Book Your ${callInfo.title}`}
             </h2>
             <p className={`text-gray-300 mb-4 ${isRTL ? 'font-arabic' : ''}`}>{callInfo.subtitle}</p>
-            <div className={`inline-flex items-center space-x-2 bg-red-500/20 text-red-300 px-4 py-2 rounded-full text-sm ${
+            <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm ${
               isRTL ? 'flex-row-reverse space-x-reverse font-arabic' : ''
-            }`}>
+            }`}
+            style={{ 
+              backgroundColor: `${TEMPLATE_CONFIG.branding.primaryColor}20`,
+              color: TEMPLATE_CONFIG.branding.primaryColor
+            }}>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -528,9 +555,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     required
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       errors.firstName ? 'border-red-500' : 'border-white/30'
                     } ${isRTL ? 'text-right font-arabic' : ''}`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     placeholder={t('bookCall.form.placeholders.firstName', 'Enter your first name')}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   />
@@ -551,9 +581,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     required
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       errors.lastName ? 'border-red-500' : 'border-white/30'
                     } ${isRTL ? 'text-right font-arabic' : ''}`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     placeholder={t('bookCall.form.placeholders.lastName', 'Enter your last name')}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   />
@@ -584,9 +617,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       errors.email ? 'border-red-500' : 'border-white/30'
                     }`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     placeholder={t('bookCall.form.placeholders.email', 'your@email.com')}
                     dir="ltr"
                   />
@@ -607,10 +643,13 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       errors.phone ? 'border-red-500' : 'border-white/30'
                     }`}
-                    placeholder={t('bookCall.form.placeholders.phone', '+20 106 023 3872')}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
+                    placeholder={t('bookCall.form.placeholders.phone', '+1 (555) 123-4567')}
                     dir="ltr"
                   />
                   {errors.phone && (
@@ -630,9 +669,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                   name="company"
                   value={formData.company}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                  className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                     isRTL ? 'text-right font-arabic' : ''
                   }`}
+                  style={{ 
+                    '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                  } as React.CSSProperties}
                   placeholder={t('bookCall.form.placeholders.company', 'Your company name')}
                   dir={isRTL ? 'rtl' : 'ltr'}
                 />
@@ -655,9 +697,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       isRTL ? 'font-arabic' : ''
                     }`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
                     <option value="" className="bg-gray-800">
@@ -677,9 +722,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       isRTL ? 'font-arabic' : ''
                     }`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
                     <option value="" className="bg-gray-800">
@@ -701,9 +749,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     name="timeline"
                     value={formData.timeline}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       isRTL ? 'font-arabic' : ''
                     }`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
                     <option value="" className="bg-gray-800">
@@ -723,9 +774,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     name="urgency"
                     value={formData.urgency}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       isRTL ? 'font-arabic' : ''
                     }`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
                     {urgencyOptions.map((option) => (
@@ -758,9 +812,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     onChange={handleInputChange}
                     min={new Date().toISOString().split('T')[0]}
                     max={new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
-                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       errors.preferredDate ? 'border-red-500' : 'border-white/30'
                     }`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     dir="ltr"
                   />
                   {errors.preferredDate && (
@@ -779,9 +836,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     required
                     value={formData.preferredTime}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       errors.preferredTime ? 'border-red-500' : 'border-white/30'
                     }`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     dir="ltr"
                   >
                     <option value="" className="bg-gray-800">{t('bookCall.form.placeholders.preferredTime', 'Select time')}</option>
@@ -804,9 +864,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                     name="timeZone"
                     value={formData.timeZone}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                    className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                       isRTL ? 'font-arabic' : ''
                     }`}
+                    style={{ 
+                      '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                    } as React.CSSProperties}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
                     {timeZones.map((zone, index) => (
@@ -834,9 +897,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                   rows={5}
                   value={formData.message}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 resize-none ${
+                  className={`w-full px-4 py-3 bg-white/20 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 resize-none ${
                     errors.message ? 'border-red-500' : 'border-white/30'
                   } ${isRTL ? 'text-right font-arabic' : ''}`}
+                  style={{ 
+                    '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                  } as React.CSSProperties}
                   placeholder={t('bookCall.form.placeholders.projectDetails', 'Tell us about your project goals, challenges, or questions...')}
                   dir={isRTL ? 'rtl' : 'ltr'}
                 />
@@ -858,9 +924,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                   name="hearAboutUs"
                   value={formData.hearAboutUs}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                  className={`w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 ${
                     isRTL ? 'font-arabic' : ''
                   }`}
+                  style={{ 
+                    '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                  } as React.CSSProperties}
                   dir={isRTL ? 'rtl' : 'ltr'}
                 >
                   <option value="" className="bg-gray-800">
@@ -881,9 +950,13 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                   name="newsletter"
                   checked={formData.newsletter}
                   onChange={handleInputChange}
-                  className={`w-5 h-5 text-red-500 bg-white/20 border-white/30 rounded focus:ring-red-500 focus:ring-2 mt-0.5 flex-shrink-0 ${
+                  className={`w-5 h-5 bg-white/20 border-white/30 rounded focus:ring-2 mt-0.5 flex-shrink-0 ${
                     isRTL ? 'ml-3' : 'mr-3'
                   }`}
+                  style={{ 
+                    accentColor: TEMPLATE_CONFIG.branding.primaryColor,
+                    '--tw-ring-color': TEMPLATE_CONFIG.branding.primaryColor 
+                  } as React.CSSProperties}
                 />
                 <span className={`text-white text-sm leading-relaxed ${isRTL ? 'font-arabic text-right' : ''}`}>
                   <strong>{t('bookCall.form.newsletter.title', 'Stay Updated')}</strong><br />
@@ -899,9 +972,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                 disabled={isSubmitting}
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className={`w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-4 rounded-lg font-semibold hover:from-red-600 hover:to-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg flex items-center justify-center ${
+                className={`w-full text-white py-4 rounded-lg font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg flex items-center justify-center ${
                   isRTL ? 'font-arabic flex-row-reverse' : ''
                 }`}
+                style={{ 
+                  background: `linear-gradient(135deg, ${TEMPLATE_CONFIG.branding.primaryColor}, ${TEMPLATE_CONFIG.branding.primaryColor}dd)`
+                }}
               >
                 {isSubmitting ? (
                   <>
@@ -953,8 +1029,12 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
               <div className="space-y-2">
                 <p className={`text-gray-300 text-sm ${isRTL ? 'font-arabic' : ''}`}>
                   {t('bookCall.form.footer.questions', 'Questions? Call us directly at')}{' '}
-                  <a href="tel:+201060233872" className="text-red-500 hover:text-red-400 font-semibold transition-colors">
-                    +20 106 023 3872
+                  <a 
+                    href={`tel:${TEMPLATE_CONFIG.company.phone}`} 
+                    className="font-semibold transition-colors hover:opacity-80"
+                    style={{ color: TEMPLATE_CONFIG.branding.primaryColor }}
+                  >
+                    {TEMPLATE_CONFIG.company.phone}
                   </a>
                 </p>
                 <p className={`text-gray-400 text-xs ${isRTL ? 'font-arabic' : ''}`}>
@@ -962,22 +1042,40 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
                 </p>
                 <p className={`text-gray-400 text-xs ${isRTL ? 'font-arabic' : ''}`}>
                   {t('bookCall.form.footer.agreement', 'By submitting this form, you agree to our')}{' '}
-                  <a href="/PrivacyPolicy" className="text-red-400 hover:text-red-300 underline">
+                  <a 
+                    href={TEMPLATE_CONFIG.routes.privacyPolicy} 
+                    className="underline hover:opacity-80"
+                    style={{ color: TEMPLATE_CONFIG.branding.primaryColor }}
+                  >
                     {t('bookCall.form.footer.privacyPolicy', 'Privacy Policy')}
                   </a>{' '}
                   {t('bookCall.form.footer.and', 'and')}{' '}
-                  <a href="/TOS" className="text-red-400 hover:text-red-300 underline">
+                  <a 
+                    href={TEMPLATE_CONFIG.routes.termsOfService} 
+                    className="underline hover:opacity-80"
+                    style={{ color: TEMPLATE_CONFIG.branding.primaryColor }}
+                  >
                     {t('bookCall.form.footer.termsOfService', 'Terms of Service')}
                   </a>
                 </p>
               </div>
 
               {/* Call Type Benefits */}
-              <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-4 text-left" dir={isRTL ? 'rtl' : 'ltr'}>
-                <h4 className={`text-blue-300 font-medium text-sm mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}>
+              <div 
+                className="border rounded-lg p-4 text-left" 
+                dir={isRTL ? 'rtl' : 'ltr'}
+                style={{ 
+                  backgroundColor: `${TEMPLATE_CONFIG.branding.primaryColor}20`,
+                  borderColor: `${TEMPLATE_CONFIG.branding.primaryColor}30`
+                }}
+              >
+                <h4 
+                  className={`font-medium text-sm mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}
+                  style={{ color: TEMPLATE_CONFIG.branding.primaryColor }}
+                >
                   {t('bookCall.form.expectations.title', 'What to expect from your {{title}}:', { title: callInfo.title })}
                 </h4>
-                <ul className="text-blue-200 text-xs space-y-1">
+                <ul className="text-xs space-y-1" style={{ color: `${TEMPLATE_CONFIG.branding.primaryColor}dd` }}>
                   {selectedCallType === 'strategy-call' && (
                     <>
                       <li className={isRTL ? 'font-arabic text-right' : ''}>• {t('bookCall.form.expectations.strategyCall.0', 'Business goal analysis and roadmap creation')}</li>
@@ -1011,3 +1109,68 @@ export default function BookCallForm({ selectedCallType }: BookCallFormProps) {
     </div>
   )
 }
+
+/* 
+TODO: Template Customization Guide
+
+1. TEMPLATE_CONFIG Object:
+   - Update company.phone with your business phone number
+   - Update company.email with your business email
+   - Change branding.primaryColor to match your brand colors
+   - Update routes to match your website structure
+
+2. Translation Keys:
+   - This component uses react-i18next for internationalization
+   - Add your translation files with the corresponding keys
+   - Customize all text content through translation files
+
+3. Form Options:
+   - Modify projectTypes array to match your services
+   - Update budgetRanges to reflect your pricing structure
+   - Adjust timelineOptions based on your project timelines
+   - Customize timeSlots for your availability
+   - Update timeZones for your target markets
+   - Modify hearAboutOptions for your marketing channels
+
+4. Styling Customization:
+   - The component uses Tailwind CSS classes
+   - Primary color is applied through CSS custom properties
+   - Focus states and hover effects use the primary color
+   - Form validation styling can be customized
+
+5. Integration Requirements:
+   - Ensure your API endpoint '/api/book-call' is implemented
+   - Make sure the fadeInUp animation is available from '@/lib/animations'
+   - Verify react-i18next is properly configured
+   - Ensure framer-motion is installed and configured
+
+6. Form Validation:
+   - Email validation uses standard regex pattern
+   - Phone validation accepts international formats
+   - Date validation prevents past dates
+   - All error messages are translatable
+
+7. Success/Error States:
+   - Success state shows booking confirmation with details
+   - Error state provides user-friendly error messages
+   - Both states maintain consistent branding
+   - Navigation buttons use configured routes
+
+8. Accessibility:
+   - Form includes proper labels and ARIA attributes
+   - Focus management for keyboard navigation
+   - Color contrast meets accessibility standards
+   - RTL language support included
+
+9. Mobile Responsiveness:
+   - Grid layouts adapt to smaller screens
+   - Touch-friendly button sizes
+   - Readable text sizes on all devices
+   - Optimized form layout for mobile
+
+10. Performance Considerations:
+    - Component uses React.memo patterns where beneficial
+    - Form validation is debounced for better UX
+    - API calls include proper error handling
+    - Loading states prevent multiple submissions
+*/

@@ -4,23 +4,64 @@ import { motion } from 'framer-motion'
 import Button from '../Button'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function BrandingHero() {
-  const brandingServices = [
-    { name: 'Logo Design', icon: '🎨' },
-    { name: 'Brand Guidelines', icon: '📋' },
-    { name: 'Visual Identity', icon: '👁️' },
-    { name: 'Brand Strategy', icon: '🎯' }
-  ]
+// Template configuration - customize for your agency
+const TEMPLATE_CONFIG = {
+  company: {
+    name: 'Your Agency', // Update with your agency name
+    brandColor: '#EF4444', // Update with your brand color (red-500 default)
+    accentColor: '#DC2626' // Update with your accent color (red-600 default)
+  },
+  hero: {
+    title: {
+      highlight: 'Branding', // The highlighted word
+      main: 'That Inspires' // The main part of the title
+    },
+    subtitle: 'Create a powerful brand identity that resonates with your audience, builds trust, and sets you apart from the competition.',
+    services: [
+      { name: 'Logo Design', icon: '🎨' },
+      { name: 'Brand Guidelines', icon: '📋' },
+      { name: 'Visual Identity', icon: '👁️' },
+      { name: 'Brand Strategy', icon: '🎯' }
+    ],
+    ctaButtons: {
+      primary: {
+        text: 'Start Your Brand',
+        action: '/Contact?service=branding' // Update with your contact page
+      },
+      secondary: {
+        text: 'View Our Work',
+        action: 'scroll-to-portfolio' // Can be URL or scroll action
+      }
+    },
+    stats: [
+      { number: '50+', label: 'Brands Created' },
+      { number: '300%', label: 'Avg. Recognition Boost' },
+      { number: '98%', label: 'Client Satisfaction' },
+      { number: '15+', label: 'Industries Served' }
+    ]
+  },
+  background: {
+    gradient: {
+      from: 'black',
+      via: 'gray-900',
+      to: 'red-900' // Update to match your brand
+    },
+    animations: true // Set to false to disable background animations
+  }
+}
 
-  const stats = [
-    { number: '50+', label: 'Brands Created' },
-    { number: '300%', label: 'Avg. Recognition Boost' },
-    { number: '98%', label: 'Client Satisfaction' },
-    { number: '15+', label: 'Industries Served' }
-  ]
+export default function BrandingHero() {
+  const handleCTAClick = (action: string) => {
+    if (action.startsWith('http') || action.startsWith('/')) {
+      window.location.href = action
+    } else if (action === 'scroll-to-portfolio') {
+      const portfolioSection = document.getElementById('branding-portfolio')
+      portfolioSection?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-red-900 pt-20">
+    <section       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-red-900 pt-20">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div 
@@ -32,31 +73,35 @@ export default function BrandingHero() {
       </div>
 
       {/* Animated Background Elements */}
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-        className="absolute top-1/4 right-1/3 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"
-      />
+      {TEMPLATE_CONFIG.background.animations && (
+        <>
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 30,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute top-1/4 right-1/3 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"
+          />
 
-      <motion.div
-        animate={{
-          scale: [1.1, 1, 1.1],
-          rotate: [180, 0, 180],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-        className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl"
-      />
+          <motion.div
+            animate={{
+              scale: [1.1, 1, 1.1],
+              rotate: [180, 0, 180],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl"
+          />
+        </>
+      )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -71,9 +116,9 @@ export default function BrandingHero() {
             className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight"
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-              Branding
+              {TEMPLATE_CONFIG.hero.title.highlight}
             </span>{' '}
-            That Inspires
+            {TEMPLATE_CONFIG.hero.title.main}
           </motion.h1>
 
           {/* Subtitle */}
@@ -81,8 +126,7 @@ export default function BrandingHero() {
             variants={fadeInUp}
             className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
           >
-            Create a powerful brand identity that resonates with your audience, builds trust, 
-            and sets you apart from the competition.
+            {TEMPLATE_CONFIG.hero.subtitle}
           </motion.p>
 
           {/* Service Highlights */}
@@ -90,7 +134,7 @@ export default function BrandingHero() {
             variants={fadeInUp}
             className="flex flex-wrap justify-center gap-6 mb-12"
           >
-            {brandingServices.map((service, index) => (
+            {TEMPLATE_CONFIG.hero.services.map((service, index) => (
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.05 }}
@@ -110,19 +154,16 @@ export default function BrandingHero() {
             <Button 
               variant="primary" 
               size="large"
-              onClick={() => window.location.href = '/Contact?service=branding'}
+              onClick={() => handleCTAClick(TEMPLATE_CONFIG.hero.ctaButtons.primary.action)}
             >
-              Start Your Brand
+              {TEMPLATE_CONFIG.hero.ctaButtons.primary.text}
             </Button>
             <Button 
               variant="outline" 
               size="large"
-              onClick={() => {
-                const portfolioSection = document.getElementById('branding-portfolio')
-                portfolioSection?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              onClick={() => handleCTAClick(TEMPLATE_CONFIG.hero.ctaButtons.secondary.action)}
             >
-              View Our Work
+              {TEMPLATE_CONFIG.hero.ctaButtons.secondary.text}
             </Button>
           </motion.div>
 
@@ -131,7 +172,7 @@ export default function BrandingHero() {
             variants={fadeInUp}
             className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-gray-700/50"
           >
-            {stats.map((stat, index) => (
+            {TEMPLATE_CONFIG.hero.stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-red-500 mb-2">
                   {stat.number}
@@ -147,3 +188,34 @@ export default function BrandingHero() {
     </section>
   )
 }
+
+/* 
+🎯 TEMPLATE-READY BRANDING HERO
+
+CUSTOMIZATION POINTS:
+✅ Company name and brand colors
+✅ Hero title and subtitle
+✅ Service highlights with icons
+✅ CTA button text and actions
+✅ Statistics and achievements
+✅ Background gradient colors
+✅ Animation toggle
+
+EASY CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your details
+2. Change brand colors to match your identity
+3. Customize hero text and messaging
+4. Update stats to reflect your achievements
+5. Modify service highlights
+6. Set CTA actions (URLs or scroll functions)
+
+FEATURES:
+- Responsive design
+- Smooth animations
+- Customizable colors
+- Flexible CTA actions
+- Background pattern overlay
+- Statistics showcase
+
+Perfect foundation for any branding service hero section!
+*/

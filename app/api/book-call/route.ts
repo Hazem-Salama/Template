@@ -1,7 +1,10 @@
 // app/api/book-call/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { CallBookingService, NewsletterService } from '@/lib/db-helpers'
-import { emailService } from '@/lib/email-service'
+
+// Template configuration - customize these imports based on your project structure
+// Replace these with your actual service imports
+// import { CallBookingService, NewsletterService } from '@/lib/db-helpers'
+// import { emailService } from '@/lib/email-service'
 
 interface FormData {
   firstName: string
@@ -33,6 +36,60 @@ interface RequestData {
   callInfo: CallInfo
   submittedAt?: string
 }
+
+// Template service placeholders - replace with your actual implementations
+class TemplateCallBookingService {
+  static async create(bookingData: any) {
+    // TODO: Implement your database save logic here
+    // Example: Save to MongoDB, PostgreSQL, or your preferred database
+    
+    // For now, return a mock response
+    return {
+      referenceId: `CALL-${Date.now()}`, // Generate your own reference ID format
+      id: 'mock-id-' + Date.now(),
+      ...bookingData
+    }
+  }
+
+  static async findByReferenceId(referenceId: string) {
+    // TODO: Implement your database query logic here
+    return null // Replace with actual database query
+  }
+
+  static async getAll(filter: any = {}, page: number = 1, limit: number = 10) {
+    // TODO: Implement your database pagination logic here
+    return {
+      bookings: [], // Replace with actual database results
+      pagination: {
+        page,
+        limit,
+        total: 0,
+        totalPages: 0
+      }
+    }
+  }
+}
+
+class TemplateNewsletterService {
+  static async subscribe(email: string, source: string, firstName?: string, lastName?: string) {
+    // TODO: Implement your newsletter subscription logic here
+    // Example: Add to Mailchimp, ConvertKit, or your email service
+    return true
+  }
+}
+
+class TemplateEmailService {
+  async sendBookingConfirmation(emailData: any) {
+    // TODO: Implement your email sending logic here
+    // Example: Use SendGrid, Resend, Nodemailer, etc.
+    
+    // For now, return true (mock success)
+    console.log('Email would be sent to:', emailData.email)
+    return true
+  }
+}
+
+const templateEmailService = new TemplateEmailService()
 
 export async function POST(request: NextRequest) {
   try {
@@ -99,11 +156,11 @@ export async function POST(request: NextRequest) {
       callType,
       callInfo,
       submittedAt: new Date(),
-      source: 'agency_website'
+      source: 'website' // Customize this based on your needs
     }
 
     // Save booking to database
-    const savedBooking = await CallBookingService.create(bookingData)
+    const savedBooking = await TemplateCallBookingService.create(bookingData)
 
     // Prepare email data
     const emailData = {
@@ -123,22 +180,24 @@ export async function POST(request: NextRequest) {
     // Send confirmation email (don't fail if email fails)
     let emailSent = false
     try {
-      emailSent = await emailService.sendBookingConfirmation(emailData)
+      emailSent = await templateEmailService.sendBookingConfirmation(emailData)
     } catch (emailError) {
       // Continue - don't fail the booking if email fails
+      console.error('Email sending failed:', emailError)
     }
 
     // Handle newsletter subscription
     if (formData.newsletter) {
       try {
-        await NewsletterService.subscribe(
+        await TemplateNewsletterService.subscribe(
           formData.email,
-          'agency_booking',
+          'website_booking', // Customize source name
           formData.firstName,
           formData.lastName
         )
       } catch (newsletterError) {
         // Continue - don't fail the booking if newsletter fails
+        console.error('Newsletter subscription failed:', newsletterError)
       }
     }
 
@@ -152,7 +211,9 @@ export async function POST(request: NextRequest) {
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
     
-    // Handle specific MongoDB errors
+    console.error('Booking creation error:', error)
+
+    // Handle specific database errors (customize based on your database)
     if (errorMessage.includes('E11000') && errorMessage.includes('referenceId')) {
       return NextResponse.json({
         success: false,
@@ -192,7 +253,7 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
 
     if (referenceId) {
-      const booking = await CallBookingService.findByReferenceId(referenceId)
+      const booking = await TemplateCallBookingService.findByReferenceId(referenceId)
       
       if (!booking) {
         return NextResponse.json({
@@ -204,7 +265,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         success: true,
         booking: {
-          id: String(booking._id),
+          id: String(booking._id || booking.id),
           referenceId: booking.referenceId,
           callType: booking.callType,
           callInfo: booking.callInfo,
@@ -222,12 +283,12 @@ export async function GET(request: NextRequest) {
         }
       })
     } else {
-      const result = await CallBookingService.getAll({}, page, limit)
+      const result = await TemplateCallBookingService.getAll({}, page, limit)
       
       return NextResponse.json({
         success: true,
-        bookings: result.bookings.map(booking => ({
-          id: String(booking._id),
+        bookings: result.bookings.map((booking: any) => ({
+          id: String(booking._id || booking.id),
           referenceId: booking.referenceId,
           callType: booking.callType,
           status: booking.status,
@@ -244,9 +305,48 @@ export async function GET(request: NextRequest) {
     }
 
   } catch (error: unknown) {
+    console.error('Booking retrieval error:', error)
     return NextResponse.json({
       success: false,
       error: 'Failed to retrieve booking'
     }, { status: 500 })
   }
 }
+
+/* 
+TODO: Implementation Guide
+
+1. Database Setup:
+   - Replace TemplateCallBookingService with your actual database service
+   - Set up your database schema for call bookings
+   - Implement proper error handling for your database
+
+2. Email Service:
+   - Replace TemplateEmailService with your email provider (SendGrid, Resend, etc.)
+   - Create email templates for booking confirmations
+   - Handle email failures gracefully
+
+3. Newsletter Service:
+   - Replace TemplateNewsletterService with your email marketing service
+   - Set up proper subscription handling
+   - Handle newsletter service failures
+
+4. Environment Variables:
+   - Add your database connection strings
+   - Add email service API keys
+   - Add any other required configuration
+
+5. Error Logging:
+   - Consider adding proper logging service (Winston, Pino, etc.)
+   - Set up error monitoring (Sentry, LogRocket, etc.)
+
+6. Security:
+   - Add rate limiting for the API endpoint
+   - Implement proper input sanitization
+   - Add CSRF protection if needed
+
+7. Testing:
+   - Add unit tests for validation logic
+   - Add integration tests for database operations
+   - Test email sending functionality
+*/

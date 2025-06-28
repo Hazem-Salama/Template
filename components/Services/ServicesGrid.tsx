@@ -6,7 +6,7 @@ import { fadeInUp, staggerContainer } from '@/lib/animations'
 // Template services - customize for your agency
 const services = [
   {
-    id: 'branding',
+    id: 'Branding',
     icon: '🎨',
     title: 'Brand Strategy & Design',
     description: 'Create a powerful brand identity that resonates with your audience and builds lasting trust.',
@@ -23,7 +23,7 @@ const services = [
     startingPrice: 'From $5,000'
   },
   {
-    id: 'marketing',
+    id: 'DM',
     icon: '📊',
     title: 'Digital Marketing',
     description: 'Data-driven marketing strategies that increase visibility and drive measurable growth.',
@@ -40,7 +40,7 @@ const services = [
     startingPrice: 'From $2,500/month'
   },
   {
-    id: 'uiux',
+    id: 'UIUX',
     icon: '💻',
     title: 'UI/UX Design',
     description: 'Design intuitive and engaging user experiences that convert visitors into customers.',
@@ -57,7 +57,7 @@ const services = [
     startingPrice: 'From $8,000'
   },
   {
-    id: 'consulting',
+    id: 'Consulting',
     icon: '💡',
     title: 'Strategy Consulting',
     description: 'Expert guidance to optimize your business strategy and accelerate growth.',
@@ -74,7 +74,7 @@ const services = [
     startingPrice: 'From $3,500'
   },
   {
-    id: 'development',
+    id: 'WebDev',
     icon: '⚡',
     title: 'Web Development',
     description: 'Build fast, secure, and scalable websites that perform excellently across all devices.',
@@ -179,7 +179,7 @@ export default function ServicesGrid() {
 
               {/* Learn More Button */}
               <motion.a
-                href={`/services/${service.id}`}
+                href={`/${service.id}`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="block w-full bg-gray-100 text-black py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-300 text-center"

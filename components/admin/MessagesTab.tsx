@@ -4,6 +4,92 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { fadeInUp } from '@/lib/animations'
 
+// Template configuration - customize for your project
+const TEMPLATE_CONFIG = {
+  developmentMode: true, // Set to false when implementing real API
+  mockData: {
+    enabled: true, // Show mock data for demonstration
+    messages: [
+      {
+        _id: 'msg-1',
+        formData: {
+          firstName: 'Emily',
+          lastName: 'Rodriguez',
+          email: 'emily.rodriguez@startup.com',
+          phone: '+1 (555) 234-5678',
+          company: 'TechFlow Startup',
+          projectType: 'Web Development',
+          budget: '$25,000 - $35,000',
+          timeline: '3-6 Months',
+          message: 'Hi! We\'re a growing startup looking to completely redesign our website. We need a modern, responsive design that can handle high traffic and integrates with our existing CRM system. Can you help us with this project?',
+          priority: 'high'
+        },
+        method: 'project-quote',
+        status: 'new',
+        referenceId: 'MSG-2024001',
+        submittedAt: new Date().toISOString()
+      },
+      {
+        _id: 'msg-2',
+        formData: {
+          firstName: 'David',
+          lastName: 'Chen',
+          email: 'david@digitalagency.co',
+          phone: '+1 (555) 345-6789',
+          company: 'Digital Marketing Co',
+          projectType: 'Partnership',
+          budget: 'Let\'s Discuss',
+          timeline: 'Just Exploring',
+          message: 'We\'re interested in exploring a potential partnership opportunity. Our agency specializes in digital marketing and we think there could be synergies with your web development services. Would love to discuss this further.',
+          priority: 'normal'
+        },
+        method: 'partnership',
+        status: 'in-progress',
+        referenceId: 'MSG-2024002',
+        submittedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
+      },
+              {
+        _id: 'msg-3',
+        formData: {
+          firstName: 'Lisa',
+          lastName: 'Thompson',
+          email: 'lisa.thompson@retailcorp.com',
+          phone: '+1 (555) 456-7890',
+          company: 'Retail Corp',
+          projectType: 'E-commerce Solutions',
+          budget: '$50,000+',
+          timeline: '1-3 Months',
+          message: 'We need urgent help with our e-commerce platform. Our current system is experiencing performance issues and we\'re losing sales. We need a complete overhaul before the holiday season. Time is critical!',
+          priority: 'urgent'
+        },
+        method: 'support',
+        status: 'responded',
+        referenceId: 'MSG-2024003',
+        submittedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+      },
+      {
+        _id: 'msg-4',
+        formData: {
+          firstName: 'Alex',
+          lastName: 'Johnson',
+          email: 'alex.johnson@freelance.com',
+          phone: '+1 (555) 567-8901',
+          company: 'Freelance Designer',
+          projectType: 'UI/UX Design',
+          budget: '$10,000 - $15,000',
+          timeline: '1-3 Months',
+          message: 'Hello! I\'m a freelance designer working on a client project and need some development support. The design is ready and I\'m looking for a reliable development partner. Would you be interested in collaborating?',
+          priority: 'low'
+        },
+        method: 'general-inquiry',
+        status: 'new',
+        referenceId: 'MSG-2024004',
+        submittedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
+      }
+    ]
+  }
+}
+
 interface Message {
   _id: string
   formData: {
@@ -38,15 +124,37 @@ export default function MessagesTab() {
 
   const fetchMessages = async () => {
     try {
-      const url = filter === 'all' ? '/api/admin/messages' : `/api/admin/messages?status=${filter}`
-      const response = await fetch(url)
-      const data = await response.json()
-      
-      if (data.success) {
-        setMessages(data.messages)
+      if (TEMPLATE_CONFIG.developmentMode && TEMPLATE_CONFIG.mockData.enabled) {
+        // DEVELOPMENT MODE: Use mock data
+        console.log('💬 DEVELOPMENT MODE: Loading mock messages...')
+        await new Promise(resolve => setTimeout(resolve, 1000)) // Simulate API delay
+        
+        // Filter mock data based on filter
+        let filteredMessages = TEMPLATE_CONFIG.mockData.messages
+        if (filter !== 'all') {
+          filteredMessages = TEMPLATE_CONFIG.mockData.messages.filter(msg => msg.status === filter)
+        }
+        setMessages(filteredMessages)
+      } else {
+        // PRODUCTION MODE: Real API call
+        const url = filter === 'all' ? '/api/admin/messages' : `/api/admin/messages?status=${filter}`
+        const response = await fetch(url)
+        const data = await response.json()
+        
+        if (data.success) {
+          setMessages(data.messages)
+        } else {
+          console.error('Failed to fetch messages:', data.error)
+        }
       }
     } catch (error) {
       console.error('Failed to fetch messages:', error)
+      
+      // Fallback to mock data on error in development
+      if (TEMPLATE_CONFIG.developmentMode) {
+        console.log('💬 API failed, using mock data as fallback')
+        setMessages(TEMPLATE_CONFIG.mockData.messages)
+      }
     } finally {
       setIsLoading(false)
     }
@@ -61,19 +169,12 @@ export default function MessagesTab() {
     setIsProcessing(message._id)
 
     try {
-      const response = await fetch('/api/admin/messages', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: message._id,
-          status: 'responded',
-          replyMessage: replyMessage.trim()
-        })
-      })
-
-      const data = await response.json()
-
-      if (data.success) {
+      if (TEMPLATE_CONFIG.developmentMode) {
+        // DEVELOPMENT MODE: Simulate API call
+        console.log(`💬 DEVELOPMENT MODE: Replying to ${message.formData.firstName}`)
+        console.log('Reply message:', replyMessage.trim())
+        await new Promise(resolve => setTimeout(resolve, 1500)) // Simulate processing time
+        
         // Update local state
         setMessages(prev => prev.map(m => 
           m._id === message._id 
@@ -86,9 +187,35 @@ export default function MessagesTab() {
         setReplyMessage('')
         
         // Show success message
-        alert(`Reply sent successfully!${data.emailSent ? ' Email delivered to customer.' : ''}`)
+        alert('✅ Reply sent successfully! (Development Mode - No real email sent)')
       } else {
-        alert(data.error || 'Failed to send reply')
+        // PRODUCTION MODE: Real API call
+        const response = await fetch('/api/admin/messages', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: message._id,
+            status: 'responded',
+            replyMessage: replyMessage.trim()
+          })
+        })
+
+        const data = await response.json()
+
+        if (data.success) {
+          setMessages(prev => prev.map(m => 
+            m._id === message._id 
+              ? { ...m, status: 'responded' }
+              : m
+          ))
+          
+          setSelectedMessage(null)
+          setReplyMessage('')
+          
+          alert(`Reply sent successfully!${data.emailSent ? ' Email delivered to customer.' : ''}`)
+        } else {
+          alert(data.error || 'Failed to send reply')
+        }
       }
     } catch (error) {
       alert('Failed to send reply')
@@ -105,20 +232,30 @@ export default function MessagesTab() {
     setIsProcessing(message._id)
 
     try {
-      const response = await fetch('/api/admin/messages', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: message._id })
-      })
-
-      const data = await response.json()
-
-      if (data.success) {
+      if (TEMPLATE_CONFIG.developmentMode) {
+        // DEVELOPMENT MODE: Simulate API call
+        console.log(`💬 DEVELOPMENT MODE: Deleting message from ${message.formData.firstName}`)
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        
         // Remove from local state
         setMessages(prev => prev.filter(m => m._id !== message._id))
-        alert('Message deleted successfully!')
+        alert('✅ Message deleted successfully! (Development Mode)')
       } else {
-        alert(data.error || 'Failed to delete message')
+        // PRODUCTION MODE: Real API call
+        const response = await fetch('/api/admin/messages', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: message._id })
+        })
+
+        const data = await response.json()
+
+        if (data.success) {
+          setMessages(prev => prev.filter(m => m._id !== message._id))
+          alert('Message deleted successfully!')
+        } else {
+          alert(data.error || 'Failed to delete message')
+        }
       }
     } catch (error) {
       alert('Failed to delete message')
@@ -130,20 +267,30 @@ export default function MessagesTab() {
   const markAsRead = async (message: Message) => {
     if (message.status === 'new') {
       try {
-        await fetch('/api/admin/messages', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id: message._id,
-            status: 'in-progress'
+        if (TEMPLATE_CONFIG.developmentMode) {
+          // DEVELOPMENT MODE: Simulate marking as read
+          setMessages(prev => prev.map(m => 
+            m._id === message._id 
+              ? { ...m, status: 'in-progress' }
+              : m
+          ))
+        } else {
+          // PRODUCTION MODE: Real API call
+          await fetch('/api/admin/messages', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: message._id,
+              status: 'in-progress'
+            })
           })
-        })
 
-        setMessages(prev => prev.map(m => 
-          m._id === message._id 
-            ? { ...m, status: 'in-progress' }
-            : m
-        ))
+          setMessages(prev => prev.map(m => 
+            m._id === message._id 
+              ? { ...m, status: 'in-progress' }
+              : m
+          ))
+        }
       } catch (error) {
         // Silent fail for read status
       }
@@ -196,12 +343,24 @@ export default function MessagesTab() {
       <div className="p-8 text-center">
         <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
         <p className="text-white">Loading messages...</p>
+        {TEMPLATE_CONFIG.developmentMode && (
+          <p className="text-yellow-300 text-sm mt-2">🔧 Development Mode: Loading mock data...</p>
+        )}
       </div>
     )
   }
 
   return (
     <div className="p-6">
+      {/* Development Mode Banner */}
+      {TEMPLATE_CONFIG.developmentMode && (
+        <div className="bg-yellow-600/20 border border-yellow-600/30 rounded-lg p-3 mb-6">
+          <p className="text-yellow-300 text-sm">
+            🔧 <strong>Development Mode:</strong> Showing mock data. Set developmentMode to false in the component to use real API.
+          </p>
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-bold text-white mb-2">💬 Messages</h2>
@@ -238,6 +397,18 @@ export default function MessagesTab() {
               : `No messages with status "${filter.replace('-', ' ')}"`
             }
           </p>
+          {TEMPLATE_CONFIG.developmentMode && filter === 'all' && (
+            <div className="mt-4">
+              <button
+                onClick={() => {
+                  setMessages(TEMPLATE_CONFIG.mockData.messages)
+                }}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+              >
+                Load Mock Data
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="space-y-4">
@@ -269,6 +440,11 @@ export default function MessagesTab() {
                     {message.status === 'new' && (
                       <span className="px-2 py-1 bg-yellow-500 text-white rounded-full text-xs font-medium animate-pulse">
                         New
+                      </span>
+                    )}
+                    {TEMPLATE_CONFIG.developmentMode && (
+                      <span className="px-2 py-1 bg-yellow-500 text-black rounded-full text-xs font-medium">
+                        MOCK
                       </span>
                     )}
                   </div>
@@ -320,7 +496,6 @@ export default function MessagesTab() {
                     <span>Reply</span>
                   </motion.button>
 
-                  {/* Delete Button - Always visible */}
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -362,6 +537,14 @@ export default function MessagesTab() {
           >
             <h3 className="text-xl font-bold text-white mb-4">📧 Reply to Message</h3>
             
+            {TEMPLATE_CONFIG.developmentMode && (
+              <div className="bg-yellow-600/20 border border-yellow-600/30 rounded-lg p-3 mb-4">
+                <p className="text-yellow-300 text-sm">
+                  🔧 <strong>Development Mode:</strong> Reply will be simulated. No real email will be sent.
+                </p>
+              </div>
+            )}
+            
             {/* Customer Info */}
             <div className="bg-white/10 rounded-lg p-4 mb-4">
               <h4 className="text-white font-medium mb-2">Customer Details:</h4>
@@ -393,7 +576,10 @@ export default function MessagesTab() {
                 className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
               />
               <p className="text-gray-400 text-xs mt-2">
-                This message will be sent directly to the customer's email address
+                {TEMPLATE_CONFIG.developmentMode 
+                  ? 'This message will be simulated in development mode'
+                  : 'This message will be sent directly to the customer\'s email address'
+                }
               </p>
             </div>
 
@@ -415,7 +601,9 @@ export default function MessagesTab() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                     </svg>
-                    <span>Send Reply</span>
+                    <span>
+                      {TEMPLATE_CONFIG.developmentMode ? 'Send Reply (Dev Mode)' : 'Send Reply'}
+                    </span>
                   </>
                 )}
               </motion.button>
@@ -438,3 +626,44 @@ export default function MessagesTab() {
     </div>
   )
 }
+
+/* 
+TODO: Template Customization Guide
+
+1. DEVELOPMENT vs PRODUCTION:
+   - Set developmentMode: false when ready for production
+   - Replace mock data with real API calls
+   - Update API endpoints to match your backend
+
+2. MOCK DATA CUSTOMIZATION:
+   - Update TEMPLATE_CONFIG.mockData.messages with relevant examples
+   - Adjust data structure to match your needs
+   - Add or remove fields as necessary
+
+3. API INTEGRATION:
+   - Replace fetch('/api/admin/messages') with your actual endpoint
+   - Update request/response handling for your API structure
+   - Add proper error handling for your use case
+
+4. CUSTOMIZATION OPTIONS:
+   - Modify message statuses and colors
+   - Update priority levels and indicators
+   - Customize date/time formatting
+   - Add additional message fields
+
+5. FEATURES TO ADD:
+   - Real-time updates via WebSocket
+   - Message threading/conversation history
+   - Advanced filtering and search
+   - Bulk operations (mark as read, delete multiple)
+   - Export functionality
+   - Template responses
+
+CURRENT TEMPLATE STATUS:
+- ✅ Mock data for immediate demonstration
+- ✅ Complete UI with all interactions
+- ✅ Development mode indicators
+- ✅ Error handling and fallbacks
+- 🟡 Replace with real API when ready
+- 🟡 Customize mock data for your use case
+*/

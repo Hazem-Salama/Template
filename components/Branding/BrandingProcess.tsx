@@ -3,8 +3,49 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function BrandingProcess() {
-  const processSteps = [
+// Template configuration - customize for your agency
+const TEMPLATE_CONFIG = {
+  company: {
+    name: 'Your Agency', // Update with your agency name
+    brandColor: '#EF4444', // Update with your brand color
+    currency: 'USD', // Update with your currency
+    currencySymbol: '$' // Update with your currency symbol
+  },
+  content: {
+    title: 'Our Branding Process',
+    subtitle: 'A proven 5-step process that ensures your brand is strategically sound, visually compelling, and ready for success in the marketplace.',
+    processTitle: 'Why Our Process Works',
+    processSubtitle: 'Our systematic approach ensures every brand we create is strategically sound and designed for long-term success.',
+    ctaTitle: 'Ready to Start Your Brand Journey?',
+    ctaSubtitle: 'Our comprehensive branding process typically takes 6-10 weeks from start to finish, ensuring every detail is perfect before launch.'
+  },
+  process: {
+    totalDuration: '6-10 weeks', // Update with your typical timeline
+    startingPrice: 2500, // Update with your starting price
+    features: [
+      {
+        icon: '🤝',
+        title: 'Collaborative Approach',
+        description: 'We work closely with you throughout the process, ensuring your vision is realized.'
+      },
+      {
+        icon: '🔄',
+        title: 'Iterative Design',
+        description: 'Multiple rounds of revisions ensure we get every detail perfect.'
+      },
+      {
+        icon: '📊',
+        title: 'Data-Driven Decisions',
+        description: 'All design choices are backed by research and strategic thinking.'
+      },
+      {
+        icon: '🚀',
+        title: 'Implementation Support',
+        description: 'We help you roll out your new brand across all channels and materials.'
+      }
+    ]
+  },
+  steps: [
     {
       step: '01',
       title: 'Discovery & Research',
@@ -75,30 +116,22 @@ export default function BrandingProcess() {
       duration: '1 week',
       icon: '📋'
     }
-  ]
+  ],
+  contact: {
+    baseUrl: '/Contact', // Update with your contact page URL
+    serviceParam: 'service' // URL parameter for service selection
+  }
+}
 
-  const processFeatures = [
-    {
-      icon: '🤝',
-      title: 'Collaborative Approach',
-      description: 'We work closely with you throughout the process, ensuring your vision is realized.'
-    },
-    {
-      icon: '🔄',
-      title: 'Iterative Design',
-      description: 'Multiple rounds of revisions ensure we get every detail perfect.'
-    },
-    {
-      icon: '📊',
-      title: 'Data-Driven Decisions',
-      description: 'All design choices are backed by research and strategic thinking.'
-    },
-    {
-      icon: '🚀',
-      title: 'Implementation Support',
-      description: 'We help you roll out your new brand across all channels and materials.'
-    }
-  ]
+export default function BrandingProcess() {
+  const formatPrice = (price: number) => {
+    return `${TEMPLATE_CONFIG.company.currencySymbol}${price.toLocaleString()}`
+  }
+
+  const handleCTAClick = () => {
+    const url = `${TEMPLATE_CONFIG.contact.baseUrl}?${TEMPLATE_CONFIG.contact.serviceParam}=branding`
+    window.location.href = url
+  }
 
   return (
     <section className="py-24 bg-white">
@@ -120,14 +153,13 @@ export default function BrandingProcess() {
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            A proven 5-step process that ensures your brand is strategically sound, 
-            visually compelling, and ready for success in the marketplace.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
         {/* Process Steps */}
         <div className="space-y-16 mb-20">
-          {processSteps.map((step, index) => (
+          {TEMPLATE_CONFIG.steps.map((step, index) => (
             <motion.div
               key={index}
               variants={staggerContainer}
@@ -193,16 +225,15 @@ export default function BrandingProcess() {
         >
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-black mb-4">
-              Why Our Process Works
+              {TEMPLATE_CONFIG.content.processTitle}
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our systematic approach ensures every brand we create is strategically sound 
-              and designed for long-term success.
+              {TEMPLATE_CONFIG.content.processSubtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processFeatures.map((feature, index) => (
+            {TEMPLATE_CONFIG.process.features.map((feature, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -225,10 +256,9 @@ export default function BrandingProcess() {
           className="bg-gradient-to-r from-black to-red-900 rounded-3xl p-8 md:p-12 text-white"
         >
           <div className="text-center mb-8">
-            <h3 className="text-3xl font-bold mb-4">Ready to Start Your Brand Journey?</h3>
+            <h3 className="text-3xl font-bold mb-4">{TEMPLATE_CONFIG.content.ctaTitle}</h3>
             <p className="text-gray-300 max-w-2xl mx-auto">
-              Our comprehensive branding process typically takes 6-10 weeks from start to finish, 
-              ensuring every detail is perfect before launch.
+              {TEMPLATE_CONFIG.content.ctaSubtitle}
             </p>
           </div>
 
@@ -236,12 +266,12 @@ export default function BrandingProcess() {
             <div className="text-center">
               <div className="text-4xl mb-3">⏱️</div>
               <h4 className="text-xl font-semibold mb-2">Timeline</h4>
-              <p className="text-gray-300">6-10 weeks for complete brand development</p>
+              <p className="text-gray-300">{TEMPLATE_CONFIG.process.totalDuration} for complete brand development</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">💰</div>
               <h4 className="text-xl font-semibold mb-2">Investment</h4>
-              <p className="text-gray-300">Starting at 1,200 EGP for individual services</p>
+              <p className="text-gray-300">Starting at {formatPrice(TEMPLATE_CONFIG.process.startingPrice)} for individual services</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">🎯</div>
@@ -254,8 +284,8 @@ export default function BrandingProcess() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors shadow-lg"
-              onClick={() => window.location.href = '/Contact?service=branding'}
+              className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold transition-colors shadow-lg"
+              onClick={handleCTAClick}
             >
               Start Your Brand Project
             </motion.button>
@@ -265,3 +295,41 @@ export default function BrandingProcess() {
     </section>
   )
 }
+
+/* 
+🎯 TEMPLATE-READY BRANDING PROCESS
+
+CUSTOMIZATION POINTS:
+✅ Company branding (name, colors, currency)
+✅ Process steps with activities and deliverables
+✅ Timeline and pricing information
+✅ Process features and benefits
+✅ CTA section with custom messaging
+✅ Contact page integration
+
+EASY SETUP:
+1. Update TEMPLATE_CONFIG with your details
+2. Modify process steps to match your workflow
+3. Set timeline and pricing information
+4. Customize process features
+5. Update contact page URL
+6. Adjust brand colors throughout
+
+FEATURES:
+- 5-step process visualization
+- Alternating layout for visual interest
+- Process features showcase
+- Timeline and pricing summary
+- Responsive design
+- Smooth animations
+- Custom brand color integration
+
+PROCESS STEPS INCLUDED:
+1. Discovery & Research
+2. Strategy Development  
+3. Design Exploration
+4. Refinement & Finalization
+5. Guidelines & Implementation
+
+Perfect for showcasing your agency's systematic approach to branding!
+*/

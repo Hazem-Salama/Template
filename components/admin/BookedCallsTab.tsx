@@ -4,6 +4,88 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { fadeInUp } from '@/lib/animations'
 
+// Template configuration - customize for your project
+const TEMPLATE_CONFIG = {
+  developmentMode: true, // Set to false when implementing real API
+  mockData: {
+    enabled: true, // Show mock data for demonstration
+    bookings: [
+      {
+        _id: 'mock-1',
+        formData: {
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john.doe@example.com',
+          phone: '+1 (555) 123-4567',
+          company: 'Tech Startup Inc.',
+          projectType: 'Web Development',
+          message: 'We need a modern website for our startup. Looking for a complete redesign with focus on user experience and mobile responsiveness.',
+          preferredDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+          preferredTime: '2:00 PM',
+          timeZone: 'EST (Eastern)',
+          urgency: 'high'
+        },
+        callInfo: {
+          title: 'Strategy Call',
+          duration: '45 minutes'
+        },
+        status: 'pending',
+        referenceId: 'CALL-2024001',
+        submittedAt: new Date().toISOString(),
+        meetingUrl: null
+      },
+      {
+        _id: 'mock-2',
+        formData: {
+          firstName: 'Sarah',
+          lastName: 'Johnson',
+          email: 'sarah@designstudio.com',
+          phone: '+1 (555) 987-6543',
+          company: 'Design Studio',
+          projectType: 'UI/UX Design',
+          message: 'Looking for consultation on improving our current app design. Need expert advice on user flow and interface optimization.',
+          preferredDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+          preferredTime: '10:30 AM',
+          timeZone: 'PST (Pacific)',
+          urgency: 'normal'
+        },
+        callInfo: {
+          title: 'Discovery Call',
+          duration: '30 minutes'
+        },
+        status: 'confirmed',
+        referenceId: 'CALL-2024002',
+        submittedAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+        meetingUrl: 'https://meet.google.com/mock-meeting-link'
+      },
+      {
+        _id: 'mock-3',
+        formData: {
+          firstName: 'Mike',
+          lastName: 'Wilson',
+          email: 'mike.wilson@corp.com',
+          phone: '+1 (555) 456-7890',
+          company: 'Corporate Solutions',
+          projectType: 'Digital Marketing',
+          message: 'Need comprehensive digital marketing strategy for Q2. Looking to increase online presence and lead generation.',
+          preferredDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+          preferredTime: '4:00 PM',
+          timeZone: 'CST (Central)',
+          urgency: 'low'
+        },
+        callInfo: {
+          title: 'Consultation',
+          duration: '60 minutes'
+        },
+        status: 'cancelled',
+        referenceId: 'CALL-2024003',
+        submittedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+        meetingUrl: null
+      }
+    ]
+  }
+}
+
 interface Booking {
   _id: string
   formData: {
@@ -42,14 +124,30 @@ export default function BookedCallsTab() {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch('/api/admin/bookings')
-      const data = await response.json()
-      
-      if (data.success) {
-        setBookings(data.bookings)
+      if (TEMPLATE_CONFIG.developmentMode && TEMPLATE_CONFIG.mockData.enabled) {
+        // DEVELOPMENT MODE: Use mock data
+        console.log('📞 DEVELOPMENT MODE: Loading mock bookings...')
+        await new Promise(resolve => setTimeout(resolve, 1000)) // Simulate API delay
+        setBookings(TEMPLATE_CONFIG.mockData.bookings)
+      } else {
+        // PRODUCTION MODE: Real API call
+        const response = await fetch('/api/admin/bookings')
+        const data = await response.json()
+        
+        if (data.success) {
+          setBookings(data.bookings)
+        } else {
+          console.error('Failed to fetch bookings:', data.error)
+        }
       }
     } catch (error) {
       console.error('Failed to fetch bookings:', error)
+      
+      // Fallback to mock data on error in development
+      if (TEMPLATE_CONFIG.developmentMode) {
+        console.log('📞 API failed, using mock data as fallback')
+        setBookings(TEMPLATE_CONFIG.mockData.bookings)
+      }
     } finally {
       setIsLoading(false)
     }
@@ -64,24 +162,19 @@ export default function BookedCallsTab() {
     setIsProcessing(booking._id)
 
     try {
-      const response = await fetch('/api/admin/bookings', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: booking._id,
-          action,
-          status: action === 'approve' ? 'confirmed' : 'cancelled',
-          meetingUrl: action === 'approve' ? meetingUrl : undefined
-        })
-      })
-
-      const data = await response.json()
-
-      if (data.success) {
+      if (TEMPLATE_CONFIG.developmentMode) {
+        // DEVELOPMENT MODE: Simulate API call
+        console.log(`📞 DEVELOPMENT MODE: ${action}ing booking for ${booking.formData.firstName}`)
+        await new Promise(resolve => setTimeout(resolve, 1500)) // Simulate processing time
+        
         // Update local state
         setBookings(prev => prev.map(b => 
           b._id === booking._id 
-            ? { ...b, status: action === 'approve' ? 'confirmed' : 'cancelled', meetingUrl: action === 'approve' ? meetingUrl : undefined }
+            ? { 
+                ...b, 
+                status: action === 'approve' ? 'confirmed' : 'cancelled', 
+                meetingUrl: action === 'approve' ? meetingUrl : undefined 
+              }
             : b
         ))
         
@@ -90,9 +183,36 @@ export default function BookedCallsTab() {
         setMeetingUrl('')
         
         // Show success message
-        alert(`Booking ${action === 'approve' ? 'approved' : 'declined'} successfully!${data.emailSent ? ' Email sent to customer.' : ''}`)
+        alert(`✅ Booking ${action === 'approve' ? 'approved' : 'declined'} successfully! (Development Mode - No real email sent)`)
       } else {
-        alert(data.error || `Failed to ${action} booking`)
+        // PRODUCTION MODE: Real API call
+        const response = await fetch('/api/admin/bookings', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: booking._id,
+            action,
+            status: action === 'approve' ? 'confirmed' : 'cancelled',
+            meetingUrl: action === 'approve' ? meetingUrl : undefined
+          })
+        })
+
+        const data = await response.json()
+
+        if (data.success) {
+          setBookings(prev => prev.map(b => 
+            b._id === booking._id 
+              ? { ...b, status: action === 'approve' ? 'confirmed' : 'cancelled', meetingUrl: action === 'approve' ? meetingUrl : undefined }
+              : b
+          ))
+          
+          setSelectedBooking(null)
+          setMeetingUrl('')
+          
+          alert(`Booking ${action === 'approve' ? 'approved' : 'declined'} successfully!${data.emailSent ? ' Email sent to customer.' : ''}`)
+        } else {
+          alert(data.error || `Failed to ${action} booking`)
+        }
       }
     } catch (error) {
       alert(`Failed to ${action} booking`)
@@ -109,20 +229,30 @@ export default function BookedCallsTab() {
     setIsProcessing(booking._id)
 
     try {
-      const response = await fetch('/api/admin/bookings', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: booking._id })
-      })
-
-      const data = await response.json()
-
-      if (data.success) {
+      if (TEMPLATE_CONFIG.developmentMode) {
+        // DEVELOPMENT MODE: Simulate API call
+        console.log(`📞 DEVELOPMENT MODE: Deleting booking for ${booking.formData.firstName}`)
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        
         // Remove from local state
         setBookings(prev => prev.filter(b => b._id !== booking._id))
-        alert('Booking deleted successfully!')
+        alert('✅ Booking deleted successfully! (Development Mode)')
       } else {
-        alert(data.error || 'Failed to delete booking')
+        // PRODUCTION MODE: Real API call
+        const response = await fetch('/api/admin/bookings', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: booking._id })
+        })
+
+        const data = await response.json()
+
+        if (data.success) {
+          setBookings(prev => prev.filter(b => b._id !== booking._id))
+          alert('Booking deleted successfully!')
+        } else {
+          alert(data.error || 'Failed to delete booking')
+        }
       }
     } catch (error) {
       alert('Failed to delete booking')
@@ -190,12 +320,24 @@ export default function BookedCallsTab() {
       <div className="p-8 text-center">
         <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
         <p className="text-white">Loading booked calls...</p>
+        {TEMPLATE_CONFIG.developmentMode && (
+          <p className="text-yellow-300 text-sm mt-2">🔧 Development Mode: Loading mock data...</p>
+        )}
       </div>
     )
   }
 
   return (
     <div className="p-6">
+      {/* Development Mode Banner */}
+      {TEMPLATE_CONFIG.developmentMode && (
+        <div className="bg-yellow-600/20 border border-yellow-600/30 rounded-lg p-3 mb-6">
+          <p className="text-yellow-300 text-sm">
+            🔧 <strong>Development Mode:</strong> Showing mock data. Set developmentMode to false in the component to use real API.
+          </p>
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-bold text-white mb-2">📞 Booked Calls</h2>
@@ -211,6 +353,18 @@ export default function BookedCallsTab() {
           <div className="text-6xl mb-4">📞</div>
           <h3 className="text-xl font-semibold text-white mb-2">No Bookings Yet</h3>
           <p className="text-gray-300">Call bookings will appear here when customers request meetings</p>
+          {TEMPLATE_CONFIG.developmentMode && (
+            <div className="mt-4">
+              <button
+                onClick={() => {
+                  setBookings(TEMPLATE_CONFIG.mockData.bookings)
+                }}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+              >
+                Load Mock Data
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="space-y-4">
@@ -237,6 +391,11 @@ export default function BookedCallsTab() {
                     {isMeetingPassed(booking) && (
                       <span className="px-2 py-1 bg-gray-500 text-white rounded-full text-xs font-medium">
                         PAST
+                      </span>
+                    )}
+                    {TEMPLATE_CONFIG.developmentMode && (
+                      <span className="px-2 py-1 bg-yellow-500 text-black rounded-full text-xs font-medium">
+                        MOCK
                       </span>
                     )}
                   </div>
@@ -401,7 +560,9 @@ export default function BookedCallsTab() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Approve & Send Email</span>
+                    <span>
+                      {TEMPLATE_CONFIG.developmentMode ? 'Approve (Dev Mode)' : 'Approve & Send Email'}
+                    </span>
                   </>
                 )}
               </motion.button>
@@ -424,3 +585,43 @@ export default function BookedCallsTab() {
     </div>
   )
 }
+
+/* 
+TODO: Template Customization Guide
+
+1. DEVELOPMENT vs PRODUCTION:
+   - Set developmentMode: false when ready for production
+   - Replace mock data with real API calls
+   - Update API endpoints to match your backend
+
+2. MOCK DATA CUSTOMIZATION:
+   - Update TEMPLATE_CONFIG.mockData.bookings with relevant examples
+   - Adjust data structure to match your needs
+   - Add or remove fields as necessary
+
+3. API INTEGRATION:
+   - Replace fetch('/api/admin/bookings') with your actual endpoint
+   - Update request/response handling for your API structure
+   - Add proper error handling for your use case
+
+4. CUSTOMIZATION OPTIONS:
+   - Modify booking statuses and colors
+   - Update priority levels and indicators
+   - Customize date/time formatting
+   - Add additional booking fields
+
+5. FEATURES TO ADD:
+   - Real-time updates via WebSocket
+   - Bulk operations (approve/decline multiple)
+   - Advanced filtering and search
+   - Export functionality
+   - Integration with calendar systems
+
+CURRENT TEMPLATE STATUS:
+- ✅ Mock data for immediate demonstration
+- ✅ Complete UI with all interactions
+- ✅ Development mode indicators
+- ✅ Error handling and fallbacks
+- 🟡 Replace with real API when ready
+- 🟡 Customize mock data for your use case
+*/

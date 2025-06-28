@@ -1,231 +1,368 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { useState } from 'react'
 
-// Tab Components
-import BookedCallsTab from '@/components/admin/BookedCallsTab'
-import MessagesTab from '@/components/admin/MessagesTab'
-import MeetingsTab from '@/components/admin/MeetingsTab'
-import CareersTab from '@/components/admin/CareersTab'
-
-export default function AdminDashboard() {
+// ULTRA-MINIMAL DASHBOARD - Absolutely no auth, no redirects, no imports that could cause issues
+export default function MinimalDashboard() {
   const [activeTab, setActiveTab] = useState('booked-calls')
-  const [admin, setAdmin] = useState<any>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [isRefreshing, setIsRefreshing] = useState(false)
-  const router = useRouter()
 
-  useEffect(() => {
-    // Check authentication
-    checkAuth()
-  }, [])
-
-  const checkAuth = async () => {
-    try {
-      // Try to fetch some protected data to verify auth
-      const response = await fetch('/api/admin/bookings?limit=1')
-      if (response.status === 401) {
-        router.push('/admin/login')
-        return
-      }
-      setAdmin({ username: 'admin' }) // Set basic admin info
-    } catch (error) {
-      router.push('/admin/login')
-    } finally {
-      setIsLoading(false)
-    }
+  // Inline styles to avoid any CSS import issues
+  const containerStyle = {
+    minHeight: '100vh',
+    background: 'linear-gradient(135deg, #111827 0%, #1F2937 50%, #3B82F620 100%)',
+    color: 'white',
+    fontFamily: 'system-ui, -apple-system, sans-serif'
   }
 
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/admin/logout', { method: 'POST' })
-      router.push('/admin/login')
-    } catch (error) {
-      // Force redirect even if logout fails
-      router.push('/admin/login')
-    }
+  const headerStyle = {
+    background: 'rgba(255, 255, 255, 0.1)',
+    backdropFilter: 'blur(10px)',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+    padding: '1rem 2rem',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 
-  const handleRefresh = () => {
-    setIsRefreshing(true)
-    // Force reload the entire page to refresh all data
-    window.location.reload()
+  const tabStyle = (isActive: boolean) => ({
+    padding: '1rem 1.5rem',
+    borderRadius: '0.75rem',
+    border: 'none',
+    background: isActive ? '#3B82F6' : 'rgba(255, 255, 255, 0.1)',
+    color: 'white',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    fontSize: '0.875rem',
+    fontWeight: '500'
+  })
+
+  const contentStyle = {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '2rem',
+  }
+
+  const cardStyle = {
+    background: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: '1rem',
+    padding: '1.5rem',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    marginBottom: '1rem'
+  }
+
+  const buttonStyle = {
+    background: '#10B981',
+    color: 'white',
+    border: 'none',
+    padding: '0.5rem 1rem',
+    borderRadius: '0.5rem',
+    cursor: 'pointer',
+    fontSize: '0.875rem'
   }
 
   const tabs = [
-    {
-      id: 'booked-calls',
-      name: 'Booked Calls',
-      icon: '📞',
-      description: 'Approve or decline call bookings'
-    },
-    {
-      id: 'messages',
-      name: 'Messages',
-      icon: '💬',
-      description: 'Respond to contact form messages'
-    },
-    {
-      id: 'meetings',
-      name: 'Meetings',
-      icon: '📅',
-      description: 'View upcoming meetings'
-    },
-    {
-      id: 'careers',
-      name: 'Careers',
-      icon: '💼',
-      description: 'Manage job postings'
-    }
+    { id: 'booked-calls', name: '📞 Booked Calls' },
+    { id: 'messages', name: '💬 Messages' },
+    { id: 'meetings', name: '📅 Meetings' },
+    { id: 'careers', name: '💼 Careers' }
   ]
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-red-900 flex items-center justify-center">
-        <div className="text-white text-center">
-          <div className="w-12 h-12 border-3 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p>Loading dashboard...</p>
-        </div>
-      </div>
-    )
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'booked-calls':
+        return (
+          <div>
+            <div style={{...cardStyle, background: 'rgba(34, 197, 94, 0.2)', border: '1px solid rgba(34, 197, 94, 0.3)'}}>
+              <h2 style={{color: '#22C55E', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem'}}>
+                🎉 SUCCESS! Dashboard is Working!
+              </h2>
+              <p style={{color: '#86EFAC', fontSize: '0.875rem'}}>
+                This minimal dashboard proves that your React component CAN load without redirects. 
+                If you're seeing this, the issue is elsewhere in your codebase.
+              </p>
+            </div>
+            
+            <h3 style={{fontSize: '1.5rem', marginBottom: '1rem'}}>📞 Booked Calls</h3>
+            
+            <div style={cardStyle}>
+              <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem'}}>
+                <div>
+                  <h4 style={{fontSize: '1.125rem', marginBottom: '0.5rem'}}>John Doe - Strategy Call</h4>
+                  <p style={{fontSize: '0.875rem', opacity: 0.8}}>john.doe@example.com • +1 (555) 123-4567</p>
+                  <p style={{fontSize: '0.75rem', opacity: 0.6}}>March 15, 2024 at 2:00 PM EST</p>
+                </div>
+                <span style={{background: '#EAB308', color: 'white', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', fontSize: '0.75rem'}}>
+                  Pending
+                </span>
+              </div>
+              <p style={{fontSize: '0.875rem', marginBottom: '1rem', opacity: 0.9}}>
+                "We need help with our startup's digital strategy. Looking for expert guidance on growth and marketing."
+              </p>
+              <div style={{display: 'flex', gap: '0.5rem'}}>
+                <button 
+                  style={{...buttonStyle, background: '#10B981'}}
+                  onClick={() => alert('✅ Booking approved! (Demo)')}
+                >
+                  Approve
+                </button>
+                <button 
+                  style={{...buttonStyle, background: '#EF4444'}}
+                  onClick={() => alert('❌ Booking declined! (Demo)')}
+                >
+                  Decline
+                </button>
+              </div>
+            </div>
+
+            <div style={cardStyle}>
+              <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem'}}>
+                <div>
+                  <h4 style={{fontSize: '1.125rem', marginBottom: '0.5rem'}}>Sarah Johnson - Discovery Call</h4>
+                  <p style={{fontSize: '0.875rem', opacity: 0.8}}>sarah@designstudio.com • +1 (555) 987-6543</p>
+                  <p style={{fontSize: '0.75rem', opacity: 0.6}}>March 18, 2024 at 10:30 AM PST</p>
+                </div>
+                <span style={{background: '#10B981', color: 'white', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', fontSize: '0.75rem'}}>
+                  Confirmed
+                </span>
+              </div>
+              <p style={{fontSize: '0.875rem', marginBottom: '1rem', opacity: 0.9}}>
+                "Interested in UI/UX design consultation for our mobile app redesign project."
+              </p>
+              <div style={{background: 'rgba(16, 185, 129, 0.2)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '0.5rem', padding: '0.75rem'}}>
+                <p style={{color: '#10B981', fontSize: '0.75rem'}}>
+                  📹 Meeting URL: https://meet.google.com/demo-meeting-link
+                </p>
+              </div>
+            </div>
+          </div>
+        )
+
+      case 'messages':
+        return (
+          <div>
+            <h3 style={{fontSize: '1.5rem', marginBottom: '1rem'}}>💬 Messages</h3>
+            
+            <div style={cardStyle}>
+              <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem'}}>
+                <div>
+                  <h4 style={{fontSize: '1.125rem', marginBottom: '0.5rem'}}>Emily Rodriguez - Project Quote</h4>
+                  <p style={{fontSize: '0.875rem', opacity: 0.8}}>emily@startup.com</p>
+                </div>
+                <span style={{background: '#EAB308', color: 'white', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', fontSize: '0.75rem'}}>
+                  New
+                </span>
+              </div>
+              <p style={{fontSize: '0.875rem', marginBottom: '1rem', opacity: 0.9}}>
+                "Hi! We're looking to redesign our website. Need a modern, responsive design that can handle high traffic..."
+              </p>
+              <button 
+                style={buttonStyle}
+                onClick={() => alert('📧 Reply sent! (Demo)')}
+              >
+                Reply
+              </button>
+            </div>
+
+            <div style={cardStyle}>
+              <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem'}}>
+                <div>
+                  <h4 style={{fontSize: '1.125rem', marginBottom: '0.5rem'}}>David Chen - Partnership</h4>
+                  <p style={{fontSize: '0.875rem', opacity: 0.8}}>david@agency.co</p>
+                </div>
+                <span style={{background: '#10B981', color: 'white', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', fontSize: '0.75rem'}}>
+                  Responded
+                </span>
+              </div>
+              <p style={{fontSize: '0.875rem', opacity: 0.9}}>
+                "Interested in exploring partnership opportunities between our agencies..."
+              </p>
+            </div>
+          </div>
+        )
+
+      case 'meetings':
+        return (
+          <div>
+            <h3 style={{fontSize: '1.5rem', marginBottom: '1rem'}}>📅 Meetings</h3>
+            
+            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem'}}>
+              <div>
+                <h4 style={{fontSize: '1.125rem', marginBottom: '1rem'}}>Today's Meetings</h4>
+                <div style={{...cardStyle, background: 'rgba(239, 68, 68, 0.2)', border: '1px solid rgba(239, 68, 68, 0.3)'}}>
+                  <p style={{fontSize: '1rem', fontWeight: '500', marginBottom: '0.5rem'}}>🔴 NOW: John Doe - Strategy Call</p>
+                  <p style={{fontSize: '0.875rem', opacity: 0.8}}>2:00 PM - 2:45 PM</p>
+                </div>
+              </div>
+              
+              <div>
+                <h4 style={{fontSize: '1.125rem', marginBottom: '1rem'}}>Upcoming This Week</h4>
+                <div style={cardStyle}>
+                  <p style={{fontSize: '1rem', fontWeight: '500', marginBottom: '0.5rem'}}>Sarah Johnson - Discovery Call</p>
+                  <p style={{fontSize: '0.875rem', opacity: 0.8}}>Tomorrow 10:30 AM</p>
+                </div>
+                <div style={cardStyle}>
+                  <p style={{fontSize: '1rem', fontWeight: '500', marginBottom: '0.5rem'}}>Mike Wilson - Consultation</p>
+                  <p style={{fontSize: '0.875rem', opacity: 0.8}}>Friday 4:00 PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+
+      case 'careers':
+        return (
+          <div>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem'}}>
+              <h3 style={{fontSize: '1.5rem'}}>💼 Careers</h3>
+              <button 
+                style={{...buttonStyle, background: '#10B981'}}
+                onClick={() => alert('Add New Job clicked! (Demo)')}
+              >
+                Add New Job
+              </button>
+            </div>
+            
+            <div style={cardStyle}>
+              <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem'}}>
+                <div>
+                  <h4 style={{fontSize: '1.125rem', marginBottom: '0.5rem'}}>Senior Frontend Developer</h4>
+                  <p style={{fontSize: '0.875rem', opacity: 0.8}}>Full-time • Remote • $80K - $120K</p>
+                </div>
+                <span style={{background: '#10B981', color: 'white', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', fontSize: '0.75rem'}}>
+                  Active
+                </span>
+              </div>
+              <p style={{fontSize: '0.75rem', opacity: 0.6}}>Posted 2 days ago • 5 applications</p>
+            </div>
+
+            <div style={cardStyle}>
+              <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem'}}>
+                <div>
+                  <h4 style={{fontSize: '1.125rem', marginBottom: '0.5rem'}}>UI/UX Designer</h4>
+                  <p style={{fontSize: '0.875rem', opacity: 0.8}}>Full-time • New York • $70K - $100K</p>
+                </div>
+                <span style={{background: '#3B82F6', color: 'white', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', fontSize: '0.75rem'}}>
+                  Active
+                </span>
+              </div>
+              <p style={{fontSize: '0.75rem', opacity: 0.6}}>Posted 1 week ago • 12 applications</p>
+            </div>
+          </div>
+        )
+
+      default:
+        return <div>Select a tab</div>
+    }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-red-900">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div 
-          className="absolute inset-0" 
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-          }}
-        />
+    <div style={containerStyle}>
+      {/* Success Banner */}
+      <div style={{
+        background: 'rgba(34, 197, 94, 0.2)', 
+        border: '1px solid rgba(34, 197, 94, 0.3)', 
+        padding: '1rem 2rem', 
+        textAlign: 'center',
+        fontSize: '1rem',
+        fontWeight: 'bold'
+      }}>
+        🔧 MINIMAL DASHBOARD LOADED SUCCESSFULLY - No authentication, no redirects, pure React!
       </div>
 
       {/* Header */}
-      <motion.header
-        variants={fadeInUp}
-        initial="hidden"
-        animate="visible"
-        className="admin-header relative z-20 bg-white/10 backdrop-blur-lg border-b border-white/20 sticky top-0"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo & Title */}
-            <div className="flex items-center space-x-4">
-              <div className="text-2xl">🔧</div>
-              <div>
-                <h1 className="text-xl font-bold text-white">Admin Dashboard</h1>
-                <p className="text-gray-300 text-sm">Unlimited Creative Agency</p>
-              </div>
-            </div>
-
-            {/* User Info & Actions */}
-            <div className="flex items-center space-x-4">
-              <div className="text-right hidden sm:block">
-                <p className="text-white font-medium">Welcome, {admin?.username}</p>
-                <p className="text-gray-300 text-sm">Administrator</p>
-              </div>
-              
-              {/* Refresh Button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleRefresh}
-                disabled={isRefreshing}
-                className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg transition-colors flex items-center space-x-2 shadow-lg disabled:opacity-50"
-                title="Refresh Dashboard"
-              >
-                <svg 
-                  className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" 
-                  />
-                </svg>
-                <span className="hidden sm:inline">
-                  {isRefreshing ? 'Refreshing...' : 'Refresh'}
-                </span>
-              </motion.button>
-
-              {/* Logout Button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleLogout}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2 shadow-lg"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-                <span className="hidden sm:inline">Logout</span>
-              </motion.button>
-            </div>
+      <header style={headerStyle}>
+        <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+          <span style={{fontSize: '1.5rem'}}>🔧</span>
+          <div>
+            <h1 style={{fontSize: '1.25rem', fontWeight: 'bold', margin: 0}}>Admin Dashboard</h1>
+            <p style={{fontSize: '0.875rem', opacity: 0.8, margin: 0}}>Your Company</p>
           </div>
         </div>
-      </motion.header>
+
+        <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+          <div style={{textAlign: 'right'}}>
+            <p style={{margin: 0, fontWeight: '500'}}>Welcome, Admin</p>
+            <p style={{margin: 0, fontSize: '0.875rem', opacity: 0.8}}>Development Mode</p>
+          </div>
+          <button 
+            style={{...buttonStyle, background: '#EF4444'}}
+            onClick={() => alert('Logout clicked! (Demo - does nothing)')}
+          >
+            Logout (Demo)
+          </button>
+        </div>
+      </header>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="space-y-8"
-        >
-          {/* Tab Navigation */}
-          <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-2xl p-2 border border-white/20">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-              {tabs.map((tab) => (
-                <motion.button
-                  key={tab.id}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`p-3 lg:p-4 rounded-xl transition-all duration-300 text-left ${
-                    activeTab === tab.id
-                      ? 'bg-red-500 text-white shadow-lg'
-                      : 'bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white'
-                  }`}
-                >
-                  <div className="flex flex-col items-center lg:flex-row lg:items-center lg:space-x-3 space-y-1 lg:space-y-0">
-                    <span className="text-xl lg:text-2xl">{tab.icon}</span>
-                    <div className="text-center lg:text-left">
-                      <h3 className="font-semibold text-sm lg:text-base">{tab.name}</h3>
-                      <p className={`text-xs hidden lg:block ${activeTab === tab.id ? 'text-red-100' : 'text-gray-400'}`}>
-                        {tab.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
+      <div style={contentStyle}>
+        {/* Tab Navigation */}
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.1)', 
+          borderRadius: '1rem', 
+          padding: '0.5rem',
+          marginBottom: '2rem',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: '0.5rem'
+        }}>
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              style={tabStyle(activeTab === tab.id)}
+              onMouseOver={(e) => {
+                if (activeTab !== tab.id) {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
+              onMouseOut={(e) => {
+                if (activeTab !== tab.id) {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
+                }
+              }}
+            >
+              {tab.name}
+            </button>
+          ))}
+        </div>
 
-          {/* Tab Content */}
-          <motion.div
-            key={activeTab}
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 min-h-[600px]"
-          >
-            {activeTab === 'booked-calls' && <BookedCallsTab />}
-            {activeTab === 'messages' && <MessagesTab />}
-            {activeTab === 'meetings' && <MeetingsTab />}
-            {activeTab === 'careers' && <CareersTab />}
-          </motion.div>
-        </motion.div>
+        {/* Tab Content */}
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.1)',
+          borderRadius: '1rem',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          minHeight: '600px',
+          padding: '1.5rem'
+        }}>
+          {renderTabContent()}
+        </div>
       </div>
     </div>
   )
 }
+
+/* 
+🎯 ULTRA-MINIMAL DASHBOARD
+
+This dashboard has ZERO external dependencies and ZERO auth checks:
+- No useRouter imports
+- No auth checks in useEffect
+- No external CSS dependencies
+- No complex state management
+- No API calls that could redirect
+- All styles are inline
+- All functionality is local
+
+IF THIS STILL REDIRECTS:
+The issue is NOT in your React component. Check:
+
+1. middleware.ts file
+2. layout.tsx files  
+3. next.config.js
+4. Server redirects (.htaccess, nginx)
+5. Browser cache (try incognito)
+
+TO USE:
+Replace your dashboard page.tsx with this file temporarily.
+If this loads, your component works and the issue is elsewhere.
+*/

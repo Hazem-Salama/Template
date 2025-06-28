@@ -1,16 +1,26 @@
-/* Admin-specific global styles */
+/* Admin-specific global styles - Template Version */
 /* Hide main website navbar and footer on admin pages */
+
+/* 
+TEMPLATE CUSTOMIZATION:
+- Update selectors to match your website's navigation structure
+- Modify class names to match your main site's components
+- Adjust z-index values based on your layout needs
+- Customize colors and styling to match your brand
+*/
 
 /* Target common navbar selectors but EXCLUDE admin elements */
 nav:not(.admin-nav):not(.admin-header),
 .navbar:not(.admin-nav):not(.admin-header),
+.navigation:not(.admin-nav):not(.admin-header),
 header:not(.admin-header) {
   display: none !important;
 }
 
 /* Target common footer selectors but EXCLUDE admin elements */
 footer:not(.admin-footer),
-.footer:not(.admin-footer) {
+.footer:not(.admin-footer),
+.site-footer:not(.admin-footer) {
   display: none !important;
 }
 
@@ -42,8 +52,396 @@ body {
   z-index: 1;
 }
 
-/* Make sure logout button is always clickable */
-.admin-header button {
+/* Make sure admin interactive elements are always clickable */
+.admin-header button,
+.admin-layout button,
+.admin-layout input,
+.admin-layout select,
+.admin-layout textarea {
   pointer-events: all !important;
   z-index: 10000 !important;
 }
+
+/* Admin-specific component styles */
+.admin-nav {
+  /* Add your admin navigation styles here */
+}
+
+.admin-footer {
+  /* Add your admin footer styles here if needed */
+}
+
+/* Custom scrollbar for admin areas (optional) */
+.admin-layout ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-layout ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.admin-layout ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.admin-layout ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Hide main site sidebars or other layout elements */
+.sidebar:not(.admin-sidebar),
+.main-sidebar:not(.admin-sidebar),
+.site-sidebar:not(.admin-sidebar) {
+  display: none !important;
+}
+
+/* Ensure admin modals and overlays work properly */
+.admin-modal,
+.admin-overlay,
+.admin-dropdown {
+  z-index: 10001 !important;
+}
+
+/* Admin form styling enhancements */
+.admin-layout .form-group {
+  margin-bottom: 1rem;
+}
+
+.admin-layout .form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.admin-layout .form-control:focus {
+  outline: none;
+  border-color: #3B82F6; /* Template primary color - customize this */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* Admin table styling */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-table th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  color: white;
+}
+
+.admin-table td {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Admin button variants */
+.admin-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-btn-primary {
+  background: #3B82F6; /* Template primary color - customize this */
+  color: white;
+}
+
+.admin-btn-primary:hover {
+  background: #2563EB;
+}
+
+.admin-btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.admin-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.admin-btn-danger {
+  background: #EF4444;
+  color: white;
+}
+
+.admin-btn-danger:hover {
+  background: #DC2626;
+}
+
+.admin-btn-success {
+  background: #10B981;
+  color: white;
+}
+
+.admin-btn-success:hover {
+  background: #059669;
+}
+
+/* Admin badge/status styling */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.admin-badge-success {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10B981;
+}
+
+.admin-badge-warning {
+  background: rgba(245, 158, 11, 0.2);
+  color: #F59E0B;
+}
+
+.admin-badge-danger {
+  background: rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+}
+
+.admin-badge-info {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3B82F6;
+}
+
+/* Admin loading states */
+.admin-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.admin-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Admin card styling */
+.admin-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.admin-card-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.admin-card-content {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive admin utilities */
+@media (max-width: 768px) {
+  .admin-layout {
+    padding: 0.5rem;
+  }
+  
+  .admin-card {
+    padding: 1rem;
+  }
+  
+  .admin-table {
+    font-size: 0.875rem;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    padding: 0.5rem;
+  }
+}
+
+/* Admin notification/toast styling */
+.admin-notification {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10002;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #1F2937;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Admin search and filter styling */
+.admin-search {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.admin-search input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  color: white;
+  placeholder-color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-search-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Admin tabs styling */
+.admin-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+}
+
+.admin-tab {
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.admin-tab:hover {
+  color: white;
+}
+
+.admin-tab.active {
+  color: white;
+  border-bottom-color: #3B82F6; /* Template primary color - customize this */
+}
+
+/* Print styles for admin reports */
+@media print {
+  .admin-header,
+  .admin-sidebar,
+  .admin-btn,
+  .no-print {
+    display: none !important;
+  }
+  
+  .admin-layout {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .admin-card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}
+
+/* 
+CUSTOMIZATION NOTES:
+
+1. Color Variables:
+   - Replace #3B82F6 (blue) with your brand primary color
+   - Update rgba values to match your color scheme
+   - Customize accent colors for badges and status indicators
+
+2. Typography:
+   - Modify font sizes and weights to match your design system
+   - Update font families if you have custom fonts
+   - Adjust line heights for better readability
+
+3. Spacing:
+   - Customize padding and margin values
+   - Adjust border-radius values for your design preference
+   - Modify gap sizes between elements
+
+4. Component Selectors:
+   - Add your specific website navigation classes to the hide rules
+   - Update class names to match your existing components
+   - Add any additional elements that should be hidden in admin mode
+
+5. Interactive Elements:
+   - Customize hover states and transitions
+   - Update focus styles for better accessibility
+   - Modify button and form styling to match your brand
+
+6. Responsive Breakpoints:
+   - Adjust media queries to match your design system
+   - Customize mobile-specific styling
+   - Add tablet-specific styles if needed
+
+7. Animation and Transitions:
+   - Modify transition durations and easing functions
+   - Customize animation keyframes
+   - Add or remove motion effects based on preferences
+
+8. Accessibility:
+   - Ensure proper color contrast ratios
+   - Add focus indicators for keyboard navigation
+   - Include screen reader specific styles if needed
+*/
