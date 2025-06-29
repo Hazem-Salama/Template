@@ -3,8 +3,23 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function WebDevProcess() {
-  const processSteps = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your web development process
+const TEMPLATE_CONFIG = {
+  content: {
+    title: {
+      main: 'Our Development',
+      highlight: 'Process'
+    },
+    subtitle: 'A systematic 6-step development approach that ensures your application is built efficiently, securely, and ready to scale with your business growth.',
+    featuresTitle: 'Why Our Development Approach Works',
+    featuresSubtitle: 'Every application we build follows industry best practices and modern development standards to ensure reliability, security, and performance.',
+    ctaTitle: 'Modern Development Standards',
+    ctaSubtitle: 'We follow the latest development standards and use cutting-edge technologies to build applications that are future-proof and scalable.',
+    ctaButton: 'Start Your Development Project'
+  },
+  // Update these process steps based on your actual methodology
+  processSteps: [
     {
       step: '01',
       title: 'Requirements Analysis & Planning',
@@ -95,9 +110,9 @@ export default function WebDevProcess() {
       duration: '1-2 weeks',
       icon: '🚀'
     }
-  ]
-
-  const developmentFeatures = [
+  ],
+  // Update these features based on your methodology highlights
+  developmentFeatures: [
     {
       icon: '🔒',
       title: 'Security First',
@@ -118,8 +133,18 @@ export default function WebDevProcess() {
       title: 'Maintainable Code',
       description: 'Clean, documented code following best practices for easy maintenance and future updates.'
     }
-  ]
+  ],
+  // Update these summary metrics based on your standards
+  summary: {
+    performance: { icon: '⚡', metric: 'Average 2.5s load time with 99.9% uptime' },
+    security: { icon: '🛡️', metric: 'SSL, secure coding practices & regular updates' },
+    scalability: { icon: '📈', metric: 'Built to grow with your business needs' }
+  },
+  // Update contact URL with your actual page
+  contactUrl: '/contact?service=development'
+}
 
+export default function WebDevProcess() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -134,20 +159,20 @@ export default function WebDevProcess() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            Our Development <span className="text-red-500">Process</span>
+            {TEMPLATE_CONFIG.content.title.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.title.highlight}</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            A systematic 6-step development approach that ensures your application is built efficiently, 
-            securely, and ready to scale with your business growth.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
         {/* Process Steps */}
         <div className="space-y-16 mb-20">
-          {processSteps.map((step, index) => (
+          {TEMPLATE_CONFIG.processSteps.map((step, index) => (
             <motion.div
               key={index}
               variants={staggerContainer}
@@ -161,7 +186,7 @@ export default function WebDevProcess() {
                 className="flex-1 max-w-2xl"
               >
                 <div className="flex items-center mb-6">
-                  <span className="text-6xl font-black text-red-500/20 mr-4">
+                  <span className="text-6xl font-black text-blue-500/20 mr-4">
                     {step.step}
                   </span>
                   <div>
@@ -182,7 +207,7 @@ export default function WebDevProcess() {
                 <ul className="space-y-3">
                   {step.activities.map((activity, activityIndex) => (
                     <li key={activityIndex} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
                       {activity}
                     </li>
                   ))}
@@ -193,9 +218,9 @@ export default function WebDevProcess() {
                 variants={fadeInUp}
                 className="flex-1 max-w-md"
               >
-                <div className="bg-gradient-to-br from-red-50 to-gray-50 rounded-3xl p-12 text-center shadow-lg">
+                <div className="bg-gradient-to-br from-blue-50 to-gray-50 rounded-3xl p-12 text-center shadow-lg">
                   <div className="text-8xl mb-6">{step.icon}</div>
-                  <div className="text-2xl font-bold text-red-500 mb-2">Step {step.step}</div>
+                  <div className="text-2xl font-bold text-blue-500 mb-2">Step {step.step}</div>
                   <div className="text-lg font-semibold text-black">{step.title}</div>
                 </div>
               </motion.div>
@@ -213,16 +238,15 @@ export default function WebDevProcess() {
         >
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-black mb-4">
-              Why Our Development Approach Works
+              {TEMPLATE_CONFIG.content.featuresTitle}
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Every application we build follows industry best practices and modern development standards 
-              to ensure reliability, security, and performance.
+              {TEMPLATE_CONFIG.content.featuresSubtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {developmentFeatures.map((feature, index) => (
+            {TEMPLATE_CONFIG.developmentFeatures.map((feature, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -242,46 +266,73 @@ export default function WebDevProcess() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="bg-gradient-to-r from-black to-red-900 rounded-3xl p-8 md:p-12 text-white"
+          className="bg-gradient-to-r from-black to-blue-900 rounded-3xl p-8 md:p-12 text-white"
         >
           <div className="text-center mb-8">
-            <h3 className="text-3xl font-bold mb-4">Modern Development Standards</h3>
+            <h3 className="text-3xl font-bold mb-4">{TEMPLATE_CONFIG.content.ctaTitle}</h3>
             <p className="text-gray-300 max-w-2xl mx-auto">
-              We follow the latest development standards and use cutting-edge technologies 
-              to build applications that are future-proof and scalable.
+              {TEMPLATE_CONFIG.content.ctaSubtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div className="text-center">
-              <div className="text-4xl mb-3">⚡</div>
+              <div className="text-4xl mb-3">{TEMPLATE_CONFIG.summary.performance.icon}</div>
               <h4 className="text-xl font-semibold mb-2">Performance</h4>
-              <p className="text-gray-300">Average 2.5s load time with 99.9% uptime</p>
+              <p className="text-gray-300">{TEMPLATE_CONFIG.summary.performance.metric}</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl mb-3">🛡️</div>
+              <div className="text-4xl mb-3">{TEMPLATE_CONFIG.summary.security.icon}</div>
               <h4 className="text-xl font-semibold mb-2">Security</h4>
-              <p className="text-gray-300">SSL, secure coding practices & regular updates</p>
+              <p className="text-gray-300">{TEMPLATE_CONFIG.summary.security.metric}</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl mb-3">📈</div>
+              <div className="text-4xl mb-3">{TEMPLATE_CONFIG.summary.scalability.icon}</div>
               <h4 className="text-xl font-semibold mb-2">Scalability</h4>
-              <p className="text-gray-300">Built to grow with your business needs</p>
+              <p className="text-gray-300">{TEMPLATE_CONFIG.summary.scalability.metric}</p>
             </div>
           </div>
 
           <div className="text-center">
-            <motion.button
+            <motion.a
+              href={TEMPLATE_CONFIG.contactUrl}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors shadow-lg"
-              onClick={() => window.location.href = '/Contact?service=development'}
+              className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-lg"
             >
-              Start Your Development Project
-            </motion.button>
+              {TEMPLATE_CONFIG.content.ctaButton}
+            </motion.a>
           </div>
         </motion.div>
       </div>
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED WEB DEV PROCESS - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with blue color scheme (blue-500/blue-600)
+✅ Template-ready configuration in TEMPLATE_CONFIG
+✅ Removed all branding and company-specific content
+✅ Consistent typography and spacing
+✅ Professional, educational tone
+
+CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your specific process
+2. Modify process steps based on your actual methodology
+3. Adjust timelines and deliverables to match your workflow
+4. Update features to highlight your approach
+5. Customize summary metrics with your standards
+6. Set contact URL to your actual page
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600) instead of red
+- Consistent card design and shadows
+- Same typography and spacing
+- Unified animation timing
+- Matching section layouts
+
+Perfect for explaining your web development process with credibility and transparency!
+*/

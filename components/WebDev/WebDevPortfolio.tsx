@@ -3,14 +3,28 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function WebDevPortfolio() {
-  const portfolioItems = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your web development portfolio
+const TEMPLATE_CONFIG = {
+  content: {
+    title: {
+      main: 'Development',
+      highlight: 'Success Stories'
+    },
+    subtitle: 'Explore our portfolio of custom web applications, e-commerce platforms, and digital solutions that have transformed businesses across industries.',
+    excellenceTitle: 'Technical Excellence Across All Projects',
+    excellenceSubtitle: 'Every website and application we build meets the highest standards of performance, security, and scalability using modern development practices.',
+    ctaText: 'Want to see more web development projects?',
+    ctaButton: 'View Complete Portfolio'
+  },
+  // Update these portfolio items with your actual projects
+  // Note: Replace with real project data and ensure you have permission to showcase
+  portfolioItems: [
     {
       id: 1,
       title: 'E-commerce Platform',
       category: 'Custom E-commerce',
       description: 'Full-featured online store with advanced inventory management and customer portal.',
-      image: '/api/placeholder/600/400',
       tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
       results: [
         '300% increase in online sales',
@@ -28,7 +42,6 @@ export default function WebDevPortfolio() {
       title: 'SaaS Dashboard Platform',
       category: 'Web Application',
       description: 'Complex data analytics dashboard with real-time reporting and user management.',
-      image: '/api/placeholder/600/400',
       tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Redis'],
       results: [
         '80% improvement in user productivity',
@@ -46,7 +59,6 @@ export default function WebDevPortfolio() {
       title: 'Healthcare Portal',
       category: 'Healthcare Platform',
       description: 'Secure patient portal with appointment scheduling and medical record management.',
-      image: '/api/placeholder/600/400',
       tags: ['React', 'Express', 'MySQL', 'HIPAA'],
       results: [
         '60% reduction in administrative work',
@@ -64,7 +76,6 @@ export default function WebDevPortfolio() {
       title: 'Educational Platform',
       category: 'Learning Management',
       description: 'Interactive learning platform with video streaming and progress tracking.',
-      image: '/api/placeholder/600/400',
       tags: ['Vue.js', 'Django', 'PostgreSQL', 'AWS'],
       results: [
         '150% increase in course completion',
@@ -77,8 +88,19 @@ export default function WebDevPortfolio() {
       techStack: 'Vue.js, Django, PostgreSQL, AWS',
       performance: 'HD video streaming, 99.5% availability'
     }
-  ]
+  ],
+  // Update these metrics with your actual performance data
+  excellenceMetrics: [
+    { number: '2.5s', label: 'Average Load Time', sublabel: 'Optimized Performance' },
+    { number: '99.9%', label: 'Uptime Guarantee', sublabel: 'Reliable Infrastructure' },
+    { number: '100%', label: 'Mobile Responsive', sublabel: 'All Device Compatible' },
+    { number: 'A+', label: 'Security Grade', sublabel: 'Industry Standards' }
+  ],
+  // Update URLs with your actual pages
+  portfolioUrl: '/portfolio?category=web-development'
+}
 
+export default function WebDevPortfolio() {
   return (
     <section id="webdev-portfolio" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -93,14 +115,14 @@ export default function WebDevPortfolio() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            Development <span className="text-red-500">Success Stories</span>
+            {TEMPLATE_CONFIG.content.title.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.title.highlight}</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Explore our portfolio of custom web applications, e-commerce platforms, 
-            and digital solutions that have transformed businesses across industries.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
@@ -111,19 +133,19 @@ export default function WebDevPortfolio() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-12"
         >
-          {portfolioItems.map((item, index) => (
+          {TEMPLATE_CONFIG.portfolioItems.map((item, index) => (
             <motion.div
               key={item.id}
               variants={fadeInUp}
               className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
             >
-              {/* Project Image */}
+              {/* Project Image Placeholder */}
               <div className="relative h-64 bg-gradient-to-br from-blue-100 to-green-100">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-6xl text-gray-400">💻</div>
                 </div>
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">
+                  <span className="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">
                     {item.category}
                   </span>
                 </div>
@@ -179,7 +201,7 @@ export default function WebDevPortfolio() {
                   <div className="space-y-2">
                     {item.results.map((result, resultIndex) => (
                       <div key={resultIndex} className="flex items-start">
-                        <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                         <p className="text-gray-600 text-sm">{result}</p>
                       </div>
                     ))}
@@ -196,39 +218,25 @@ export default function WebDevPortfolio() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mt-20 bg-gradient-to-r from-gray-50 to-red-50 rounded-3xl p-8 md:p-12"
+          className="mt-20 bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl p-8 md:p-12"
         >
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-black mb-4">
-              Technical Excellence Across All Projects
+              {TEMPLATE_CONFIG.content.excellenceTitle}
             </h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Every website and application we build meets the highest standards of performance, 
-              security, and scalability using modern development practices.
+              {TEMPLATE_CONFIG.content.excellenceSubtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-500 mb-2">2.5s</div>
-              <div className="text-gray-700 font-medium mb-1">Average Load Time</div>
-              <div className="text-gray-600 text-sm">Optimized Performance</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-500 mb-2">99.9%</div>
-              <div className="text-gray-700 font-medium mb-1">Uptime Guarantee</div>
-              <div className="text-gray-600 text-sm">Reliable Infrastructure</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-500 mb-2">100%</div>
-              <div className="text-gray-700 font-medium mb-1">Mobile Responsive</div>
-              <div className="text-gray-600 text-sm">All Device Compatible</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-500 mb-2">A+</div>
-              <div className="text-gray-700 font-medium mb-1">Security Grade</div>
-              <div className="text-gray-600 text-sm">Industry Standards</div>
-            </div>
+            {TEMPLATE_CONFIG.excellenceMetrics.map((metric, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl font-bold text-blue-500 mb-2">{metric.number}</div>
+                <div className="text-gray-700 font-medium mb-1">{metric.label}</div>
+                <div className="text-gray-600 text-sm">{metric.sublabel}</div>
+              </div>
+            ))}
           </div>
         </motion.div>
 
@@ -240,17 +248,45 @@ export default function WebDevPortfolio() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mt-16"
         >
-          <p className="text-gray-600 mb-6">Want to see more web development projects?</p>
-          <motion.button
+          <p className="text-gray-600 mb-6">{TEMPLATE_CONFIG.content.ctaText}</p>
+          <motion.a
+            href={TEMPLATE_CONFIG.portfolioUrl}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-500 transition-colors shadow-lg"
-            onClick={() => window.location.href = '/Portfolio?category=web-development'}
+            className="bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-500 transition-colors shadow-lg"
           >
-            View Complete Portfolio
-          </motion.button>
+            {TEMPLATE_CONFIG.content.ctaButton}
+          </motion.a>
         </motion.div>
       </div>
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED WEB DEV PORTFOLIO - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with blue color scheme (blue-500/blue-600)
+✅ Template-ready configuration in TEMPLATE_CONFIG
+✅ Removed all branding and specific project references
+✅ Placeholder project data (replace with real portfolio)
+✅ Consistent typography and spacing
+
+CUSTOMIZATION:
+1. Replace TEMPLATE_CONFIG.portfolioItems with your actual projects
+2. Update excellence metrics with your performance data
+3. Add real project images (remove placeholder)
+4. Modify portfolio URL to match your site structure
+5. Ensure you have permission to showcase client work
+6. Update industry categories and case study details
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600) instead of red
+- Consistent card design and shadows
+- Same typography and spacing
+- Unified animation timing
+- Matching section layouts
+
+IMPORTANT: Replace template portfolio items with real projects and ensure client permission for showcase!
+*/
