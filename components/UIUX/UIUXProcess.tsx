@@ -3,8 +3,23 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function UIUXProcess() {
-  const processSteps = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your UI/UX design process
+const TEMPLATE_CONFIG = {
+  content: {
+    title: {
+      main: 'Our UI/UX',
+      highlight: 'Process'
+    },
+    subtitle: 'A systematic 6-step approach that ensures every design decision is user-centered, strategically sound, and optimized for maximum business impact.',
+    featuresTitle: 'Why Our UX Process Works',
+    featuresSubtitle: 'Our methodology combines proven UX principles with business strategy to create designs that users love and businesses profit from.',
+    ctaTitle: 'Ready to Transform Your User Experience?',
+    ctaSubtitle: 'Our comprehensive UX design process typically takes 8-14 weeks, depending on project scope, ensuring every interaction delights your users.',
+    ctaButton: 'Start Your UI/UX Project'
+  },
+  // Update these process steps based on your actual methodology
+  processSteps: [
     {
       step: '01',
       title: 'Discover & Understand',
@@ -89,9 +104,9 @@ export default function UIUXProcess() {
       duration: '1 week',
       icon: '🚀'
     }
-  ]
-
-  const processFeatures = [
+  ],
+  // Update these features based on your methodology highlights
+  processFeatures: [
     {
       icon: '👥',
       title: 'User-Centered Approach',
@@ -112,8 +127,21 @@ export default function UIUXProcess() {
       title: 'Goal-Oriented Design',
       description: 'Every element serves a purpose and drives toward your business objectives.'
     }
-  ]
+  ],
+  // Update these summary metrics based on your offerings
+  summary: {
+    timeline: '8-14 weeks',
+    timelineDescription: 'for complete UX transformation',
+    investment: '$2,000',
+    investmentDescription: 'for individual services',
+    results: '85%',
+    resultsDescription: 'average conversion rate improvement'
+  },
+  // Update contact URL with your actual page
+  contactUrl: '/contact?service=ui-ux-design'
+}
 
+export default function UIUXProcess() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,20 +156,20 @@ export default function UIUXProcess() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            Our UI/UX <span className="text-red-500">Process</span>
+            {TEMPLATE_CONFIG.content.title.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.title.highlight}</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            A systematic 6-step approach that ensures every design decision is user-centered, 
-            strategically sound, and optimized for maximum business impact.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
         {/* Process Steps */}
         <div className="space-y-16 mb-20">
-          {processSteps.map((step, index) => (
+          {TEMPLATE_CONFIG.processSteps.map((step, index) => (
             <motion.div
               key={index}
               variants={staggerContainer}
@@ -155,7 +183,7 @@ export default function UIUXProcess() {
                 className="flex-1 max-w-2xl"
               >
                 <div className="flex items-center mb-6">
-                  <span className="text-6xl font-black text-red-500/20 mr-4">
+                  <span className="text-6xl font-black text-blue-500/20 mr-4">
                     {step.step}
                   </span>
                   <div>
@@ -176,7 +204,7 @@ export default function UIUXProcess() {
                 <ul className="space-y-3">
                   {step.activities.map((activity, activityIndex) => (
                     <li key={activityIndex} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
                       {activity}
                     </li>
                   ))}
@@ -187,9 +215,9 @@ export default function UIUXProcess() {
                 variants={fadeInUp}
                 className="flex-1 max-w-md"
               >
-                <div className="bg-gradient-to-br from-red-50 to-gray-50 rounded-3xl p-12 text-center shadow-lg">
+                <div className="bg-gradient-to-br from-blue-50 to-gray-50 rounded-3xl p-12 text-center shadow-lg">
                   <div className="text-8xl mb-6">{step.icon}</div>
-                  <div className="text-2xl font-bold text-red-500 mb-2">Step {step.step}</div>
+                  <div className="text-2xl font-bold text-blue-500 mb-2">Step {step.step}</div>
                   <div className="text-lg font-semibold text-black">{step.title}</div>
                 </div>
               </motion.div>
@@ -207,16 +235,15 @@ export default function UIUXProcess() {
         >
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-black mb-4">
-              Why Our UX Process Works
+              {TEMPLATE_CONFIG.content.featuresTitle}
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our methodology combines proven UX principles with business strategy 
-              to create designs that users love and businesses profit from.
+              {TEMPLATE_CONFIG.content.featuresSubtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processFeatures.map((feature, index) => (
+            {TEMPLATE_CONFIG.processFeatures.map((feature, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -236,13 +263,12 @@ export default function UIUXProcess() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="bg-gradient-to-r from-black to-red-900 rounded-3xl p-8 md:p-12 text-white"
+          className="bg-gradient-to-r from-black to-blue-900 rounded-3xl p-8 md:p-12 text-white"
         >
           <div className="text-center mb-8">
-            <h3 className="text-3xl font-bold mb-4">Ready to Transform Your User Experience?</h3>
+            <h3 className="text-3xl font-bold mb-4">{TEMPLATE_CONFIG.content.ctaTitle}</h3>
             <p className="text-gray-300 max-w-2xl mx-auto">
-              Our comprehensive UX design process typically takes 8-14 weeks, depending on project scope, 
-              ensuring every interaction delights your users.
+              {TEMPLATE_CONFIG.content.ctaSubtitle}
             </p>
           </div>
 
@@ -250,32 +276,60 @@ export default function UIUXProcess() {
             <div className="text-center">
               <div className="text-4xl mb-3">⏱️</div>
               <h4 className="text-xl font-semibold mb-2">Timeline</h4>
-              <p className="text-gray-300">8-14 weeks for complete UX transformation</p>
+              <p className="text-gray-300">{TEMPLATE_CONFIG.summary.timeline} {TEMPLATE_CONFIG.summary.timelineDescription}</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">💰</div>
               <h4 className="text-xl font-semibold mb-2">Investment</h4>
-              <p className="text-gray-300">Starting at $2,000 for individual services</p>
+              <p className="text-gray-300">{TEMPLATE_CONFIG.summary.investment} {TEMPLATE_CONFIG.summary.investmentDescription}</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">📈</div>
               <h4 className="text-xl font-semibold mb-2">Results</h4>
-              <p className="text-gray-300">85% average conversion rate improvement</p>
+              <p className="text-gray-300">{TEMPLATE_CONFIG.summary.results} {TEMPLATE_CONFIG.summary.resultsDescription}</p>
             </div>
           </div>
 
           <div className="text-center">
-            <motion.button
+            <motion.a
+              href={TEMPLATE_CONFIG.contactUrl}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors shadow-lg"
-              onClick={() => window.location.href = '/Contact?service=ui-ux-design'}
+              className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-lg"
             >
-              Start Your UI/UX Project
-            </motion.button>
+              {TEMPLATE_CONFIG.content.ctaButton}
+            </motion.a>
           </div>
         </motion.div>
       </div>
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED UI/UX PROCESS - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with blue color scheme (blue-500/blue-600)
+✅ Template-ready configuration in TEMPLATE_CONFIG
+✅ Removed all branding and company-specific content
+✅ Consistent typography and spacing
+✅ Professional, educational tone
+
+CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your specific process
+2. Modify process steps based on your actual methodology
+3. Adjust timelines and deliverables to match your workflow
+4. Update features to highlight your approach
+5. Customize summary metrics with your offerings
+6. Set contact URL to your actual page
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600) instead of red
+- Consistent card design and shadows
+- Same typography and spacing
+- Unified animation timing
+- Matching section layouts
+
+Perfect for explaining your UI/UX design process with credibility and transparency!
+*/

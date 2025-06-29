@@ -3,8 +3,35 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function ROIBenchmarks() {
-  const industryBenchmarks = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your agency's industry benchmarks
+const TEMPLATE_CONFIG = {
+  content: {
+    title: {
+      main: 'Industry',
+      highlight: 'ROI Benchmarks'
+    },
+    subtitle: 'See how businesses in different industries and stages typically benefit from strategic consulting investments.',
+    industryTitle: {
+      main: 'Industry',
+      highlight: 'Performance'
+    },
+    stageTitle: {
+      main: 'ROI by',
+      highlight: 'Business Stage'
+    },
+    comparisonTitle: {
+      main: 'How Does Strategy Consulting',
+      highlight: 'Compare?'
+    },
+    comparisonSubtitle: 'See how strategy consulting ROI compares to other business investments and marketing channels.',
+    cta: {
+      text: 'Calculate Your Specific ROI',
+      action: '#roi-calculator'
+    }
+  },
+  // Update these benchmarks based on your actual data
+  industryBenchmarks: [
     {
       industry: 'Technology',
       avgROI: '18:1',
@@ -53,9 +80,9 @@ export default function ROIBenchmarks() {
       topResults: '$2.2M additional revenue',
       characteristics: ['Knowledge-based', 'Relationship-driven', 'Expertise value']
     }
-  ]
-
-  const businessStageData = [
+  ],
+  // Update these stage data based on your experience
+  businessStageData: [
     {
       stage: 'Startup',
       description: '< 2 years, building foundation',
@@ -100,7 +127,21 @@ export default function ROIBenchmarks() {
         '80% strategic alignment improvement'
       ]
     }
+  ],
+  // Update these comparison metrics based on your research
+  comparisonData: [
+    { name: 'Strategy Consulting', roi: '15:1', highlight: true },
+    { name: 'Digital Marketing', roi: '4:1', highlight: false },
+    { name: 'Technology Investment', roi: '6:1', highlight: false },
+    { name: 'Traditional Advertising', roi: '2:1', highlight: false }
   ]
+}
+
+export default function ROIBenchmarks() {
+  const handleCTAClick = () => {
+    const element = document.querySelector(TEMPLATE_CONFIG.content.cta.action)
+    element?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <section className="py-24 bg-white">
@@ -116,14 +157,14 @@ export default function ROIBenchmarks() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            Industry <span className="text-red-500">ROI Benchmarks</span>
+            {TEMPLATE_CONFIG.content.title.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.title.highlight}</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            See how businesses in different industries and stages typically benefit 
-            from strategic consulting investments.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
@@ -139,11 +180,12 @@ export default function ROIBenchmarks() {
             variants={fadeInUp}
             className="text-3xl font-bold text-center text-black mb-12"
           >
-            <span className="text-red-500">Industry</span> Performance
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.industryTitle.main}</span>{' '}
+            {TEMPLATE_CONFIG.content.industryTitle.highlight}
           </motion.h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {industryBenchmarks.map((benchmark, index) => (
+            {TEMPLATE_CONFIG.industryBenchmarks.map((benchmark, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -154,7 +196,7 @@ export default function ROIBenchmarks() {
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Average ROI:</span>
-                    <span className="font-bold text-red-500">{benchmark.avgROI}</span>
+                    <span className="font-bold text-blue-500">{benchmark.avgROI}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Growth Increase:</span>
@@ -175,7 +217,7 @@ export default function ROIBenchmarks() {
                   <div className="space-y-1">
                     {benchmark.characteristics.map((char, charIndex) => (
                       <div key={charIndex} className="flex items-center text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-red-500 rounded-full mr-2 flex-shrink-0"></div>
+                        <div className="w-2 h-2 bg-blue-500 rounded-full mr-2 flex-shrink-0"></div>
                         {char}
                       </div>
                     ))}
@@ -198,18 +240,19 @@ export default function ROIBenchmarks() {
             variants={fadeInUp}
             className="text-3xl font-bold text-center text-black mb-12"
           >
-            ROI by <span className="text-red-500">Business Stage</span>
+            {TEMPLATE_CONFIG.content.stageTitle.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.stageTitle.highlight}</span>
           </motion.h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {businessStageData.map((stage, index) => (
+            {TEMPLATE_CONFIG.businessStageData.map((stage, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="bg-gradient-to-br from-red-50 to-gray-50 rounded-2xl p-8 border border-red-100"
+                className="bg-gradient-to-br from-blue-50 to-gray-50 rounded-2xl p-8 border border-blue-100"
               >
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">
+                  <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">
                     {stage.avgROI}
                   </div>
                   <div>
@@ -228,7 +271,7 @@ export default function ROIBenchmarks() {
                   <div className="space-y-2">
                     {stage.typicalGains.map((gain, gainIndex) => (
                       <div key={gainIndex} className="flex items-center text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-red-500 rounded-full mr-3 flex-shrink-0"></div>
+                        <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
                         {gain}
                       </div>
                     ))}
@@ -248,45 +291,66 @@ export default function ROIBenchmarks() {
           className="bg-gray-50 rounded-2xl p-8 md:p-12 text-center"
         >
           <h3 className="text-3xl font-bold text-black mb-6">
-            How Does Strategy Consulting <span className="text-red-500">Compare?</span>
+            {TEMPLATE_CONFIG.content.comparisonTitle.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.comparisonTitle.highlight}</span>
           </h3>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            See how strategy consulting ROI compares to other business investments and marketing channels.
+            {TEMPLATE_CONFIG.content.comparisonSubtitle}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="bg-white rounded-xl p-6">
-              <h4 className="font-bold text-black mb-2">Strategy Consulting</h4>
-              <div className="text-2xl font-bold text-red-500 mb-2">15:1</div>
-              <div className="text-sm text-gray-600">Average ROI</div>
-            </div>
-            <div className="bg-white rounded-xl p-6">
-              <h4 className="font-bold text-black mb-2">Digital Marketing</h4>
-              <div className="text-2xl font-bold text-gray-400 mb-2">4:1</div>
-              <div className="text-sm text-gray-600">Average ROI</div>
-            </div>
-            <div className="bg-white rounded-xl p-6">
-              <h4 className="font-bold text-black mb-2">Technology Investment</h4>
-              <div className="text-2xl font-bold text-gray-400 mb-2">6:1</div>
-              <div className="text-sm text-gray-600">Average ROI</div>
-            </div>
-            <div className="bg-white rounded-xl p-6">
-              <h4 className="font-bold text-black mb-2">Traditional Advertising</h4>
-              <div className="text-2xl font-bold text-gray-400 mb-2">2:1</div>
-              <div className="text-sm text-gray-600">Average ROI</div>
-            </div>
+            {TEMPLATE_CONFIG.comparisonData.map((item, index) => (
+              <div 
+                key={index}
+                className={`bg-white rounded-xl p-6 ${item.highlight ? 'ring-2 ring-blue-500' : ''}`}
+              >
+                <h4 className="font-bold text-black mb-2">{item.name}</h4>
+                <div className={`text-2xl font-bold mb-2 ${item.highlight ? 'text-blue-500' : 'text-gray-400'}`}>
+                  {item.roi}
+                </div>
+                <div className="text-sm text-gray-600">Average ROI</div>
+              </div>
+            ))}
           </div>
 
-          <motion.a
-            href="#roi-calculator"
+          <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block mt-8 bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors"
+            className="inline-block mt-8 bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
+            onClick={handleCTAClick}
           >
-            Calculate Your Specific ROI
-          </motion.a>
+            {TEMPLATE_CONFIG.content.cta.text}
+          </motion.button>
         </motion.div>
       </div>
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED ROI BENCHMARKS - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with blue color scheme (blue-500/blue-600)
+✅ Template-ready configuration in TEMPLATE_CONFIG
+✅ Removed all branding and company-specific content
+✅ Consistent typography and spacing
+✅ Smooth scroll CTA functionality
+
+CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your specific data
+2. Modify industry benchmarks based on your experience
+3. Adjust business stage data and ROI ratios
+4. Update comparison metrics with your research
+5. Customize titles and messaging
+6. Set CTA scroll target
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600) instead of red
+- Consistent card design and shadows
+- Same button styling and hover effects
+- Unified typography and spacing
+- Matching background gradients
+
+Perfect for showcasing industry-specific ROI data with professional, unified styling!
+*/

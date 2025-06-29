@@ -3,12 +3,31 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function ROIMethodology() {
-  const methodologySteps = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your agency's ROI methodology
+const TEMPLATE_CONFIG = {
+  content: {
+    title: {
+      main: 'How We Calculate',
+      highlight: 'Your ROI'
+    },
+    subtitle: 'Our ROI calculations are based on proven methodologies and real client data from multiple successful strategy consulting projects.',
+    componentsTitle: {
+      main: 'Key',
+      highlight: 'ROI Components'
+    },
+    accuracyTitle: {
+      main: 'Proven',
+      highlight: 'Accuracy'
+    },
+    accuracySubtitle: 'Our ROI projections have been validated against actual client results over multiple years, showing consistent accuracy in predicting strategic consulting outcomes.'
+  },
+  // Update these methodology steps based on your actual process
+  methodologySteps: [
     {
       step: '01',
       title: 'Historical Data Analysis',
-      description: 'We analyze data from 500+ completed projects across various industries and business stages.',
+      description: 'We analyze data from multiple completed projects across various industries and business stages.',
       factors: [
         'Industry-specific growth patterns',
         'Business stage multipliers', 
@@ -49,9 +68,9 @@ export default function ROIMethodology() {
         'Resource availability impact'
       ]
     }
-  ]
-
-  const roiComponents = [
+  ],
+  // Update these ROI components based on your service offerings
+  roiComponents: [
     {
       icon: '📈',
       title: 'Revenue Growth',
@@ -80,8 +99,16 @@ export default function ROIMethodology() {
       impact: '65% risk reduction',
       color: 'text-orange-500'
     }
+  ],
+  // Update these accuracy statistics based on your track record
+  accuracyStats: [
+    { number: '92%', label: 'Prediction Accuracy', sublabel: 'Within ±15% of actual results' },
+    { number: '100+', label: 'Validated Projects', sublabel: 'Across 15+ industries' },
+    { number: '2+ Years', label: 'Track Record', sublabel: 'Consistent methodology' }
   ]
+}
 
+export default function ROIMethodology() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -96,14 +123,14 @@ export default function ROIMethodology() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            How We Calculate <span className="text-red-500">Your ROI</span>
+            {TEMPLATE_CONFIG.content.title.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.title.highlight}</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Our ROI calculations are based on proven methodologies and real client data 
-            from over 500 successful strategy consulting projects.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
@@ -116,14 +143,14 @@ export default function ROIMethodology() {
           className="mb-20"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {methodologySteps.map((step, index) => (
+            {TEMPLATE_CONFIG.methodologySteps.map((step, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
                 className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
               >
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">
+                  <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">
                     {step.step}
                   </div>
                   <h3 className="text-xl font-bold text-black">{step.title}</h3>
@@ -134,7 +161,7 @@ export default function ROIMethodology() {
                 <div className="space-y-2">
                   {step.factors.map((factor, factorIndex) => (
                     <div key={factorIndex} className="flex items-center text-sm text-gray-700">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3 flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
                       {factor}
                     </div>
                   ))}
@@ -156,11 +183,12 @@ export default function ROIMethodology() {
             variants={fadeInUp}
             className="text-3xl font-bold text-center text-black mb-12"
           >
-            Key <span className="text-red-500">ROI Components</span>
+            {TEMPLATE_CONFIG.content.componentsTitle.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.componentsTitle.highlight}</span>
           </motion.h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {roiComponents.map((component, index) => (
+            {TEMPLATE_CONFIG.roiComponents.map((component, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -188,32 +216,52 @@ export default function ROIMethodology() {
           className="bg-white rounded-2xl p-8 md:p-12 text-center shadow-lg border border-gray-100"
         >
           <h3 className="text-3xl font-bold text-black mb-6">
-            Proven <span className="text-red-500">Accuracy</span>
+            {TEMPLATE_CONFIG.content.accuracyTitle.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.accuracyTitle.highlight}</span>
           </h3>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Our ROI projections have been validated against actual client results over multiple years, 
-            showing consistent accuracy in predicting strategic consulting outcomes.
+            {TEMPLATE_CONFIG.content.accuracySubtitle}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-2">92%</div>
-              <div className="text-gray-600">Prediction Accuracy</div>
-              <div className="text-sm text-gray-500 mt-1">Within ±15% of actual results</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-2">500+</div>
-              <div className="text-gray-600">Validated Projects</div>
-              <div className="text-sm text-gray-500 mt-1">Across 15+ industries</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-2">3 Years</div>
-              <div className="text-gray-600">Track Record</div>
-              <div className="text-sm text-gray-500 mt-1">Consistent methodology</div>
-            </div>
+            {TEMPLATE_CONFIG.accuracyStats.map((stat, index) => (
+              <div key={index}>
+                <div className="text-3xl font-bold text-blue-500 mb-2">{stat.number}</div>
+                <div className="text-gray-600">{stat.label}</div>
+                <div className="text-sm text-gray-500 mt-1">{stat.sublabel}</div>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED ROI METHODOLOGY - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with blue color scheme (blue-500/blue-600)
+✅ Template-ready configuration in TEMPLATE_CONFIG
+✅ Removed all branding and specific company references
+✅ Consistent typography and spacing
+✅ Professional, educational tone
+
+CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your specific methodology
+2. Modify methodology steps based on your actual process
+3. Adjust ROI components to match your service offerings
+4. Update accuracy statistics with your track record
+5. Customize titles and messaging
+6. Add or remove methodology steps as needed
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600) instead of red
+- Consistent card design and shadows
+- Same typography and spacing
+- Unified animation timing
+- Matching section layouts
+
+Perfect for explaining your ROI calculation methodology with credibility and transparency!
+*/

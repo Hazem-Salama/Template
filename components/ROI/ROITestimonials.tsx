@@ -3,16 +3,40 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function ROITestimonials() {
-  const roiTestimonials = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your agency's success stories
+const TEMPLATE_CONFIG = {
+  content: {
+    title: {
+      main: 'Real ROI',
+      highlight: 'Success Stories'
+    },
+    subtitle: 'See how our ROI predictions compared to actual results achieved by real clients across different industries and investment levels.',
+    predictionTitle: {
+      main: 'Prediction vs',
+      highlight: 'Actual Results'
+    },
+    accuracyTitle: {
+      main: 'ROI Prediction',
+      highlight: 'Accuracy'
+    },
+    accuracySubtitle: 'Our track record shows consistently accurate ROI predictions, with most clients exceeding our conservative estimates.',
+    cta: {
+      text: 'Discuss Your ROI Potential',
+      url: '/contact?service=consulting&intent=roi-discussion'
+    }
+  },
+  // Update these testimonials with your actual client success stories
+  // Note: Use anonymized or permission-granted client data only
+  roiTestimonials: [
     {
       name: 'David Kim',
-      title: 'CEO, CloudTech Solutions',
+      title: 'CEO',
       company: 'SaaS Startup',
       investment: '$4,500',
       actualROI: '24:1',
       timeframe: '8 months',
-      quote: 'The ROI calculator predicted 18:1, but we actually achieved 24:1. The strategic framework they provided helped us pivot at exactly the right time and capture a $1.2M market opportunity.',
+      quote: 'The ROI calculator predicted 18:1, but we actually achieved 24:1. The strategic framework helped us pivot at exactly the right time and capture a significant market opportunity.',
       results: {
         revenue: '$1,080,000',
         growth: '340%',
@@ -22,12 +46,12 @@ export default function ROITestimonials() {
     },
     {
       name: 'Sarah Martinez',
-      title: 'Founder, HealthFirst Clinics',
+      title: 'Founder',
       company: 'Healthcare Provider',
       investment: '$1,500',
       actualROI: '16:1',
       timeframe: '6 months',
-      quote: 'Initially skeptical about the ROI projections, but they were spot-on. The strategic audit identified inefficiencies that saved us $180k annually and helped us expand to 3 new locations.',
+      quote: 'Initially skeptical about the ROI projections, but they were spot-on. The strategic audit identified inefficiencies that saved us significantly and helped us expand to new locations.',
       results: {
         revenue: '$240,000',
         growth: '125%',
@@ -37,12 +61,12 @@ export default function ROITestimonials() {
     },
     {
       name: 'Michael Chen',
-      title: 'VP Strategy, RetailMax Corp',
+      title: 'VP Strategy',
       company: 'E-commerce Platform',
       investment: '$15,000',
       actualROI: '19:1',
       timeframe: '12 months',
-      quote: 'Our enterprise strategy package delivered exactly what was promised. The digital transformation roadmap generated $2.8M in additional revenue and positioned us as a market leader.',
+      quote: 'Our enterprise strategy package delivered exactly what was promised. The digital transformation roadmap generated substantial additional revenue and positioned us as a market leader.',
       results: {
         revenue: '$2,850,000',
         growth: '180%',
@@ -50,16 +74,16 @@ export default function ROITestimonials() {
       },
       image: '👨‍💼'
     }
-  ]
-
-  const roiStories = [
+  ],
+  // Update these ROI stories with your actual case studies
+  roiStories: [
     {
       industry: 'FinTech',
       challenge: 'Market entry strategy',
       prediction: '15:1 ROI in 12 months',
       actual: '22:1 ROI in 9 months',
       outcome: 'Exceeded projections by 47%',
-      details: 'Strategic positioning helped secure $8M Series A funding ahead of schedule'
+      details: 'Strategic positioning helped secure Series A funding ahead of schedule'
     },
     {
       industry: 'Manufacturing',
@@ -67,7 +91,7 @@ export default function ROITestimonials() {
       prediction: '8:1 ROI in 18 months',
       actual: '11:1 ROI in 14 months',
       outcome: 'Exceeded projections by 38%',
-      details: 'Process optimization reduced costs by $1.2M annually'
+      details: 'Process optimization reduced costs significantly'
     },
     {
       industry: 'Professional Services',
@@ -75,10 +99,19 @@ export default function ROITestimonials() {
       prediction: '12:1 ROI in 8 months',
       actual: '18:1 ROI in 6 months',
       outcome: 'Exceeded projections by 50%',
-      details: 'New service lines generated $850K additional revenue'
+      details: 'New service lines generated substantial additional revenue'
     }
+  ],
+  // Update these accuracy statistics based on your track record
+  accuracyStats: [
+    { number: '94%', label: 'Achieved Predicted ROI', sublabel: 'Or better' },
+    { number: '68%', label: 'Exceeded Predictions', sublabel: 'By 20%+ on average' },
+    { number: '15%', label: 'Average Variance', sublabel: 'Prediction accuracy' },
+    { number: '100+', label: 'Tracked Projects', sublabel: 'Data validation' }
   ]
+}
 
+export default function ROITestimonials() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -93,14 +126,14 @@ export default function ROITestimonials() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            Real ROI <span className="text-red-500">Success Stories</span>
+            {TEMPLATE_CONFIG.content.title.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.title.highlight}</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            See how our ROI predictions compared to actual results achieved by real clients 
-            across different industries and investment levels.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
@@ -113,7 +146,7 @@ export default function ROITestimonials() {
           className="mb-20"
         >
           <div className="space-y-8">
-            {roiTestimonials.map((testimonial, index) => (
+            {TEMPLATE_CONFIG.roiTestimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -127,7 +160,7 @@ export default function ROITestimonials() {
                       <div>
                         <h4 className="font-bold text-black text-lg">{testimonial.name}</h4>
                         <p className="text-gray-600">{testimonial.title}</p>
-                        <p className="text-red-500 font-medium">{testimonial.company}</p>
+                        <p className="text-blue-500 font-medium">{testimonial.company}</p>
                       </div>
                     </div>
                     <blockquote className="text-gray-700 text-lg leading-relaxed mb-6">
@@ -144,11 +177,11 @@ export default function ROITestimonials() {
                   </div>
 
                   {/* Results Metrics */}
-                  <div className="bg-gradient-to-br from-red-50 to-gray-50 rounded-xl p-6">
+                  <div className="bg-gradient-to-br from-blue-50 to-gray-50 rounded-xl p-6">
                     <h5 className="font-bold text-black mb-4 text-center">Actual Results</h5>
                     <div className="space-y-4">
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-red-500 mb-1">{testimonial.actualROI}</div>
+                        <div className="text-3xl font-bold text-blue-500 mb-1">{testimonial.actualROI}</div>
                         <div className="text-gray-600 text-sm">Actual ROI</div>
                       </div>
                       <div className="grid grid-cols-1 gap-3">
@@ -185,11 +218,12 @@ export default function ROITestimonials() {
             variants={fadeInUp}
             className="text-3xl font-bold text-center text-black mb-12"
           >
-            Prediction vs <span className="text-red-500">Actual Results</span>
+            {TEMPLATE_CONFIG.content.predictionTitle.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.predictionTitle.highlight}</span>
           </motion.h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {roiStories.map((story, index) => (
+            {TEMPLATE_CONFIG.roiStories.map((story, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -230,46 +264,61 @@ export default function ROITestimonials() {
           className="bg-white rounded-2xl p-8 md:p-12 text-center shadow-lg border border-gray-100"
         >
           <h3 className="text-3xl font-bold text-black mb-6">
-            ROI Prediction <span className="text-red-500">Accuracy</span>
+            {TEMPLATE_CONFIG.content.accuracyTitle.main}{' '}
+            <span className="text-blue-500">{TEMPLATE_CONFIG.content.accuracyTitle.highlight}</span>
           </h3>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Our track record shows consistently accurate ROI predictions, with most clients 
-            exceeding our conservative estimates.
+            {TEMPLATE_CONFIG.content.accuracySubtitle}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-2">94%</div>
-              <div className="text-gray-600">Achieved Predicted ROI</div>
-              <div className="text-sm text-gray-500 mt-1">Or better</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-2">68%</div>
-              <div className="text-gray-600">Exceeded Predictions</div>
-              <div className="text-sm text-gray-500 mt-1">By 20%+ on average</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-2">15%</div>
-              <div className="text-gray-600">Average Variance</div>
-              <div className="text-sm text-gray-500 mt-1">Prediction accuracy</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-2">500+</div>
-              <div className="text-gray-600">Tracked Projects</div>
-              <div className="text-sm text-gray-500 mt-1">Data validation</div>
-            </div>
+            {TEMPLATE_CONFIG.accuracyStats.map((stat, index) => (
+              <div key={index}>
+                <div className="text-3xl font-bold text-blue-500 mb-2">{stat.number}</div>
+                <div className="text-gray-600">{stat.label}</div>
+                <div className="text-sm text-gray-500 mt-1">{stat.sublabel}</div>
+              </div>
+            ))}
           </div>
 
           <motion.a
-            href="/contact?service=Consulting&intent=roi-discussion"
+            href={TEMPLATE_CONFIG.content.cta.url}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block mt-8 bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors"
+            className="inline-block mt-8 bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
           >
-            Discuss Your ROI Potential
+            {TEMPLATE_CONFIG.content.cta.text}
           </motion.a>
         </motion.div>
       </div>
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED ROI TESTIMONIALS - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with blue color scheme (blue-500/blue-600)
+✅ Template-ready configuration in TEMPLATE_CONFIG
+✅ Removed all specific branding and company references
+✅ Anonymized client testimonials (update with real data)
+✅ Consistent typography and spacing
+
+CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your actual client success stories
+2. Replace testimonials with real, permission-granted client data
+3. Modify ROI stories based on your case studies
+4. Update accuracy statistics with your track record
+5. Customize CTA URL and messaging
+6. Add or remove testimonial cards as needed
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600) instead of red
+- Consistent card design and shadows
+- Same typography and spacing
+- Unified animation timing
+- Matching section layouts
+
+IMPORTANT: Replace template testimonials with real client data (with permission) for authenticity!
+*/

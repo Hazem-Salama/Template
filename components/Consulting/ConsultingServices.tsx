@@ -3,8 +3,20 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function ConsultingServices() {
-  const services = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your agency's consulting services
+const TEMPLATE_CONFIG = {
+  company: {
+    name: 'Your Agency Name', // Update with your agency name
+    currency: 'USD', // Update with your currency
+    currencySymbol: '$' // Update with your currency symbol
+  },
+  content: {
+    title: 'Our Consulting Services',
+    subtitle: 'Comprehensive strategic guidance across all aspects of your business, from brand positioning to digital transformation.',
+    packagesTitle: 'Choose Your Consulting Package'
+  },
+  services: [
     {
       icon: '🎯',
       title: 'Business Strategy Development',
@@ -77,11 +89,68 @@ export default function ConsultingServices() {
         'Performance Metrics'
       ]
     }
+  ],
+  packages: [
+    {
+      name: 'Strategy Audit',
+      price: 4500,
+      description: 'Perfect for startups and small businesses',
+      popular: false,
+      features: [
+        'Current state assessment',
+        'Strategic recommendations',
+        '90-minute strategy session',
+        'Action plan document'
+      ],
+      cta: 'Get Started',
+      action: '/contact?service=consulting&package=audit'
+    },
+    {
+      name: 'Strategic Transformation',
+      price: 10500,
+      description: 'Ideal for growing businesses',
+      popular: true,
+      features: [
+        'Comprehensive strategy development',
+        'Market & competitive analysis',
+        'Implementation roadmap',
+        '3 strategy sessions',
+        '30-day follow-up support'
+      ],
+      cta: 'Get Started',
+      action: '/contact?service=consulting&package=transformation'
+    },
+    {
+      name: 'Enterprise Strategy',
+      price: null,
+      description: 'For large organizations',
+      popular: false,
+      features: [
+        'Multi-department strategy',
+        'Digital transformation plan',
+        'Ongoing consulting partnership',
+        'Dedicated strategy team'
+      ],
+      cta: 'Discuss Needs',
+      action: '/contact?service=consulting&package=enterprise'
+    }
   ]
+}
+
+export default function ConsultingServices() {
+  const formatPrice = (price: number | null) => {
+    if (price === null) return 'Custom'
+    return `${price.toLocaleString()} ${TEMPLATE_CONFIG.company.currencySymbol}`
+  }
+
+  const handlePackageClick = (action: string) => {
+    window.location.href = action
+  }
 
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -93,43 +162,43 @@ export default function ConsultingServices() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            Our <span className="text-red-500">Consulting Services</span>
+            Our <span className="text-blue-500">Consulting Services</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Comprehensive strategic guidance across all aspects of your business, 
-            from brand positioning to digital transformation.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
+        {/* Services Grid - Unified styling */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
         >
-          {services.map((service, index) => (
+          {TEMPLATE_CONFIG.services.map((service, index) => (
             <motion.div
               key={index}
               variants={fadeInUp}
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group"
             >
-              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-bold text-black mb-3 group-hover:text-red-500 transition-colors duration-300">
+              <h3 className="text-xl font-bold text-black mb-4 group-hover:text-blue-500 transition-colors duration-300">
                 {service.title}
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 {service.description}
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center text-sm text-gray-700">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
                     {feature}
                   </li>
                 ))}
@@ -138,7 +207,7 @@ export default function ConsultingServices() {
           ))}
         </motion.div>
 
-        {/* Service Packages */}
+        {/* Service Packages - Unified styling */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
@@ -147,118 +216,102 @@ export default function ConsultingServices() {
           className="mt-20"
         >
           <h3 className="text-3xl font-bold text-center text-black mb-12">
-            Choose Your <span className="text-red-500">Consulting Package</span>
+            Choose Your <span className="text-blue-500">Consulting Package</span>
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Starter Package */}
-            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-              <div className="text-center mb-6">
-                <h4 className="text-xl font-bold text-black mb-2">Strategy Audit</h4>
-                <div className="text-3xl font-bold text-red-500 mb-4">4,500 EGP</div>
-                <p className="text-gray-600">Perfect for startups and small businesses</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Current state assessment
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Strategic recommendations
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  90-minute strategy session
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Action plan document
-                </li>
-              </ul>
-              <a
-                href="/book-call?service=Consulting&package=audit"
-                className="block w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors text-center"
+            {TEMPLATE_CONFIG.packages.map((pkg, index) => (
+              <div 
+                key={index}
+                className={`rounded-2xl p-8 border-2 relative ${
+                  pkg.popular 
+                    ? 'bg-gradient-to-br from-blue-50 to-gray-50 border-blue-500' 
+                    : 'bg-gray-50 border-gray-200'
+                }`}
               >
-                Get Started
-              </a>
-            </div>
+                {/* Popular Badge */}
+                {pkg.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                    Most Popular
+                  </div>
+                )}
 
-            {/* Professional Package */}
-            <div className="bg-red-50 rounded-2xl p-8 border-2 border-red-500 relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                Most Popular
-              </div>
-              <div className="text-center mb-6">
-                <h4 className="text-xl font-bold text-black mb-2">Strategic Transformation</h4>
-                <div className="text-3xl font-bold text-red-500 mb-4">10,500 EGP</div>
-                <p className="text-gray-600">Ideal for growing businesses</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Comprehensive strategy development
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Market & competitive analysis
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Implementation roadmap
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  3 strategy sessions
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  30-day follow-up support
-                </li>
-              </ul>
-              <a
-                href="/book-call?service=Consulting&package=transformation"
-                className="block w-full bg-red-500 text-white py-3 rounded-lg font-medium hover:bg-red-600 transition-colors text-center"
-              >
-                Get Started
-              </a>
-            </div>
+                <div className="text-center mb-6">
+                  <h4 className="text-xl font-bold text-black mb-2">{pkg.name}</h4>
+                  <div className="text-3xl font-bold text-blue-500 mb-4">
+                    {formatPrice(pkg.price)}
+                  </div>
+                  <p className="text-gray-600">{pkg.description}</p>
+                </div>
 
-            {/* Enterprise Package */}
-            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-              <div className="text-center mb-6">
-                <h4 className="text-xl font-bold text-black mb-2">Enterprise Strategy</h4>
-                <div className="text-3xl font-bold text-red-500 mb-4">Custom</div>
-                <p className="text-gray-600">For large organizations</p>
+                <ul className="space-y-3 mb-8">
+                  {pkg.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center text-sm">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`w-full py-3 rounded-lg font-medium transition-colors ${
+                    pkg.popular
+                      ? 'bg-blue-500 text-white hover:bg-blue-600'
+                      : 'bg-black text-white hover:bg-gray-800'
+                  }`}
+                  onClick={() => handlePackageClick(pkg.action)}
+                >
+                  {pkg.cta}
+                </motion.button>
               </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Multi-department strategy
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Digital transformation plan
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Ongoing consulting partnership
-                </li>
-                <li className="flex items-center text-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                  Dedicated strategy team
-                </li>
-              </ul>
-              <a
-                href="/book-call?service=Consulting&package=enterprise"
-                className="block w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors text-center"
-              >
-                Discuss Needs
-              </a>
-            </div>
+            ))}
           </div>
         </motion.div>
       </div>
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED CONSULTING SERVICES - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with about/branding/careers components
+✅ Blue color scheme consistency (blue-500/blue-600)
+✅ Same card design and hover effects
+✅ Consistent shadow and spacing
+✅ Template-ready configuration
+
+CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your details
+2. Modify services array with your offerings
+3. Customize service packages and pricing
+4. Set contact page URLs
+5. Update currency and pricing format
+6. Mark popular packages
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600)
+- Consistent card styling and shadows
+- Same hover effects and animations
+- Unified button styling
+- Matching typography and spacing
+- Consistent background gradients
+
+SERVICES INCLUDED:
+- Business Strategy Development
+- Digital Transformation Planning
+- Brand Positioning Strategy
+- Market Research & Analysis
+- Competitive Analysis
+- Growth Strategy Planning
+
+PACKAGES INCLUDED:
+- Strategy Audit (Entry level)
+- Strategic Transformation (Popular)
+- Enterprise Strategy (Custom)
+
+Perfect for showcasing consulting services with unified design!
+*/

@@ -3,8 +3,21 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function DigitalMarketingProcess() {
-  const processSteps = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your agency's digital marketing process
+const TEMPLATE_CONFIG = {
+  company: {
+    name: 'Your Agency Name', // Update with your agency name
+  },
+  content: {
+    title: 'Our Marketing Process',
+    subtitle: 'A proven 6-step methodology that ensures your digital marketing campaigns deliver maximum ROI and sustainable business growth.',
+    featuresTitle: 'Why Our Marketing Approach Works',
+    featuresSubtitle: 'Our data-driven methodology combined with creative excellence ensures every campaign delivers measurable results and sustainable growth.',
+    ctaTitle: 'Ready to Dominate Digital Marketing?',
+    ctaSubtitle: 'Our comprehensive digital marketing approach typically delivers results within 30-60 days, with significant ROI improvements in the first quarter.'
+  },
+  processSteps: [
     {
       step: '01',
       title: 'Research & Strategy',
@@ -89,9 +102,8 @@ export default function DigitalMarketingProcess() {
       duration: 'Quarterly',
       icon: '📈'
     }
-  ]
-
-  const marketingFeatures = [
+  ],
+  features: [
     {
       icon: '🎯',
       title: 'Data-Driven Approach',
@@ -112,11 +124,23 @@ export default function DigitalMarketingProcess() {
       title: 'Multi-Platform Expertise',
       description: 'Native understanding of each platform\'s unique audience and algorithms.'
     }
-  ]
+  ],
+  results: {
+    timeline: '30-60 days',
+    roi: '500%',
+    transparency: 'Full'
+  }
+}
+
+export default function DigitalMarketingProcess() {
+  const handleCTAClick = () => {
+    window.location.href = '/contact?service=digital-marketing'
+  }
 
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -128,20 +152,19 @@ export default function DigitalMarketingProcess() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            Our Marketing <span className="text-red-500">Process</span>
+            Our Marketing <span className="text-blue-500">Process</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            A proven 6-step methodology that ensures your digital marketing campaigns 
-            deliver maximum ROI and sustainable business growth.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
-        {/* Process Steps */}
+        {/* Process Steps - Unified styling */}
         <div className="space-y-16 mb-20">
-          {processSteps.map((step, index) => (
+          {TEMPLATE_CONFIG.processSteps.map((step, index) => (
             <motion.div
               key={index}
               variants={staggerContainer}
@@ -155,7 +178,7 @@ export default function DigitalMarketingProcess() {
                 className="flex-1 max-w-2xl"
               >
                 <div className="flex items-center mb-6">
-                  <span className="text-6xl font-black text-red-500/20 mr-4">
+                  <span className="text-6xl font-black text-blue-500/20 mr-4">
                     {step.step}
                   </span>
                   <div>
@@ -176,7 +199,7 @@ export default function DigitalMarketingProcess() {
                 <ul className="space-y-3">
                   {step.activities.map((activity, activityIndex) => (
                     <li key={activityIndex} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
                       {activity}
                     </li>
                   ))}
@@ -187,9 +210,9 @@ export default function DigitalMarketingProcess() {
                 variants={fadeInUp}
                 className="flex-1 max-w-md"
               >
-                <div className="bg-gradient-to-br from-red-50 to-gray-50 rounded-3xl p-12 text-center shadow-lg">
+                <div className="bg-gradient-to-br from-blue-50 to-gray-50 rounded-3xl p-12 text-center shadow-lg">
                   <div className="text-8xl mb-6">{step.icon}</div>
-                  <div className="text-2xl font-bold text-red-500 mb-2">Step {step.step}</div>
+                  <div className="text-2xl font-bold text-blue-500 mb-2">Step {step.step}</div>
                   <div className="text-lg font-semibold text-black">{step.title}</div>
                 </div>
               </motion.div>
@@ -197,7 +220,7 @@ export default function DigitalMarketingProcess() {
           ))}
         </div>
 
-        {/* Marketing Features */}
+        {/* Marketing Features - Unified styling */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -207,16 +230,15 @@ export default function DigitalMarketingProcess() {
         >
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-black mb-4">
-              Why Our Marketing Approach Works
+              Why Our Marketing <span className="text-blue-500">Approach Works</span>
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our data-driven methodology combined with creative excellence ensures 
-              every campaign delivers measurable results and sustainable growth.
+              {TEMPLATE_CONFIG.content.featuresSubtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {marketingFeatures.map((feature, index) => (
+            {TEMPLATE_CONFIG.features.map((feature, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -230,19 +252,18 @@ export default function DigitalMarketingProcess() {
           </div>
         </motion.div>
 
-        {/* Results & ROI Summary */}
+        {/* Results & ROI Summary - Unified styling */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="bg-gradient-to-r from-black to-red-900 rounded-3xl p-8 md:p-12 text-white"
+          className="bg-gradient-to-r from-black to-blue-900 rounded-3xl p-8 md:p-12 text-white"
         >
           <div className="text-center mb-8">
-            <h3 className="text-3xl font-bold mb-4">Ready to Dominate Digital Marketing?</h3>
+            <h3 className="text-3xl font-bold mb-4">{TEMPLATE_CONFIG.content.ctaTitle}</h3>
             <p className="text-gray-300 max-w-2xl mx-auto">
-              Our comprehensive digital marketing approach typically delivers results within 
-              30-60 days, with significant ROI improvements in the first quarter.
+              {TEMPLATE_CONFIG.content.ctaSubtitle}
             </p>
           </div>
 
@@ -250,16 +271,16 @@ export default function DigitalMarketingProcess() {
             <div className="text-center">
               <div className="text-4xl mb-3">🚀</div>
               <h4 className="text-xl font-semibold mb-2">Quick Results</h4>
-              <p className="text-gray-300">See improvements within 30-60 days</p>
+              <p className="text-gray-300">See improvements within {TEMPLATE_CONFIG.results.timeline}</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">💰</div>
               <h4 className="text-xl font-semibold mb-2">High ROI</h4>
-              <p className="text-gray-300">Average 500% return on investment</p>
+              <p className="text-gray-300">Average {TEMPLATE_CONFIG.results.roi} return on investment</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">📊</div>
-              <h4 className="text-xl font-semibold mb-2">Full Transparency</h4>
+              <h4 className="text-xl font-semibold mb-2">{TEMPLATE_CONFIG.results.transparency} Transparency</h4>
               <p className="text-gray-300">Detailed monthly reports & analytics</p>
             </div>
           </div>
@@ -268,8 +289,8 @@ export default function DigitalMarketingProcess() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors shadow-lg"
-              onClick={() => window.location.href = '/contact?service=digital-marketing'}
+              className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-lg"
+              onClick={handleCTAClick}
             >
               Launch Your Marketing Campaign
             </motion.button>
@@ -279,3 +300,46 @@ export default function DigitalMarketingProcess() {
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED DIGITAL MARKETING PROCESS - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with about/branding/careers/consulting components
+✅ Blue color scheme consistency (blue-500/blue-600)
+✅ Same alternating layout pattern
+✅ Consistent card design and animations
+✅ Template-ready configuration
+
+CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your details
+2. Modify process steps to match your methodology
+3. Customize features and benefits
+4. Update timeline and ROI information
+5. Set contact page URL
+6. Adjust deliverables and activities
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600)
+- Alternating layout for visual interest
+- Same card styling and shadows
+- Consistent button styling
+- Unified background gradients
+- Matching typography and spacing
+
+PROCESS STEPS INCLUDED:
+1. Research & Strategy
+2. Content Planning & Creation
+3. Campaign Setup & Launch
+4. Execution & Management
+5. Analysis & Optimization
+6. Scale & Growth
+
+FEATURES INCLUDED:
+- Data-Driven Approach
+- Creative Excellence
+- Real-Time Optimization
+- Multi-Platform Expertise
+
+Perfect for showcasing your digital marketing methodology with unified design!
+*/

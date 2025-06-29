@@ -3,8 +3,22 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function CareersTestimonials() {
-  const testimonials = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your agency's team testimonials and achievements
+const TEMPLATE_CONFIG = {
+  company: {
+    name: 'Your Agency Name', // Update with your agency name
+  },
+  content: {
+    title: 'What Our Team Says',
+    subtitle: 'Hear directly from our team members about their experiences, growth, and what makes working here special.',
+    growthTitle: 'Career Growth Stories',
+    recognitionTitle: 'Industry Recognition',
+    recognitionSubtitle: 'These recognitions reflect our commitment to creating an exceptional workplace. When you join us, you\'re joining a company that\'s recognized for putting its people first and fostering an environment where everyone can thrive.',
+    promoterTitle: 'Employee Net Promoter Score',
+    promoterDescription: '78% of our employees would recommend us as a great place to work'
+  },
+  testimonials: [
     {
       name: 'Sarah Chen',
       role: 'Senior UI/UX Designer',
@@ -37,9 +51,8 @@ export default function CareersTestimonials() {
       quote: 'Coming from a corporate environment, the culture shock was amazing. Here, my ideas are heard, implemented, and celebrated. The unlimited PTO policy actually works - they encourage you to take time off.',
       highlight: 'Increased client campaign performance by an average of 65% across all accounts'
     }
-  ]
-
-  const careerPaths = [
+  ],
+  careerPaths: [
     {
       person: 'Alex Thompson',
       journey: [
@@ -60,9 +73,8 @@ export default function CareersTestimonials() {
       ],
       image: '📈'
     }
-  ]
-
-  const recognitions = [
+  ],
+  recognitions: [
     {
       award: 'Best Places to Work',
       organization: 'Creative Industry Awards',
@@ -81,8 +93,18 @@ export default function CareersTestimonials() {
       year: '2023',
       description: 'Acknowledged for commitment to building diverse and inclusive teams'
     }
-  ]
+  ],
+  satisfaction: {
+    nps: 78,
+    metrics: [
+      { score: '4.8/5', category: 'Work-Life Balance' },
+      { score: '4.9/5', category: 'Team Collaboration' },
+      { score: '4.7/5', category: 'Career Growth' }
+    ]
+  }
+}
 
+export default function CareersTestimonials() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,15 +120,14 @@ export default function CareersTestimonials() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              What Our Team <span className="text-red-500">Says</span>
+              What Our Team <span className="text-blue-500">Says</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Hear directly from our team members about their experiences, growth, 
-              and what makes working here special.
+              {TEMPLATE_CONFIG.content.subtitle}
             </p>
           </motion.div>
 
-          {/* Employee Testimonials */}
+          {/* Employee Testimonials - Unified styling */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -114,7 +135,7 @@ export default function CareersTestimonials() {
             viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20"
           >
-            {testimonials.map((testimonial, index) => (
+            {TEMPLATE_CONFIG.testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -125,7 +146,7 @@ export default function CareersTestimonials() {
                   <div>
                     <h4 className="font-bold text-black">{testimonial.name}</h4>
                     <p className="text-gray-600">{testimonial.role}</p>
-                    <p className="text-red-500 text-sm">{testimonial.tenure} with us</p>
+                    <p className="text-blue-500 text-sm">{testimonial.tenure} with us</p>
                   </div>
                 </div>
                 
@@ -141,17 +162,17 @@ export default function CareersTestimonials() {
             ))}
           </motion.div>
 
-          {/* Career Growth Stories */}
+          {/* Career Growth Stories - Unified styling */}
           <motion.div
             variants={fadeInUp}
             className="bg-white rounded-2xl p-8 md:p-12 mb-20"
           >
             <h3 className="text-3xl font-bold text-black mb-8 text-center">
-              Career <span className="text-red-500">Growth Stories</span>
+              Career <span className="text-blue-500">Growth Stories</span>
             </h3>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {careerPaths.map((path, index) => (
+              {TEMPLATE_CONFIG.careerPaths.map((path, index) => (
                 <div key={index} className="space-y-6">
                   <div className="flex items-center mb-6">
                     <div className="text-3xl mr-4">{path.image}</div>
@@ -162,8 +183,8 @@ export default function CareersTestimonials() {
                     {path.journey.map((step, stepIndex) => (
                       <div key={stepIndex} className="flex items-start">
                         <div className="flex-shrink-0 w-16 text-center">
-                          <div className="text-sm font-medium text-red-500">{step.year}</div>
-                          <div className="w-2 h-2 bg-red-500 rounded-full mx-auto mt-2"></div>
+                          <div className="text-sm font-medium text-blue-500">{step.year}</div>
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mx-auto mt-2"></div>
                           {stepIndex < path.journey.length - 1 && (
                             <div className="w-px h-8 bg-gray-300 mx-auto mt-2"></div>
                           )}
@@ -180,21 +201,21 @@ export default function CareersTestimonials() {
             </div>
           </motion.div>
 
-          {/* Industry Recognition */}
+          {/* Industry Recognition - Unified styling */}
           <motion.div
             variants={fadeInUp}
-            className="bg-gradient-to-r from-red-50 to-gray-50 rounded-2xl p-8 md:p-12"
+            className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8 md:p-12 mb-16"
           >
             <h3 className="text-3xl font-bold text-black mb-8 text-center">
-              Industry <span className="text-red-500">Recognition</span>
+              Industry <span className="text-blue-500">Recognition</span>
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              {recognitions.map((recognition, index) => (
+              {TEMPLATE_CONFIG.recognitions.map((recognition, index) => (
                 <div key={index} className="bg-white rounded-xl p-6 text-center">
                   <div className="text-3xl mb-4">🏆</div>
                   <h4 className="font-bold text-black mb-2">{recognition.award}</h4>
-                  <p className="text-red-500 font-medium mb-2">{recognition.organization}</p>
+                  <p className="text-blue-500 font-medium mb-2">{recognition.organization}</p>
                   <p className="text-gray-600 text-sm mb-3">{recognition.year}</p>
                   <p className="text-gray-700 text-xs">{recognition.description}</p>
                 </div>
@@ -204,40 +225,32 @@ export default function CareersTestimonials() {
             <div className="text-center">
               <h4 className="font-bold text-black mb-4">What This Means for You</h4>
               <p className="text-gray-700 max-w-2xl mx-auto">
-                These recognitions reflect our commitment to creating an exceptional workplace. 
-                When you join us, you're joining a company that's recognized for putting its people first 
-                and fostering an environment where everyone can thrive.
+                {TEMPLATE_CONFIG.content.recognitionSubtitle}
               </p>
             </div>
           </motion.div>
 
-          {/* Employee Net Promoter Score */}
+          {/* Employee Net Promoter Score - Unified styling */}
           <motion.div
             variants={fadeInUp}
-            className="mt-16 bg-white rounded-2xl p-8 border border-gray-200"
+            className="bg-white rounded-2xl p-8 border border-gray-200"
           >
             <div className="text-center">
               <h3 className="text-2xl font-bold text-black mb-4">
-                Employee Net Promoter Score
+                {TEMPLATE_CONFIG.content.promoterTitle}
               </h3>
-              <div className="text-5xl font-bold text-red-500 mb-4">78</div>
+              <div className="text-5xl font-bold text-blue-500 mb-4">{TEMPLATE_CONFIG.satisfaction.nps}</div>
               <p className="text-gray-600 mb-6">
-                78% of our employees would recommend us as a great place to work
+                {TEMPLATE_CONFIG.content.promoterDescription}
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600 mb-2">4.8/5</div>
-                  <div className="text-gray-600 text-sm">Work-Life Balance</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600 mb-2">4.9/5</div>
-                  <div className="text-gray-600 text-sm">Team Collaboration</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600 mb-2">4.7/5</div>
-                  <div className="text-gray-600 text-sm">Career Growth</div>
-                </div>
+                {TEMPLATE_CONFIG.satisfaction.metrics.map((metric, index) => (
+                  <div key={index} className="text-center">
+                    <div className="text-2xl font-bold text-green-600 mb-2">{metric.score}</div>
+                    <div className="text-gray-600 text-sm">{metric.category}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -246,3 +259,38 @@ export default function CareersTestimonials() {
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED CAREERS TESTIMONIALS - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with about/branding components
+✅ Blue color scheme consistency (blue-500/blue-600)
+✅ Same card design and hover effects
+✅ Consistent shadow and spacing
+✅ Template-ready configuration
+
+CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your details
+2. Replace testimonials with real employee quotes
+3. Customize career growth paths
+4. Update industry recognitions
+5. Adjust satisfaction metrics
+6. Modify achievement highlights
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600)
+- Consistent card styling and shadows
+- Same grid layouts and spacing
+- Unified typography scale
+- Matching background gradients
+- Consistent section structure
+
+SECTIONS INCLUDED:
+- Employee testimonials (4 examples)
+- Career growth stories (2 paths)
+- Industry recognitions (3 awards)
+- Employee satisfaction metrics
+
+Perfect for showcasing team experiences and company culture with unified design!
+*/

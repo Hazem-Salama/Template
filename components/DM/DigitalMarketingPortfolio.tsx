@@ -3,14 +3,26 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-export default function DigitalMarketingPortfolio() {
-  const portfolioItems = [
+// ===== TEMPLATE CONFIGURATION =====
+// Customize these settings to match your agency's digital marketing portfolio
+const TEMPLATE_CONFIG = {
+  company: {
+    name: 'Your Agency Name', // Update with your agency name
+  },
+  content: {
+    title: 'Marketing Success Stories',
+    subtitle: 'See how our strategic digital marketing campaigns have transformed brands, driven massive growth, and delivered exceptional ROI across industries.',
+    impactTitle: 'Proven Marketing Results Across Industries',
+    impactSubtitle: 'Our data-driven marketing strategies consistently deliver exceptional ROI and measurable business growth across diverse sectors.',
+    differenceTitle: 'What Makes Our Marketing Different',
+    ctaText: 'View Complete Portfolio'
+  },
+  portfolioItems: [
     {
       id: 1,
       title: 'E-commerce Fashion Brand',
       category: 'Social Media Marketing',
       description: 'Complete social media transformation for a fashion e-commerce brand across Instagram, TikTok, and Facebook.',
-      image: '/api/placeholder/600/400',
       tags: ['Instagram', 'TikTok', 'Facebook Ads', 'Content Creation'],
       results: [
         '800% increase in Instagram followers',
@@ -29,7 +41,6 @@ export default function DigitalMarketingPortfolio() {
       title: 'Local Restaurant Chain',
       category: 'Integrated Marketing Campaign',
       description: 'Comprehensive digital marketing campaign to increase foot traffic and online orders.',
-      image: '/api/placeholder/600/400',
       tags: ['Google Ads', 'Facebook Marketing', 'Photography', 'Local SEO'],
       results: [
         '300% increase in online orders',
@@ -48,7 +59,6 @@ export default function DigitalMarketingPortfolio() {
       title: 'Tech Startup SaaS',
       category: 'B2B Marketing Campaign',
       description: 'Lead generation and brand awareness campaign for a B2B SaaS startup.',
-      image: '/api/placeholder/600/400',
       tags: ['LinkedIn Ads', 'Video Marketing', 'Content Strategy', 'Lead Generation'],
       results: [
         '500% increase in qualified leads',
@@ -67,7 +77,6 @@ export default function DigitalMarketingPortfolio() {
       title: 'Fitness Influencer Brand',
       category: 'Personal Brand Marketing',
       description: 'Building a personal brand for a fitness influencer across multiple platforms.',
-      image: '/api/placeholder/600/400',
       tags: ['Personal Branding', 'Content Creation', 'Influencer Marketing', 'Community Building'],
       results: [
         '2M+ followers across all platforms',
@@ -81,11 +90,44 @@ export default function DigitalMarketingPortfolio() {
       duration: '12 months',
       platforms: ['Instagram', 'YouTube', 'TikTok']
     }
-  ]
+  ],
+  impactMetrics: [
+    { value: '500%', label: 'Average ROI', description: 'Return on Investment' },
+    { value: '2M+', label: 'Followers Managed', description: 'Across All Platforms' },
+    { value: '85%', label: 'Engagement Rate', description: 'Average Improvement' },
+    { value: '150+', label: 'Campaigns Launched', description: 'Successful Projects' }
+  ],
+  differencePoints: [
+    {
+      icon: '📸',
+      title: 'Professional Content Creation',
+      description: 'High-quality photography, video editing, and visual content that stops the scroll.'
+    },
+    {
+      icon: '🎯',
+      title: 'Platform-Native Strategy',
+      description: 'Tailored approaches for each platform\'s unique algorithm and audience behavior.'
+    },
+    {
+      icon: '📊',
+      title: 'Data-Driven Optimization',
+      description: 'Continuous testing and optimization based on real performance data and insights.'
+    }
+  ],
+  links: {
+    portfolioUrl: '/portfolio?category=digital-marketing'
+  }
+}
+
+export default function DigitalMarketingPortfolio() {
+  const handleViewMoreClick = () => {
+    window.location.href = TEMPLATE_CONFIG.links.portfolioUrl
+  }
 
   return (
     <section id="marketing-portfolio" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -97,29 +139,29 @@ export default function DigitalMarketingPortfolio() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-bold text-black mb-6"
           >
-            Marketing <span className="text-red-500">Success Stories</span>
+            Marketing <span className="text-blue-500">Success Stories</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            See how our strategic digital marketing campaigns have transformed brands, 
-            driven massive growth, and delivered exceptional ROI across industries.
+            {TEMPLATE_CONFIG.content.subtitle}
           </motion.p>
         </motion.div>
 
+        {/* Portfolio Grid - Unified styling */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20"
         >
-          {portfolioItems.map((item, index) => (
+          {TEMPLATE_CONFIG.portfolioItems.map((item, index) => (
             <motion.div
               key={item.id}
               variants={fadeInUp}
-              className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
             >
               {/* Project Image */}
               <div className="relative h-64 bg-gradient-to-br from-purple-100 to-pink-100">
@@ -127,7 +169,7 @@ export default function DigitalMarketingPortfolio() {
                   <div className="text-6xl text-gray-400">📱</div>
                 </div>
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">
+                  <span className="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">
                     {item.category}
                   </span>
                 </div>
@@ -148,7 +190,7 @@ export default function DigitalMarketingPortfolio() {
                   {item.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-3 py-1 bg-purple-100 text-purple-700 text-sm rounded-full"
+                      className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full"
                     >
                       {tag}
                     </span>
@@ -196,7 +238,7 @@ export default function DigitalMarketingPortfolio() {
                   <div className="space-y-2">
                     {item.results.map((result, resultIndex) => (
                       <div key={resultIndex} className="flex items-start">
-                        <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                         <p className="text-gray-600 text-sm">{result}</p>
                       </div>
                     ))}
@@ -207,100 +249,122 @@ export default function DigitalMarketingPortfolio() {
           ))}
         </motion.div>
 
-        {/* Marketing Impact Metrics */}
+        {/* Marketing Impact Metrics - Unified styling */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mt-20 bg-gradient-to-r from-gray-50 to-red-50 rounded-3xl p-8 md:p-12"
+          className="mb-16"
         >
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-black mb-4">
-              Proven Marketing Results Across Industries
-            </h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Our data-driven marketing strategies consistently deliver exceptional ROI 
-              and measurable business growth across diverse sectors.
-            </p>
-          </div>
+          <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8 md:p-12">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold text-black mb-4">
+                {TEMPLATE_CONFIG.content.impactTitle}
+              </h3>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                {TEMPLATE_CONFIG.content.impactSubtitle}
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-500 mb-2">500%</div>
-              <div className="text-gray-700 font-medium mb-1">Average ROI</div>
-              <div className="text-gray-600 text-sm">Return on Investment</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-500 mb-2">2M+</div>
-              <div className="text-gray-700 font-medium mb-1">Followers Managed</div>
-              <div className="text-gray-600 text-sm">Across All Platforms</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-500 mb-2">85%</div>
-              <div className="text-gray-700 font-medium mb-1">Engagement Rate</div>
-              <div className="text-gray-600 text-sm">Average Improvement</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-500 mb-2">150+</div>
-              <div className="text-gray-700 font-medium mb-1">Campaigns Launched</div>
-              <div className="text-gray-600 text-sm">Successful Projects</div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              {TEMPLATE_CONFIG.impactMetrics.map((metric, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-4xl font-bold text-blue-500 mb-2">{metric.value}</div>
+                  <div className="text-gray-700 font-medium mb-1">{metric.label}</div>
+                  <div className="text-gray-600 text-sm">{metric.description}</div>
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>
 
-        {/* Services Showcase */}
+        {/* Services Showcase - Unified styling */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mt-16"
+          className="mb-16"
         >
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-black mb-4">
-              What Makes Our Marketing Different
+              What Makes Our Marketing <span className="text-blue-500">Different</span>
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-white rounded-xl shadow-md">
-              <div className="text-4xl mb-4">📸</div>
-              <h4 className="text-lg font-bold text-black mb-3">Professional Content Creation</h4>
-              <p className="text-gray-600 text-sm">High-quality photography, video editing, and visual content that stops the scroll.</p>
-            </div>
-            <div className="text-center p-6 bg-white rounded-xl shadow-md">
-              <div className="text-4xl mb-4">🎯</div>
-              <h4 className="text-lg font-bold text-black mb-3">Platform-Native Strategy</h4>
-              <p className="text-gray-600 text-sm">Tailored approaches for each platform's unique algorithm and audience behavior.</p>
-            </div>
-            <div className="text-center p-6 bg-white rounded-xl shadow-md">
-              <div className="text-4xl mb-4">📊</div>
-              <h4 className="text-lg font-bold text-black mb-3">Data-Driven Optimization</h4>
-              <p className="text-gray-600 text-sm">Continuous testing and optimization based on real performance data and insights.</p>
-            </div>
+            {TEMPLATE_CONFIG.differencePoints.map((point, index) => (
+              <div key={index} className="text-center p-6 bg-white rounded-xl shadow-md">
+                <div className="text-4xl mb-4">{point.icon}</div>
+                <h4 className="text-lg font-bold text-black mb-3">{point.title}</h4>
+                <p className="text-gray-600 text-sm">{point.description}</p>
+              </div>
+            ))}
           </div>
         </motion.div>
 
-        {/* View More CTA */}
+        {/* View More CTA - Unified styling */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mt-16"
+          className="text-center"
         >
           <p className="text-gray-600 mb-6">Want to see more marketing campaign results?</p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-500 transition-colors shadow-lg"
-            onClick={() => window.location.href = '/Portfolio?category=digital-marketing'}
+            className="bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-500 transition-colors shadow-lg"
+            onClick={handleViewMoreClick}
           >
-            View Complete Portfolio
+            {TEMPLATE_CONFIG.content.ctaText}
           </motion.button>
         </motion.div>
       </div>
     </section>
   )
 }
+
+/* 
+🎯 UNIFIED DIGITAL MARKETING PORTFOLIO - TEMPLATE READY
+
+FEATURES:
+✅ Unified styling with about/branding/careers/consulting components
+✅ Blue color scheme consistency (blue-500/blue-600)
+✅ Same card design and hover effects
+✅ Consistent shadow and spacing
+✅ Template-ready configuration
+
+CUSTOMIZATION:
+1. Update TEMPLATE_CONFIG with your details
+2. Replace portfolio items with real campaigns
+3. Update impact metrics and statistics
+4. Customize difference points
+5. Set portfolio page URL
+6. Adjust campaign details
+
+UNIFIED ELEMENTS:
+- Blue accent color (blue-500/blue-600)
+- Consistent card styling and shadows
+- Same hover effects and animations
+- Unified button styling
+- Matching typography and spacing
+- Consistent background gradients
+
+PORTFOLIO EXAMPLES INCLUDED:
+- E-commerce Fashion Brand
+- Local Restaurant Chain
+- Tech Startup SaaS
+- Fitness Influencer Brand
+
+FEATURES INCLUDED:
+- Campaign challenge/solution sections
+- Platform usage details
+- Results and metrics
+- Impact statistics
+- Difference points
+
+Perfect for showcasing digital marketing success with unified design!
+*/
