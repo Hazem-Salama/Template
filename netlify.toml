@@ -4,12 +4,11 @@
   
   # Output directory (where Next.js puts the static files)
   publish = "out"
-  
-  # Node version and environment variables
-  environment = { 
-    NODE_VERSION = "18",
-    NODE_OPTIONS = "--max-old-space-size=4096"
-  }
+
+[build.environment]
+  # Node version and build settings
+  NODE_VERSION = "18"
+  NODE_OPTIONS = "--max-old-space-size=4096"
 
 # Handle client-side routing for SPA behavior
 [[redirects]]
