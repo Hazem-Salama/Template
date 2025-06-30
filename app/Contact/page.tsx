@@ -1,6 +1,6 @@
 // app/contact/page.tsx
 import { Metadata } from 'next'
-import ContactClient from '@/components/Contact/ContactClient'
+import ContactPageClient from './ContactPageClient'
 
 export const metadata: Metadata = {
   title: 'Contact Us - Unlimited Creative Agency',
@@ -20,5 +20,5 @@ export const metadata: Metadata = {
 }
 
 export default function ContactPage() {
-  return <ContactClient />
+  return <ContactPageClient />
 }

@@ -1,4 +1,4 @@
-// next.config.ts - Updated for Netlify deployment
+// next.config.ts - Corrected for Next.js 15
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -7,23 +7,14 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true
   },
-  // Disable server-side features for static export
-  experimental: {
-    // Remove any experimental server features
-  },
-  // Optimize build
-  swcMinify: true,
-  // Handle static export properly
-  distDir: '.next',
+  // Remove swcMinify - it's enabled by default in Next.js 15
   // Ensure proper asset handling
-  assetPrefix: undefined,
+  assetPrefix: '',
   // TypeScript configuration
   typescript: {
-    // Allow production builds to successfully complete even if there are type errors
     ignoreBuildErrors: false,
   },
   eslint: {
-    // Allow production builds to successfully complete even if there are ESLint errors
     ignoreDuringBuilds: false,
   }
 };

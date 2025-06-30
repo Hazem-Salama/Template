@@ -32,7 +32,7 @@ const TEMPLATE_CONFIG = {
         status: 'pending',
         referenceId: 'CALL-2024001',
         submittedAt: new Date().toISOString(),
-        meetingUrl: null
+        meetingUrl: undefined as string | undefined
       },
       {
         _id: 'mock-2',
@@ -80,7 +80,7 @@ const TEMPLATE_CONFIG = {
         status: 'cancelled',
         referenceId: 'CALL-2024003',
         submittedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
-        meetingUrl: null
+        meetingUrl: undefined as string | undefined
       }
     ]
   }
@@ -108,7 +108,7 @@ interface Booking {
   status: string
   referenceId: string
   submittedAt: string
-  meetingUrl?: string
+  meetingUrl?: string | undefined // Fixed: Allow undefined
 }
 
 export default function BookedCallsTab() {
@@ -128,7 +128,7 @@ export default function BookedCallsTab() {
         // DEVELOPMENT MODE: Use mock data
         console.log('📞 DEVELOPMENT MODE: Loading mock bookings...')
         await new Promise(resolve => setTimeout(resolve, 1000)) // Simulate API delay
-        setBookings(TEMPLATE_CONFIG.mockData.bookings)
+        setBookings(TEMPLATE_CONFIG.mockData.bookings as Booking[]) // Fixed: Type assertion
       } else {
         // PRODUCTION MODE: Real API call
         const response = await fetch('/api/admin/bookings')
@@ -146,7 +146,7 @@ export default function BookedCallsTab() {
       // Fallback to mock data on error in development
       if (TEMPLATE_CONFIG.developmentMode) {
         console.log('📞 API failed, using mock data as fallback')
-        setBookings(TEMPLATE_CONFIG.mockData.bookings)
+        setBookings(TEMPLATE_CONFIG.mockData.bookings as Booking[]) // Fixed: Type assertion
       }
     } finally {
       setIsLoading(false)
@@ -357,7 +357,7 @@ export default function BookedCallsTab() {
             <div className="mt-4">
               <button
                 onClick={() => {
-                  setBookings(TEMPLATE_CONFIG.mockData.bookings)
+                  setBookings(TEMPLATE_CONFIG.mockData.bookings as Booking[])
                 }}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
               >
@@ -585,43 +585,3 @@ export default function BookedCallsTab() {
     </div>
   )
 }
-
-/* 
-TODO: Template Customization Guide
-
-1. DEVELOPMENT vs PRODUCTION:
-   - Set developmentMode: false when ready for production
-   - Replace mock data with real API calls
-   - Update API endpoints to match your backend
-
-2. MOCK DATA CUSTOMIZATION:
-   - Update TEMPLATE_CONFIG.mockData.bookings with relevant examples
-   - Adjust data structure to match your needs
-   - Add or remove fields as necessary
-
-3. API INTEGRATION:
-   - Replace fetch('/api/admin/bookings') with your actual endpoint
-   - Update request/response handling for your API structure
-   - Add proper error handling for your use case
-
-4. CUSTOMIZATION OPTIONS:
-   - Modify booking statuses and colors
-   - Update priority levels and indicators
-   - Customize date/time formatting
-   - Add additional booking fields
-
-5. FEATURES TO ADD:
-   - Real-time updates via WebSocket
-   - Bulk operations (approve/decline multiple)
-   - Advanced filtering and search
-   - Export functionality
-   - Integration with calendar systems
-
-CURRENT TEMPLATE STATUS:
-- ✅ Mock data for immediate demonstration
-- ✅ Complete UI with all interactions
-- ✅ Development mode indicators
-- ✅ Error handling and fallbacks
-- 🟡 Replace with real API when ready
-- 🟡 Customize mock data for your use case
-*/

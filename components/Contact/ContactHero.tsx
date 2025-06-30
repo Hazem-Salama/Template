@@ -10,11 +10,31 @@ interface ContactHeroProps {
   onMethodSelect: (method: string) => void
 }
 
-export default function ContactHero({ selectedMethod, onMethodSelect }: ContactHeroProps) {
-  const { company, branding, business } = templateConfig
+interface ContactMethod {
+  id: string
+  icon: string
+  title: string
+  description: string
+  action: string
+  responseTime: string
+}
+
+interface ResponsePromise {
+  icon: string
+  title: string
+  description: string
+}
+
+interface QuickStat {
+  number: string
+  label: string
+}
+
+function ContactHero({ selectedMethod, onMethodSelect }: ContactHeroProps) {
+  const { company, branding, business, social } = templateConfig
 
   // Contact methods - easily customizable
-  const contactMethods = [
+  const contactMethods: ContactMethod[] = [
     {
       id: 'general-inquiry',
       icon: '💬',
@@ -65,7 +85,7 @@ export default function ContactHero({ selectedMethod, onMethodSelect }: ContactH
     }
   ]
 
-  const responsePromise = [
+  const responsePromise: ResponsePromise[] = [
     {
       icon: '⚡',
       title: 'Quick Response',
@@ -88,7 +108,7 @@ export default function ContactHero({ selectedMethod, onMethodSelect }: ContactH
     }
   ]
 
-  const quickStats = [
+  const quickStats: QuickStat[] = [
     {
       number: '500+',
       label: 'Projects Completed'
@@ -106,6 +126,14 @@ export default function ContactHero({ selectedMethod, onMethodSelect }: ContactH
       label: 'Average Response'
     }
   ]
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    (e.target as HTMLAnchorElement).style.color = branding.primaryColor
+  }
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    (e.target as HTMLAnchorElement).style.color = 'inherit'
+  }
 
   return (
     <div className="flex-1 flex items-start justify-center p-8 lg:p-12">
@@ -237,8 +265,8 @@ export default function ContactHero({ selectedMethod, onMethodSelect }: ContactH
                 href={`mailto:${company.email}`} 
                 className="hover:text-white transition-colors"
                 style={{ color: 'inherit' }}
-                onMouseEnter={(e) => e.target.style.color = branding.primaryColor}
-                onMouseLeave={(e) => e.target.style.color = 'inherit'}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               >
                 {company.email}
               </a>
@@ -249,8 +277,8 @@ export default function ContactHero({ selectedMethod, onMethodSelect }: ContactH
                 href={`tel:${company.phone}`} 
                 className="hover:text-white transition-colors"
                 style={{ color: 'inherit' }}
-                onMouseEnter={(e) => e.target.style.color = branding.primaryColor}
-                onMouseLeave={(e) => e.target.style.color = 'inherit'}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               >
                 {company.phone}
               </a>
@@ -261,12 +289,12 @@ export default function ContactHero({ selectedMethod, onMethodSelect }: ContactH
             </div>
             
             {/* Social Links */}
-            {(company.social?.linkedin || company.social?.twitter || company.social?.instagram) && (
+            {(social?.linkedin || social?.twitter || social?.instagram) && (
               <div className="flex items-center justify-center lg:justify-start space-x-4 pt-4">
                 <span className="text-sm text-gray-400">Follow us:</span>
-                {company.social?.linkedin && (
+                {social?.linkedin && (
                   <a 
-                    href={company.social.linkedin} 
+                    href={social.linkedin} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors"
@@ -275,9 +303,9 @@ export default function ContactHero({ selectedMethod, onMethodSelect }: ContactH
                     💼
                   </a>
                 )}
-                {company.social?.twitter && (
+                {social?.twitter && (
                   <a 
-                    href={company.social.twitter} 
+                    href={social.twitter} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors"
@@ -286,9 +314,9 @@ export default function ContactHero({ selectedMethod, onMethodSelect }: ContactH
                     🐦
                   </a>
                 )}
-                {company.social?.instagram && (
+                {social?.instagram && (
                   <a 
-                    href={company.social.instagram} 
+                    href={social.instagram} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors"
@@ -354,3 +382,5 @@ export default function ContactHero({ selectedMethod, onMethodSelect }: ContactH
     </div>
   )
 }
+
+export default ContactHero;
