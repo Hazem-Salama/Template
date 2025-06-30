@@ -5,12 +5,11 @@
   # Output directory (where Next.js puts the static files)
   publish = "out"
   
-  # Node version
-  environment = { NODE_VERSION = "18" }
-
-[build.environment]
-  # Suppress the i18next warning during build
-  NODE_OPTIONS = "--max-old-space-size=4096"
+  # Node version and environment variables
+  environment = { 
+    NODE_VERSION = "18",
+    NODE_OPTIONS = "--max-old-space-size=4096"
+  }
 
 # Handle client-side routing for SPA behavior
 [[redirects]]
