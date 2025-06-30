@@ -1,22 +1,24 @@
-// next.config.ts - Corrected for Next.js 15
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Enable static export
   output: 'export',
-  trailingSlash: true,
+  
+  // Disable image optimization for static export
   images: {
     unoptimized: true
   },
-  // Remove swcMinify - it's enabled by default in Next.js 15
-  // Ensure proper asset handling
-  assetPrefix: '',
-  // TypeScript configuration
-  typescript: {
-    ignoreBuildErrors: false,
-  },
-  eslint: {
-    ignoreDuringBuilds: false,
+  
+  // Base path and asset prefix (update if deploying to subdirectory)
+  // basePath: '/your-subdirectory', // Only if deploying to a subdirectory
+  // assetPrefix: '/your-subdirectory/', // Only if deploying to a subdirectory
+  
+  // Trailing slash for better static hosting compatibility
+  trailingSlash: true,
+  
+  // Disable server-side features that don't work with static export
+  experimental: {
+    // Disable any experimental features that might cause issues
   }
-};
+}
 
-export default nextConfig;
+module.exports = nextConfig
